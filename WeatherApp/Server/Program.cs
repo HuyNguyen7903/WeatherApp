@@ -12,7 +12,7 @@ namespace WeatherServer
     public class WeatherServer
     {
         private const int Port = 8888;
-        private const string ApiKey = "26653ec7090961b6a70cc1709679d31d";
+        private const string ApiKey = "26653ec7090961b6a70cc1709679d31d"; //sua api key
         private const string ApiUrl = "http://api.openweathermap.org/data/2.5/weather?q={0}&appid={1}&units=metric";
 
         public async Task StartAsync()
