@@ -54,3 +54,25 @@ D:\Thai_Van_Tinh\NET\BTL\WeatherApp_2\Client\obj\Debug\net9.0-windows\Client.gen
 D:\Thai_Van_Tinh\NET\BTL\WeatherApp_2\Client\obj\Debug\net9.0-windows\ref\Client.dll
 D:\Thai_Van_Tinh\NET\BTL\WeatherApp_2\Client\obj\Debug\net9.0-windows\WeatherClient.Form1.resources
 D:\Thai_Van_Tinh\NET\BTL\WeatherApp_2\Client\obj\Debug\net9.0-windows\Client.csproj.GenerateResource.cache
+E:\Compuer\HK8\Lập trình mạng\BTN\Client\bin\Debug\net9.0-windows\Client.exe
+E:\Compuer\HK8\Lập trình mạng\BTN\Client\bin\Debug\net9.0-windows\Client.deps.json
+E:\Compuer\HK8\Lập trình mạng\BTN\Client\bin\Debug\net9.0-windows\Client.runtimeconfig.json
+E:\Compuer\HK8\Lập trình mạng\BTN\Client\bin\Debug\net9.0-windows\Client.dll
+E:\Compuer\HK8\Lập trình mạng\BTN\Client\bin\Debug\net9.0-windows\Client.pdb
+E:\Compuer\HK8\Lập trình mạng\BTN\Client\bin\Debug\net9.0-windows\Newtonsoft.Json.dll
+E:\Compuer\HK8\Lập trình mạng\BTN\Client\bin\Debug\net9.0-windows\WinForms.DataVisualization.Utilities.dll
+E:\Compuer\HK8\Lập trình mạng\BTN\Client\bin\Debug\net9.0-windows\WinForms.DataVisualization.dll
+E:\Compuer\HK8\Lập trình mạng\BTN\Client\obj\Debug\net9.0-windows\Client.csproj.AssemblyReference.cache
+E:\Compuer\HK8\Lập trình mạng\BTN\Client\obj\Debug\net9.0-windows\Client.Form1.resources
+E:\Compuer\HK8\Lập trình mạng\BTN\Client\obj\Debug\net9.0-windows\Client.csproj.GenerateResource.cache
+E:\Compuer\HK8\Lập trình mạng\BTN\Client\obj\Debug\net9.0-windows\Client.GeneratedMSBuildEditorConfig.editorconfig
+E:\Compuer\HK8\Lập trình mạng\BTN\Client\obj\Debug\net9.0-windows\Client.AssemblyInfoInputs.cache
+E:\Compuer\HK8\Lập trình mạng\BTN\Client\obj\Debug\net9.0-windows\Client.AssemblyInfo.cs
+E:\Compuer\HK8\Lập trình mạng\BTN\Client\obj\Debug\net9.0-windows\Client.csproj.CoreCompileInputs.cache
+E:\Compuer\HK8\Lập trình mạng\BTN\Client\obj\Debug\net9.0-windows\Client.sourcelink.json
+E:\Compuer\HK8\Lập trình mạng\BTN\Client\obj\Debug\net9.0-windows\Client.csproj.Up2Date
+E:\Compuer\HK8\Lập trình mạng\BTN\Client\obj\Debug\net9.0-windows\Client.dll
+E:\Compuer\HK8\Lập trình mạng\BTN\Client\obj\Debug\net9.0-windows\refint\Client.dll
+E:\Compuer\HK8\Lập trình mạng\BTN\Client\obj\Debug\net9.0-windows\Client.pdb
+E:\Compuer\HK8\Lập trình mạng\BTN\Client\obj\Debug\net9.0-windows\Client.genruntimeconfig.cache
+E:\Compuer\HK8\Lập trình mạng\BTN\Client\obj\Debug\net9.0-windows\ref\Client.dll

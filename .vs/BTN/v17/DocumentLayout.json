@@ -1,0 +1,88 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\Compuer\\HK8\\L\u1EADp tr\u00ECnh m\u1EA1ng\\BTN\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\Compuer\\HK8\\L\u1EADp tr\u00ECnh m\u1EA1ng\\BTN\\group5.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:group5.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\Compuer\\HK8\\L\u1EADp tr\u00ECnh m\u1EA1ng\\BTN\\weatherAppClient\\Client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:weatherAppClient\\Client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\Compuer\\HK8\\L\u1EADp tr\u00ECnh m\u1EA1ng\\BTN\\weatherAppServer\\Server.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:weatherAppServer\\Server.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\Compuer\\HK8\\L\u1EADp tr\u00ECnh m\u1EA1ng\\BTN\\BTL.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:BTL.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Client.cs",
+              "DocumentMoniker": "E:\\Compuer\\HK8\\L\u1EADp tr\u00ECnh m\u1EA1ng\\BTN\\weatherAppClient\\Client.cs",
+              "RelativeDocumentMoniker": "weatherAppClient\\Client.cs",
+              "ToolTip": "E:\\Compuer\\HK8\\L\u1EADp tr\u00ECnh m\u1EA1ng\\BTN\\weatherAppClient\\Client.cs",
+              "RelativeToolTip": "weatherAppClient\\Client.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-12T05:16:10.485Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Server.cs",
+              "DocumentMoniker": "E:\\Compuer\\HK8\\L\u1EADp tr\u00ECnh m\u1EA1ng\\BTN\\weatherAppServer\\Server.cs",
+              "RelativeDocumentMoniker": "weatherAppServer\\Server.cs",
+              "ToolTip": "E:\\Compuer\\HK8\\L\u1EADp tr\u00ECnh m\u1EA1ng\\BTN\\weatherAppServer\\Server.cs",
+              "RelativeToolTip": "weatherAppServer\\Server.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-12T05:16:08.244Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "BTL.csproj",
+              "DocumentMoniker": "E:\\Compuer\\HK8\\L\u1EADp tr\u00ECnh m\u1EA1ng\\BTN\\BTL.csproj",
+              "RelativeDocumentMoniker": "BTL.csproj",
+              "ToolTip": "E:\\Compuer\\HK8\\L\u1EADp tr\u00ECnh m\u1EA1ng\\BTN\\BTL.csproj",
+              "RelativeToolTip": "BTL.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-03-12T05:16:05.575Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "group5.cs",
+              "DocumentMoniker": "E:\\Compuer\\HK8\\L\u1EADp tr\u00ECnh m\u1EA1ng\\BTN\\group5.cs",
+              "RelativeDocumentMoniker": "group5.cs",
+              "ToolTip": "E:\\Compuer\\HK8\\L\u1EADp tr\u00ECnh m\u1EA1ng\\BTN\\group5.cs",
+              "RelativeToolTip": "group5.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-12T05:14:56.219Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

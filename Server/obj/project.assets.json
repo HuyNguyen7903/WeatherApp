@@ -55,23 +55,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\tinht\\.nuget\\packages\\": {},
+    "C:\\Users\\PHUCVU\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Thai_Van_Tinh\\NET\\BTL\\WeatherApp_2\\Server\\Server.csproj",
+      "projectUniqueName": "E:\\Compuer\\HK8\\Lập trình mạng\\BTN\\Server\\Server.csproj",
       "projectName": "Server",
-      "projectPath": "D:\\Thai_Van_Tinh\\NET\\BTL\\WeatherApp_2\\Server\\Server.csproj",
-      "packagesPath": "C:\\Users\\tinht\\.nuget\\packages\\",
-      "outputPath": "D:\\Thai_Van_Tinh\\NET\\BTL\\WeatherApp_2\\Server\\obj\\",
+      "projectPath": "E:\\Compuer\\HK8\\Lập trình mạng\\BTN\\Server\\Server.csproj",
+      "packagesPath": "C:\\Users\\PHUCVU\\.nuget\\packages\\",
+      "outputPath": "E:\\Compuer\\HK8\\Lập trình mạng\\BTN\\Server\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\tinht\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\PHUCVU\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
