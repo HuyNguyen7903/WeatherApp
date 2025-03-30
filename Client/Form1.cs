@@ -8,7 +8,6 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Collections.Generic;
-
 namespace Client
 {
     public partial class Form1 : Form
@@ -179,11 +178,11 @@ namespace Client
             {
                 dt.Rows.Add(
                     forecast.Date.ToString("dd/MM"),
-                    forecast.DayOfWeek ?? "N/A",
+                    forecast.DayOfWeek,
                     $"{forecast.AvgTemperature}°C",
                     $"{forecast.MinTemperature}°C",
                     $"{forecast.MaxTemperature}°C",
-                    forecast.Description ?? "N/A"
+                    forecast.Description
                 );
             }
 

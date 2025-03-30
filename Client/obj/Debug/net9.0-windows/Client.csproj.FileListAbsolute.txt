@@ -52,7 +52,6 @@ D:\Thai_Van_Tinh\NET\BTL\WeatherApp_2\Client\obj\Debug\net9.0-windows\refint\Cli
 D:\Thai_Van_Tinh\NET\BTL\WeatherApp_2\Client\obj\Debug\net9.0-windows\Client.pdb
 D:\Thai_Van_Tinh\NET\BTL\WeatherApp_2\Client\obj\Debug\net9.0-windows\Client.genruntimeconfig.cache
 D:\Thai_Van_Tinh\NET\BTL\WeatherApp_2\Client\obj\Debug\net9.0-windows\ref\Client.dll
-D:\Thai_Van_Tinh\NET\BTL\WeatherApp_2\Client\obj\Debug\net9.0-windows\WeatherClient.Form1.resources
 D:\Thai_Van_Tinh\NET\BTL\WeatherApp_2\Client\obj\Debug\net9.0-windows\Client.csproj.GenerateResource.cache
 E:\Compuer\HK8\Lập trình mạng\BTN\Client\bin\Debug\net9.0-windows\Client.exe
 E:\Compuer\HK8\Lập trình mạng\BTN\Client\bin\Debug\net9.0-windows\Client.deps.json
@@ -76,3 +75,26 @@ E:\Compuer\HK8\Lập trình mạng\BTN\Client\obj\Debug\net9.0-windows\refint\Cl
 E:\Compuer\HK8\Lập trình mạng\BTN\Client\obj\Debug\net9.0-windows\Client.pdb
 E:\Compuer\HK8\Lập trình mạng\BTN\Client\obj\Debug\net9.0-windows\Client.genruntimeconfig.cache
 E:\Compuer\HK8\Lập trình mạng\BTN\Client\obj\Debug\net9.0-windows\ref\Client.dll
+D:\Thai_Van_Tinh\NET\BTL\WeatherApp_2\Client\obj\Debug\net9.0-windows\Client.Form1.resources
+D:\Thai_Van_Tinh\NET\BTL\WeatherApp_2\Client\obj\Debug\net9.0-windows\Client.Properties.Resources.resources
+D:\Thai_Van_Tinh\NET\BTL\WeatherApp_2\Client\bin\Debug\net9.0-windows\Azure.Core.dll
+D:\Thai_Van_Tinh\NET\BTL\WeatherApp_2\Client\bin\Debug\net9.0-windows\Azure.Identity.dll
+D:\Thai_Van_Tinh\NET\BTL\WeatherApp_2\Client\bin\Debug\net9.0-windows\System.Windows.Forms.DataVisualization.dll
+D:\Thai_Van_Tinh\NET\BTL\WeatherApp_2\Client\bin\Debug\net9.0-windows\Microsoft.Bcl.AsyncInterfaces.dll
+D:\Thai_Van_Tinh\NET\BTL\WeatherApp_2\Client\bin\Debug\net9.0-windows\Microsoft.Data.SqlClient.dll
+D:\Thai_Van_Tinh\NET\BTL\WeatherApp_2\Client\bin\Debug\net9.0-windows\Microsoft.Identity.Client.dll
+D:\Thai_Van_Tinh\NET\BTL\WeatherApp_2\Client\bin\Debug\net9.0-windows\Microsoft.Identity.Client.Extensions.Msal.dll
+D:\Thai_Van_Tinh\NET\BTL\WeatherApp_2\Client\bin\Debug\net9.0-windows\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Thai_Van_Tinh\NET\BTL\WeatherApp_2\Client\bin\Debug\net9.0-windows\Microsoft.IdentityModel.Logging.dll
+D:\Thai_Van_Tinh\NET\BTL\WeatherApp_2\Client\bin\Debug\net9.0-windows\Microsoft.IdentityModel.Protocols.dll
+D:\Thai_Van_Tinh\NET\BTL\WeatherApp_2\Client\bin\Debug\net9.0-windows\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Thai_Van_Tinh\NET\BTL\WeatherApp_2\Client\bin\Debug\net9.0-windows\Microsoft.IdentityModel.Tokens.dll
+D:\Thai_Van_Tinh\NET\BTL\WeatherApp_2\Client\bin\Debug\net9.0-windows\System.IdentityModel.Tokens.Jwt.dll
+D:\Thai_Van_Tinh\NET\BTL\WeatherApp_2\Client\bin\Debug\net9.0-windows\System.Runtime.Caching.dll
+D:\Thai_Van_Tinh\NET\BTL\WeatherApp_2\Client\bin\Debug\net9.0-windows\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\Thai_Van_Tinh\NET\BTL\WeatherApp_2\Client\bin\Debug\net9.0-windows\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\Thai_Van_Tinh\NET\BTL\WeatherApp_2\Client\bin\Debug\net9.0-windows\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Thai_Van_Tinh\NET\BTL\WeatherApp_2\Client\bin\Debug\net9.0-windows\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Thai_Van_Tinh\NET\BTL\WeatherApp_2\Client\bin\Debug\net9.0-windows\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Thai_Van_Tinh\NET\BTL\WeatherApp_2\Client\bin\Debug\net9.0-windows\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Thai_Van_Tinh\NET\BTL\WeatherApp_2\Client\bin\Debug\net9.0-windows\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll

@@ -1,4 +1,6 @@
-﻿namespace Client
+﻿using System.Windows.Forms.DataVisualization.Charting;
+
+namespace Client
 {
     partial class Form1
     {
@@ -6,7 +8,8 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.DataGridView dataGridView1;
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -28,6 +31,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            ChartArea chartArea1 = new ChartArea();
+            Legend legend1 = new Legend();
+            Series series1 = new Series();
             label15 = new Label();
             labTemperature = new Label();
             btnSearch = new Button();
@@ -53,6 +59,8 @@
             labWindSpeed = new Label();
             labPressure = new Label();
             btnLocation = new Button();
+            chart1 = new Chart();
+            dataGridView1 = new DataGridView();
             labDistrict = new Label();
             labCoolPlaces = new Label();
             labTourSuggestions = new Label();
@@ -62,6 +70,8 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)chart1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // label15
@@ -71,10 +81,9 @@
             label15.BackColor = Color.Transparent;
             label15.Font = new Font("Times New Roman", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label15.ForeColor = SystemColors.Menu;
-            label15.Location = new Point(348, 386);
-            label15.Margin = new Padding(4, 0, 4, 0);
+            label15.Location = new Point(278, 309);
             label15.Name = "label15";
-            label15.Size = new Size(28, 41);
+            label15.Size = new Size(23, 35);
             label15.TabIndex = 67;
             label15.Text = "/";
             // 
@@ -85,10 +94,9 @@
             labTemperature.BackColor = Color.Transparent;
             labTemperature.Font = new Font("Times New Roman", 72F, FontStyle.Bold, GraphicsUnit.Point, 0);
             labTemperature.ForeColor = Color.Transparent;
-            labTemperature.Location = new Point(680, 138);
-            labTemperature.Margin = new Padding(4, 0, 4, 0);
+            labTemperature.Location = new Point(544, 110);
             labTemperature.Name = "labTemperature";
-            labTemperature.Size = new Size(231, 163);
+            labTemperature.Size = new Size(192, 135);
             labTemperature.TabIndex = 54;
             labTemperature.Text = "°C";
             // 
@@ -99,10 +107,10 @@
             btnSearch.FlatStyle = FlatStyle.System;
             btnSearch.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnSearch.ForeColor = Color.White;
-            btnSearch.Location = new Point(1340, 67);
-            btnSearch.Margin = new Padding(4, 5, 4, 5);
+            btnSearch.Location = new Point(1072, 54);
+            btnSearch.Margin = new Padding(3, 4, 3, 4);
             btnSearch.Name = "btnSearch";
-            btnSearch.Size = new Size(120, 55);
+            btnSearch.Size = new Size(96, 44);
             btnSearch.TabIndex = 53;
             btnSearch.Text = "Tìm";
             btnSearch.UseVisualStyleBackColor = false;
@@ -115,11 +123,11 @@
             TBCity.BackColor = Color.White;
             TBCity.Font = new Font("Times New Roman", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TBCity.ForeColor = Color.Black;
-            TBCity.Location = new Point(458, 67);
-            TBCity.Margin = new Padding(4, 5, 4, 5);
+            TBCity.Location = new Point(366, 54);
+            TBCity.Margin = new Padding(3, 4, 3, 4);
             TBCity.Multiline = true;
             TBCity.Name = "TBCity";
-            TBCity.Size = new Size(856, 52);
+            TBCity.Size = new Size(686, 43);
             TBCity.TabIndex = 52;
             // 
             // label1
@@ -129,10 +137,9 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(250, 83);
-            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Location = new Point(200, 66);
             label1.Name = "label1";
-            label1.Size = new Size(153, 32);
+            label1.Size = new Size(128, 25);
             label1.TabIndex = 51;
             label1.Text = "Nơi cần tìm";
             // 
@@ -142,10 +149,9 @@
             labDateTime2.BackColor = Color.Transparent;
             labDateTime2.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             labDateTime2.ForeColor = Color.White;
-            labDateTime2.Location = new Point(250, 22);
-            labDateTime2.Margin = new Padding(4, 0, 4, 0);
+            labDateTime2.Location = new Point(200, 18);
             labDateTime2.Name = "labDateTime2";
-            labDateTime2.Size = new Size(85, 32);
+            labDateTime2.Size = new Size(72, 25);
             labDateTime2.TabIndex = 57;
             labDateTime2.Text = "Ngày:";
             // 
@@ -154,10 +160,10 @@
             picIcon.Anchor = AnchorStyles.Top;
             picIcon.BackColor = Color.Transparent;
             picIcon.ErrorImage = null;
-            picIcon.Location = new Point(1086, 144);
-            picIcon.Margin = new Padding(4, 5, 4, 5);
+            picIcon.Location = new Point(869, 115);
+            picIcon.Margin = new Padding(3, 4, 3, 4);
             picIcon.Name = "picIcon";
-            picIcon.Size = new Size(225, 220);
+            picIcon.Size = new Size(180, 176);
             picIcon.SizeMode = PictureBoxSizeMode.Zoom;
             picIcon.TabIndex = 55;
             picIcon.TabStop = false;
@@ -168,10 +174,9 @@
             labDateTime.BackColor = Color.Transparent;
             labDateTime.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             labDateTime.ForeColor = Color.White;
-            labDateTime.Location = new Point(50, 22);
-            labDateTime.Margin = new Padding(4, 0, 4, 0);
+            labDateTime.Location = new Point(40, 18);
             labDateTime.Name = "labDateTime";
-            labDateTime.Size = new Size(69, 32);
+            labDateTime.Size = new Size(56, 25);
             labDateTime.TabIndex = 56;
             labDateTime.Text = "Giờ:";
             // 
@@ -182,10 +187,9 @@
             labTemp_min.BackColor = Color.Transparent;
             labTemp_min.Font = new Font("Times New Roman", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             labTemp_min.ForeColor = SystemColors.Menu;
-            labTemp_min.Location = new Point(249, 386);
-            labTemp_min.Margin = new Padding(4, 0, 4, 0);
+            labTemp_min.Location = new Point(199, 309);
             labTemp_min.Name = "labTemp_min";
-            labTemp_min.Size = new Size(79, 41);
+            labTemp_min.Size = new Size(66, 35);
             labTemp_min.TabIndex = 49;
             labTemp_min.Text = "N/A";
             // 
@@ -196,10 +200,9 @@
             labTemp_max.BackColor = Color.Transparent;
             labTemp_max.Font = new Font("Times New Roman", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             labTemp_max.ForeColor = SystemColors.Menu;
-            labTemp_max.Location = new Point(370, 386);
-            labTemp_max.Margin = new Padding(4, 0, 4, 0);
+            labTemp_max.Location = new Point(296, 309);
             labTemp_max.Name = "labTemp_max";
-            labTemp_max.Size = new Size(79, 41);
+            labTemp_max.Size = new Size(66, 35);
             labTemp_max.TabIndex = 50;
             labTemp_max.Text = "N/A";
             // 
@@ -209,10 +212,9 @@
             labAdvice.BackColor = Color.Transparent;
             labAdvice.Font = new Font("Times New Roman", 25.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             labAdvice.ForeColor = SystemColors.Menu;
-            labAdvice.Location = new Point(235, 638);
-            labAdvice.Margin = new Padding(4, 0, 4, 0);
+            labAdvice.Location = new Point(188, 510);
             labAdvice.Name = "labAdvice";
-            labAdvice.Size = new Size(279, 60);
+            labAdvice.Size = new Size(235, 49);
             labAdvice.TabIndex = 62;
             labAdvice.Text = "Lời khuyên";
             // 
@@ -222,10 +224,9 @@
             labDetail2.BackColor = Color.Transparent;
             labDetail2.Font = new Font("Times New Roman", 19.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             labDetail2.ForeColor = SystemColors.Menu;
-            labDetail2.Location = new Point(236, 559);
-            labDetail2.Margin = new Padding(4, 0, 4, 0);
+            labDetail2.Location = new Point(189, 448);
             labDetail2.Name = "labDetail2";
-            labDetail2.Size = new Size(89, 45);
+            labDetail2.Size = new Size(73, 37);
             labDetail2.TabIndex = 4;
             labDetail2.Text = "N/A";
             // 
@@ -236,10 +237,9 @@
             labFeels_like.BackColor = Color.Transparent;
             labFeels_like.Font = new Font("Times New Roman", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             labFeels_like.ForeColor = SystemColors.Menu;
-            labFeels_like.Location = new Point(482, 475);
-            labFeels_like.Margin = new Padding(4, 0, 4, 0);
+            labFeels_like.Location = new Point(386, 380);
             labFeels_like.Name = "labFeels_like";
-            labFeels_like.Size = new Size(79, 41);
+            labFeels_like.Size = new Size(66, 35);
             labFeels_like.TabIndex = 15;
             labFeels_like.Text = "N/A";
             // 
@@ -250,10 +250,9 @@
             label13.BackColor = Color.Transparent;
             label13.Font = new Font("Times New Roman", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label13.ForeColor = SystemColors.Menu;
-            label13.Location = new Point(238, 475);
-            label13.Margin = new Padding(4, 0, 4, 0);
+            label13.Location = new Point(190, 380);
             label13.Name = "label13";
-            label13.Size = new Size(239, 41);
+            label13.Size = new Size(200, 35);
             label13.TabIndex = 14;
             label13.Text = "Cảm giác như ";
             // 
@@ -264,10 +263,9 @@
             labHumidity.BackColor = Color.Transparent;
             labHumidity.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             labHumidity.ForeColor = SystemColors.Window;
-            labHumidity.Location = new Point(765, 548);
-            labHumidity.Margin = new Padding(4, 0, 4, 0);
+            labHumidity.Location = new Point(612, 439);
             labHumidity.Name = "labHumidity";
-            labHumidity.Size = new Size(62, 32);
+            labHumidity.Size = new Size(51, 25);
             labHumidity.TabIndex = 69;
             labHumidity.Text = "N/A";
             // 
@@ -277,10 +275,10 @@
             pictureBox6.BackColor = Color.Transparent;
             pictureBox6.BackgroundImageLayout = ImageLayout.Stretch;
             pictureBox6.ErrorImage = null;
-            pictureBox6.Location = new Point(1140, 472);
-            pictureBox6.Margin = new Padding(4, 5, 4, 5);
+            pictureBox6.Location = new Point(912, 378);
+            pictureBox6.Margin = new Padding(3, 4, 3, 4);
             pictureBox6.Name = "pictureBox6";
-            pictureBox6.Size = new Size(72, 72);
+            pictureBox6.Size = new Size(58, 58);
             pictureBox6.TabIndex = 20;
             pictureBox6.TabStop = false;
             // 
@@ -291,10 +289,10 @@
             pictureBox2.BackgroundImageLayout = ImageLayout.Stretch;
             pictureBox2.Cursor = Cursors.AppStarting;
             pictureBox2.ErrorImage = null;
-            pictureBox2.Location = new Point(780, 472);
-            pictureBox2.Margin = new Padding(4, 5, 4, 5);
+            pictureBox2.Location = new Point(624, 378);
+            pictureBox2.Margin = new Padding(3, 4, 3, 4);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(65, 72);
+            pictureBox2.Size = new Size(52, 58);
             pictureBox2.TabIndex = 68;
             pictureBox2.TabStop = false;
             // 
@@ -305,10 +303,9 @@
             labSunset.BackColor = Color.Transparent;
             labSunset.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             labSunset.ForeColor = SystemColors.Window;
-            labSunset.Location = new Point(400, 303);
-            labSunset.Margin = new Padding(4, 0, 4, 0);
+            labSunset.Location = new Point(320, 242);
             labSunset.Name = "labSunset";
-            labSunset.Size = new Size(62, 32);
+            labSunset.Size = new Size(51, 25);
             labSunset.TabIndex = 9;
             labSunset.Text = "N/A";
             // 
@@ -318,10 +315,10 @@
             pictureBox4.BackColor = Color.Transparent;
             pictureBox4.BackgroundImageLayout = ImageLayout.Stretch;
             pictureBox4.ErrorImage = null;
-            pictureBox4.Location = new Point(964, 472);
-            pictureBox4.Margin = new Padding(4, 5, 4, 5);
+            pictureBox4.Location = new Point(771, 378);
+            pictureBox4.Margin = new Padding(3, 4, 3, 4);
             pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(65, 72);
+            pictureBox4.Size = new Size(52, 58);
             pictureBox4.TabIndex = 10;
             pictureBox4.TabStop = false;
             // 
@@ -332,10 +329,9 @@
             labSunrise.BackColor = Color.Transparent;
             labSunrise.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             labSunrise.ForeColor = SystemColors.Window;
-            labSunrise.Location = new Point(239, 303);
-            labSunrise.Margin = new Padding(4, 0, 4, 0);
+            labSunrise.Location = new Point(191, 242);
             labSunrise.Name = "labSunrise";
-            labSunrise.Size = new Size(62, 32);
+            labSunrise.Size = new Size(51, 25);
             labSunrise.TabIndex = 6;
             labSunrise.Text = "N/A";
             // 
@@ -345,10 +341,10 @@
             pictureBox3.BackColor = Color.Transparent;
             pictureBox3.BackgroundImageLayout = ImageLayout.Stretch;
             pictureBox3.ErrorImage = null;
-            pictureBox3.Location = new Point(395, 227);
-            pictureBox3.Margin = new Padding(4, 5, 4, 5);
+            pictureBox3.Location = new Point(316, 181);
+            pictureBox3.Margin = new Padding(3, 4, 3, 4);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(65, 72);
+            pictureBox3.Size = new Size(52, 58);
             pictureBox3.TabIndex = 7;
             pictureBox3.TabStop = false;
             // 
@@ -358,10 +354,10 @@
             pictureBox5.BackColor = Color.Transparent;
             pictureBox5.BackgroundImageLayout = ImageLayout.Stretch;
             pictureBox5.ErrorImage = null;
-            pictureBox5.Location = new Point(246, 227);
-            pictureBox5.Margin = new Padding(4, 5, 4, 5);
+            pictureBox5.Location = new Point(197, 181);
+            pictureBox5.Margin = new Padding(3, 4, 3, 4);
             pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(68, 72);
+            pictureBox5.Size = new Size(54, 58);
             pictureBox5.TabIndex = 0;
             pictureBox5.TabStop = false;
             // 
@@ -372,10 +368,9 @@
             labWindSpeed.BackColor = Color.Transparent;
             labWindSpeed.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             labWindSpeed.ForeColor = SystemColors.Window;
-            labWindSpeed.Location = new Point(949, 548);
-            labWindSpeed.Margin = new Padding(4, 0, 4, 0);
+            labWindSpeed.Location = new Point(759, 439);
             labWindSpeed.Name = "labWindSpeed";
-            labWindSpeed.Size = new Size(62, 32);
+            labWindSpeed.Size = new Size(51, 25);
             labWindSpeed.TabIndex = 11;
             labWindSpeed.Text = "N/A";
             // 
@@ -386,10 +381,9 @@
             labPressure.BackColor = Color.Transparent;
             labPressure.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             labPressure.ForeColor = SystemColors.Window;
-            labPressure.Location = new Point(1132, 542);
-            labPressure.Margin = new Padding(4, 0, 4, 0);
+            labPressure.Location = new Point(906, 434);
             labPressure.Name = "labPressure";
-            labPressure.Size = new Size(62, 32);
+            labPressure.Size = new Size(51, 25);
             labPressure.TabIndex = 13;
             labPressure.Text = "N/A";
             // 
@@ -400,14 +394,69 @@
             btnLocation.FlatStyle = FlatStyle.System;
             btnLocation.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnLocation.ForeColor = Color.White;
-            btnLocation.Location = new Point(1468, 67);
-            btnLocation.Margin = new Padding(4, 5, 4, 5);
+            btnLocation.Location = new Point(1174, 54);
+            btnLocation.Margin = new Padding(3, 4, 3, 4);
             btnLocation.Name = "btnLocation";
-            btnLocation.Size = new Size(120, 55);
+            btnLocation.Size = new Size(96, 44);
             btnLocation.TabIndex = 70;
             btnLocation.Text = "Vị trí";
             btnLocation.UseVisualStyleBackColor = false;
             btnLocation.Click += btnLocation_Click;
+            // 
+            // chart1
+            // 
+            chart1.Anchor = AnchorStyles.Bottom;
+            chart1.BackImageTransparentColor = Color.Transparent;
+            chart1.BackSecondaryColor = Color.Transparent;
+            chart1.BorderlineColor = Color.Transparent;
+            chartArea1.AlignmentOrientation = AreaAlignmentOrientations.Vertical | AreaAlignmentOrientations.Horizontal;
+            chartArea1.BackColor = Color.Transparent;
+            chartArea1.BackImageTransparentColor = Color.Transparent;
+            chartArea1.Name = "ChartArea1";
+            chart1.ChartAreas.Add(chartArea1);
+            chart1.Cursor = Cursors.Hand;
+            legend1.Name = "Legend1";
+            chart1.Legends.Add(legend1);
+            chart1.Location = new Point(12, 610);
+            chart1.Margin = new Padding(3, 4, 3, 4);
+            chart1.Name = "chart1";
+            chart1.Palette = ChartColorPalette.None;
+            chart1.RightToLeft = RightToLeft.No;
+            series1.BackGradientStyle = GradientStyle.TopBottom;
+            series1.BackImageTransparentColor = Color.Transparent;
+            series1.BackSecondaryColor = Color.Transparent;
+            series1.BorderColor = Color.Transparent;
+            series1.ChartArea = "ChartArea1";
+            series1.Color = Color.DodgerBlue;
+            series1.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            series1.LabelBackColor = Color.Transparent;
+            series1.LabelBorderColor = Color.Transparent;
+            series1.Legend = "Legend1";
+            series1.MarkerBorderColor = Color.Transparent;
+            series1.MarkerColor = Color.Transparent;
+            series1.MarkerImageTransparentColor = Color.Transparent;
+            series1.Name = "Nhiệt độ";
+            series1.ShadowColor = Color.Transparent;
+            chart1.Series.Add(series1);
+            chart1.Size = new Size(827, 346);
+            chart1.TabIndex = 71;
+            chart1.Text = "chart1";
+            chart1.TextAntiAliasingQuality = TextAntiAliasingQuality.Normal;
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.Anchor = AnchorStyles.Bottom;
+            dataGridView1.BackgroundColor = Color.White;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.GridColor = Color.Black;
+            dataGridView1.ImeMode = ImeMode.On;
+            dataGridView1.Location = new Point(845, 610);
+            dataGridView1.Margin = new Padding(3, 4, 3, 4);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersWidth = 51;
+            dataGridView1.RowTemplate.Height = 24;
+            dataGridView1.Size = new Size(565, 346);
+            dataGridView1.TabIndex = 72;
             // 
             // labDistrict
             // 
@@ -416,10 +465,9 @@
             labDistrict.BackColor = Color.Transparent;
             labDistrict.Font = new Font("Microsoft Sans Serif", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             labDistrict.ForeColor = Color.Transparent;
-            labDistrict.Location = new Point(1462, 14);
-            labDistrict.Margin = new Padding(4, 0, 4, 0);
+            labDistrict.Location = new Point(1170, 11);
             labDistrict.Name = "labDistrict";
-            labDistrict.Size = new Size(115, 25);
+            labDistrict.Size = new Size(87, 20);
             labDistrict.TabIndex = 73;
             labDistrict.Text = "Thành phố";
             // 
@@ -430,10 +478,9 @@
             labCoolPlaces.BackColor = Color.Transparent;
             labCoolPlaces.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             labCoolPlaces.ForeColor = Color.Transparent;
-            labCoolPlaces.Location = new Point(634, 352);
-            labCoolPlaces.Margin = new Padding(4, 0, 4, 0);
+            labCoolPlaces.Location = new Point(507, 281);
             labCoolPlaces.Name = "labCoolPlaces";
-            labCoolPlaces.Size = new Size(182, 27);
+            labCoolPlaces.Size = new Size(150, 22);
             labCoolPlaces.TabIndex = 74;
             labCoolPlaces.Text = "Địa điểm mát mẻ:";
             // 
@@ -444,24 +491,25 @@
             labTourSuggestions.BackColor = Color.Transparent;
             labTourSuggestions.Font = new Font("Times New Roman", 12F, FontStyle.Underline, GraphicsUnit.Point, 0);
             labTourSuggestions.ForeColor = Color.White;
-            labTourSuggestions.Location = new Point(634, 405);
-            labTourSuggestions.Margin = new Padding(4, 0, 4, 0);
+            labTourSuggestions.Location = new Point(507, 324);
             labTourSuggestions.Name = "labTourSuggestions";
-            labTourSuggestions.Size = new Size(117, 27);
+            labTourSuggestions.Size = new Size(98, 22);
             labTourSuggestions.TabIndex = 75;
             labTourSuggestions.Text = "Gợi ý tour:";
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
             BackColor = SystemColors.ActiveCaption;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1788, 1200);
+            ClientSize = new Size(1430, 960);
             Controls.Add(labTourSuggestions);
             Controls.Add(labCoolPlaces);
             Controls.Add(labDistrict);
+            Controls.Add(dataGridView1);
+            Controls.Add(chart1);
             Controls.Add(btnLocation);
             Controls.Add(labHumidity);
             Controls.Add(pictureBox6);
@@ -488,7 +536,7 @@
             Controls.Add(labDetail2);
             Controls.Add(label13);
             DoubleBuffered = true;
-            Margin = new Padding(4, 5, 4, 5);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "Form1";
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterScreen;
@@ -499,6 +547,8 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)chart1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
 
