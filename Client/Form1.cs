@@ -12,9 +12,11 @@ namespace Client
 {
     public partial class Form1 : Form
     {
+        private ToolTip toolTip1;
         public Form1()
         {
             InitializeComponent();
+            toolTip1 = new ToolTip(); 
             InitializeChart();
             UpdateDateTime();
         }
@@ -85,26 +87,34 @@ namespace Client
                     return;
                 }
 
-                // Display current weather
+                // Hiển thị thông tin cơ bản
                 labTemperature.Text = $"{weatherResponse.Temperature}°C";
-                labHumidity.Text = $"{weatherResponse.Humidity}%";
-                labWindSpeed.Text = $"{weatherResponse.WindSpeed} km/h";
-                labPressure.Text = $"{weatherResponse.Pressure} hPa";
-                labDetail2.Text = weatherResponse.Description ?? "Không có mô tả";
-                labSunset.Text = weatherResponse.Sunset ?? "N/A";
-                labSunrise.Text = weatherResponse.Sunrise ?? "N/A";
-                labDistrict.Text = $"{weatherResponse.City ?? "Không xác định"}, {weatherResponse.Country ?? "Không xác định"}";
-                labFeels_like.Text = $"{weatherResponse.Like_feel} °C";
+                labDistrict.Text = $"{weatherResponse.City ?? "N/A"}, {weatherResponse.Country ?? "N/A"}";
+                labDetail2.Text = weatherResponse.Description ?? "N/A";
+
+                SetLabelWithTooltip(labHumidity, $"Độ ẩm: {weatherResponse.Humidity}%", 
+                    $"Không khí {(weatherResponse.Humidity > 70 ? "ẩm ướt" : "khô ráo")}");
+        
+                SetLabelWithTooltip(labWindSpeed, $"Gió: {weatherResponse.WindSpeed} km/h", 
+                    $"{(weatherResponse.WindSpeed > 20 ? "Gió mạnh" : "Gió nhẹ")}");
+        
+                SetLabelWithTooltip(labPressure, $"Áp suất: {weatherResponse.Pressure} hPa", 
+                    $"{(weatherResponse.Pressure < 1000 ? "Có thể có thời tiết xấu" : "Ổn định")}");
+        
+                SetLabelWithTooltip(labFeels_like, $"{weatherResponse.Like_feel}°C", 
+                    $"{(weatherResponse.Like_feel > weatherResponse.Temperature ? "Nóng hơn thực tế" : "Mát hơn thực tế")}");
+
+                labSunrise.Text = $"Mọc: {weatherResponse.Sunrise ?? "N/A"}";
+                labSunset.Text = $"Lặn: {weatherResponse.Sunset ?? "N/A"}";
 
                 if (!string.IsNullOrEmpty(weatherResponse.Icon))
                 {
                     picIcon.ImageLocation = $"http://openweathermap.org/img/wn/{weatherResponse.Icon}@2x.png";
                 }
 
-                labFeels_like.Text = $"~{weatherResponse.Temperature}°C";
                 labAdvice.Text = GetWeatherAdvice(weatherResponse.Temperature, weatherResponse.Description ?? string.Empty);
 
-                // Display forecast
+                // Hiển thị dự báo
                 if (weatherResponse.DailyForecast != null && weatherResponse.DailyForecast.Count > 0)
                 {
                     DisplayForecastChart(weatherResponse.DailyForecast);
@@ -116,6 +126,14 @@ namespace Client
                 MessageBox.Show($"Lỗi khi hiển thị dữ liệu: {ex.Message}", "Lỗi",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+        private void SetLabelWithTooltip(Label label, string mainText, string tooltipText)
+        {
+            label.Text = mainText;
+            toolTip1.SetToolTip(label, tooltipText);
+            toolTip1.IsBalloon = true; 
+            toolTip1.ShowAlways = true; 
+    
         }
 
         private void DisplayForecastChart(List<DailyForecast> forecasts)
@@ -192,12 +210,16 @@ namespace Client
 
         private string GetWeatherAdvice(double temperature, string description)
         {
-            if (temperature > 30)
-                return "Nắng nóng, nên mặc đồ thoáng mát và uống nhiều nước";
-            else if (temperature < 20)
-                return "Trời mát/lạnh, nên mặc áo ấm";
+            if (temperature > 35)
+                return "Trời rất nóng, có thể oi bức và khó chịu. Nhiệt độ cao dễ gây mất nước và mệt mỏi.";
+            else if (temperature > 30)
+                return "Thời tiết nóng với nhiệt độ cao, có thể có nắng gắt vào ban ngày.";
+            else if (temperature >= 20 && temperature <= 30)
+                return "Thời tiết ấm áp, không quá nóng cũng không quá lạnh, thích hợp cho các hoạt động ngoài trời.";
+            else if (temperature >= 10 && temperature < 20)
+                return "Trời mát, có thể se lạnh vào sáng sớm hoặc ban đêm.";
             else
-                return "Thời tiết dễ chịu, thích hợp cho các hoạt động ngoài trời";
+                return "Trời lạnh, nhiệt độ thấp có thể gây rét buốt, nhất là vào ban đêm.";
         }
 
         private async Task<string> GetWeatherDataFromServerAsync(string city)
@@ -260,3 +282,4 @@ namespace Client
         public string Icon { get; set; } = string.Empty;
     }
 }
+

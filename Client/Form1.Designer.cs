@@ -62,8 +62,6 @@ namespace Client
             chart1 = new Chart();
             dataGridView1 = new DataGridView();
             labDistrict = new Label();
-            labCoolPlaces = new Label();
-            labTourSuggestions = new Label();
             ((System.ComponentModel.ISupportInitialize)picIcon).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -261,13 +259,40 @@ namespace Client
             labHumidity.Anchor = AnchorStyles.Top;
             labHumidity.AutoSize = true;
             labHumidity.BackColor = Color.Transparent;
-            labHumidity.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            labHumidity.Font = new Font("Times New Roman", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             labHumidity.ForeColor = SystemColors.Window;
-            labHumidity.Location = new Point(612, 439);
+            labHumidity.Location = new Point(600, 380);
             labHumidity.Name = "labHumidity";
             labHumidity.Size = new Size(51, 25);
             labHumidity.TabIndex = 69;
             labHumidity.Text = "N/A";
+            //
+            // labWindSpeed
+            // 
+            labWindSpeed.Anchor = AnchorStyles.Top;
+            labWindSpeed.AutoSize = true;
+            labWindSpeed.BackColor = Color.Transparent;
+            labWindSpeed.Font = new Font("Times New Roman", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            labWindSpeed.ForeColor = SystemColors.Window;
+            labWindSpeed.Location = new Point(600, 309);
+            labWindSpeed.Name = "labWindSpeed";
+            labWindSpeed.Size = new Size(51, 25);
+            labWindSpeed.TabIndex = 11;
+            labWindSpeed.Text = "N/A";
+            // 
+            // labPressure
+            // 
+            labPressure.Anchor = AnchorStyles.Top;
+            labPressure.AutoSize = true;
+            labPressure.BackColor = Color.Transparent;
+            labPressure.Font = new Font("Times New Roman", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            labPressure.ForeColor = SystemColors.Window;
+            labPressure.Location = new Point(600, 460);
+            labPressure.Name = "labPressure";
+            labPressure.Size = new Size(51, 25);
+            labPressure.TabIndex = 13;
+            labPressure.Text = "N/A";
+            // 
             // 
             // pictureBox6
             // 
@@ -361,32 +386,6 @@ namespace Client
             pictureBox5.TabIndex = 0;
             pictureBox5.TabStop = false;
             // 
-            // labWindSpeed
-            // 
-            labWindSpeed.Anchor = AnchorStyles.Top;
-            labWindSpeed.AutoSize = true;
-            labWindSpeed.BackColor = Color.Transparent;
-            labWindSpeed.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labWindSpeed.ForeColor = SystemColors.Window;
-            labWindSpeed.Location = new Point(759, 439);
-            labWindSpeed.Name = "labWindSpeed";
-            labWindSpeed.Size = new Size(51, 25);
-            labWindSpeed.TabIndex = 11;
-            labWindSpeed.Text = "N/A";
-            // 
-            // labPressure
-            // 
-            labPressure.Anchor = AnchorStyles.Top;
-            labPressure.AutoSize = true;
-            labPressure.BackColor = Color.Transparent;
-            labPressure.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labPressure.ForeColor = SystemColors.Window;
-            labPressure.Location = new Point(906, 434);
-            labPressure.Name = "labPressure";
-            labPressure.Size = new Size(51, 25);
-            labPressure.TabIndex = 13;
-            labPressure.Text = "N/A";
-            // 
             // btnLocation
             // 
             btnLocation.Anchor = AnchorStyles.Top;
@@ -471,32 +470,6 @@ namespace Client
             labDistrict.TabIndex = 73;
             labDistrict.Text = "Thành phố";
             // 
-            // labCoolPlaces
-            // 
-            labCoolPlaces.Anchor = AnchorStyles.Top;
-            labCoolPlaces.AutoSize = true;
-            labCoolPlaces.BackColor = Color.Transparent;
-            labCoolPlaces.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            labCoolPlaces.ForeColor = Color.Transparent;
-            labCoolPlaces.Location = new Point(507, 281);
-            labCoolPlaces.Name = "labCoolPlaces";
-            labCoolPlaces.Size = new Size(150, 22);
-            labCoolPlaces.TabIndex = 74;
-            labCoolPlaces.Text = "Địa điểm mát mẻ:";
-            // 
-            // labTourSuggestions
-            // 
-            labTourSuggestions.Anchor = AnchorStyles.Top;
-            labTourSuggestions.AutoSize = true;
-            labTourSuggestions.BackColor = Color.Transparent;
-            labTourSuggestions.Font = new Font("Times New Roman", 12F, FontStyle.Underline, GraphicsUnit.Point, 0);
-            labTourSuggestions.ForeColor = Color.White;
-            labTourSuggestions.Location = new Point(507, 324);
-            labTourSuggestions.Name = "labTourSuggestions";
-            labTourSuggestions.Size = new Size(98, 22);
-            labTourSuggestions.TabIndex = 75;
-            labTourSuggestions.Text = "Gợi ý tour:";
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -505,8 +478,6 @@ namespace Client
             BackColor = SystemColors.ActiveCaption;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1430, 960);
-            Controls.Add(labTourSuggestions);
-            Controls.Add(labCoolPlaces);
             Controls.Add(labDistrict);
             Controls.Add(dataGridView1);
             Controls.Add(chart1);
@@ -582,8 +553,6 @@ namespace Client
         private System.Windows.Forms.Label labPressure;
         private System.Windows.Forms.Button btnLocation;
         private System.Windows.Forms.Label labDistrict;
-        private System.Windows.Forms.Label labCoolPlaces;
-        private System.Windows.Forms.Label labTourSuggestions;
 
     }
 }
