@@ -77,9 +77,9 @@
             this.label15.BackColor = System.Drawing.Color.Transparent;
             this.label15.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.SystemColors.Menu;
-            this.label15.Location = new System.Drawing.Point(757, 438);
+            this.label15.Location = new System.Drawing.Point(673, 350);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(28, 41);
+            this.label15.Size = new System.Drawing.Size(23, 35);
             this.label15.TabIndex = 67;
             this.label15.Text = "/";
             // 
@@ -90,12 +90,11 @@
             this.labTemperature.BackColor = System.Drawing.Color.Transparent;
             this.labTemperature.Font = new System.Drawing.Font("Times New Roman", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labTemperature.ForeColor = System.Drawing.Color.Transparent;
-            this.labTemperature.Location = new System.Drawing.Point(235, 168);
+            this.labTemperature.Location = new System.Drawing.Point(209, 134);
             this.labTemperature.Name = "labTemperature";
-            this.labTemperature.Size = new System.Drawing.Size(231, 163);
+            this.labTemperature.Size = new System.Drawing.Size(192, 135);
             this.labTemperature.TabIndex = 54;
             this.labTemperature.Text = "°C";
-            this.labTemperature.Click += new System.EventHandler(this.labTemperature_Click);
             // 
             // btnSearch
             // 
@@ -104,10 +103,9 @@
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnSearch.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSearch.ForeColor = System.Drawing.Color.White;
-            this.btnSearch.Location = new System.Drawing.Point(1169, 79);
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnSearch.Location = new System.Drawing.Point(1228, 63);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(136, 62);
+            this.btnSearch.Size = new System.Drawing.Size(121, 50);
             this.btnSearch.TabIndex = 53;
             this.btnSearch.Text = "Tìm";
             this.btnSearch.UseVisualStyleBackColor = false;
@@ -458,11 +456,10 @@
             this.TBCity.BackColor = System.Drawing.Color.White;
             this.TBCity.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TBCity.ForeColor = System.Drawing.Color.Black;
-            this.TBCity.Location = new System.Drawing.Point(234, 79);
-            this.TBCity.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.TBCity.Location = new System.Drawing.Point(208, 63);
             this.TBCity.Multiline = true;
             this.TBCity.Name = "TBCity";
-            this.TBCity.Size = new System.Drawing.Size(905, 62);
+            this.TBCity.Size = new System.Drawing.Size(949, 50);
             this.TBCity.TabIndex = 52;
             // 
             // label1
@@ -472,9 +469,9 @@
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(43, 92);
+            this.label1.Location = new System.Drawing.Point(38, 74);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(153, 32);
+            this.label1.Size = new System.Drawing.Size(128, 25);
             this.label1.TabIndex = 51;
             this.label1.Text = "Nơi cần tìm";
             // 
@@ -484,9 +481,9 @@
             this.labDateTime2.BackColor = System.Drawing.Color.Transparent;
             this.labDateTime2.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labDateTime2.ForeColor = System.Drawing.Color.White;
-            this.labDateTime2.Location = new System.Drawing.Point(228, 18);
+            this.labDateTime2.Location = new System.Drawing.Point(237, 14);
             this.labDateTime2.Name = "labDateTime2";
-            this.labDateTime2.Size = new System.Drawing.Size(85, 32);
+            this.labDateTime2.Size = new System.Drawing.Size(72, 25);
             this.labDateTime2.TabIndex = 57;
             this.labDateTime2.Text = "Ngày:";
             // 
@@ -495,14 +492,12 @@
             this.picIcon.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.picIcon.BackColor = System.Drawing.Color.Transparent;
             this.picIcon.ErrorImage = null;
-            this.picIcon.Location = new System.Drawing.Point(686, 168);
-            this.picIcon.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.picIcon.Location = new System.Drawing.Point(610, 134);
             this.picIcon.Name = "picIcon";
-            this.picIcon.Size = new System.Drawing.Size(202, 176);
+            this.picIcon.Size = new System.Drawing.Size(180, 141);
             this.picIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picIcon.TabIndex = 55;
             this.picIcon.TabStop = false;
-            this.picIcon.Click += new System.EventHandler(this.picIcon_Click);
             // 
             // labDateTime
             // 
@@ -510,9 +505,9 @@
             this.labDateTime.BackColor = System.Drawing.Color.Transparent;
             this.labDateTime.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labDateTime.ForeColor = System.Drawing.Color.White;
-            this.labDateTime.Location = new System.Drawing.Point(43, 18);
+            this.labDateTime.Location = new System.Drawing.Point(38, 14);
             this.labDateTime.Name = "labDateTime";
-            this.labDateTime.Size = new System.Drawing.Size(69, 32);
+            this.labDateTime.Size = new System.Drawing.Size(56, 25);
             this.labDateTime.TabIndex = 56;
             this.labDateTime.Text = "Giờ:";
             // 
@@ -523,12 +518,11 @@
             this.labTemp_min.BackColor = System.Drawing.Color.Transparent;
             this.labTemp_min.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labTemp_min.ForeColor = System.Drawing.SystemColors.Menu;
-            this.labTemp_min.Location = new System.Drawing.Point(672, 440);
+            this.labTemp_min.Location = new System.Drawing.Point(597, 352);
             this.labTemp_min.Name = "labTemp_min";
-            this.labTemp_min.Size = new System.Drawing.Size(79, 41);
+            this.labTemp_min.Size = new System.Drawing.Size(66, 35);
             this.labTemp_min.TabIndex = 49;
             this.labTemp_min.Text = "N/A";
-            this.labTemp_min.Click += new System.EventHandler(this.labTemp_min_Click);
             // 
             // labTemp_max
             // 
@@ -537,24 +531,22 @@
             this.labTemp_max.BackColor = System.Drawing.Color.Transparent;
             this.labTemp_max.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labTemp_max.ForeColor = System.Drawing.SystemColors.Menu;
-            this.labTemp_max.Location = new System.Drawing.Point(809, 440);
+            this.labTemp_max.Location = new System.Drawing.Point(690, 352);
             this.labTemp_max.Name = "labTemp_max";
-            this.labTemp_max.Size = new System.Drawing.Size(79, 41);
+            this.labTemp_max.Size = new System.Drawing.Size(66, 35);
             this.labTemp_max.TabIndex = 50;
             this.labTemp_max.Text = "N/A";
-            this.labTemp_max.Click += new System.EventHandler(this.labTemp_max_Click);
             // 
             // labAdvice
             // 
             this.labAdvice.BackColor = System.Drawing.Color.Transparent;
             this.labAdvice.Font = new System.Drawing.Font("Times New Roman", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labAdvice.ForeColor = System.Drawing.SystemColors.Menu;
-            this.labAdvice.Location = new System.Drawing.Point(37, 662);
+            this.labAdvice.Location = new System.Drawing.Point(33, 530);
             this.labAdvice.Name = "labAdvice";
-            this.labAdvice.Size = new System.Drawing.Size(851, 202);
+            this.labAdvice.Size = new System.Drawing.Size(756, 162);
             this.labAdvice.TabIndex = 62;
             this.labAdvice.Text = "Lời khuyên";
-            this.labAdvice.Click += new System.EventHandler(this.labAdvice_Click);
             // 
             // labDetail2
             // 
@@ -562,9 +554,9 @@
             this.labDetail2.BackColor = System.Drawing.Color.Transparent;
             this.labDetail2.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labDetail2.ForeColor = System.Drawing.SystemColors.Menu;
-            this.labDetail2.Location = new System.Drawing.Point(226, 367);
+            this.labDetail2.Location = new System.Drawing.Point(201, 294);
             this.labDetail2.Name = "labDetail2";
-            this.labDetail2.Size = new System.Drawing.Size(89, 45);
+            this.labDetail2.Size = new System.Drawing.Size(73, 37);
             this.labDetail2.TabIndex = 4;
             this.labDetail2.Text = "N/A";
             // 
@@ -575,9 +567,9 @@
             this.labFeels_like.BackColor = System.Drawing.Color.Transparent;
             this.labFeels_like.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labFeels_like.ForeColor = System.Drawing.SystemColors.Menu;
-            this.labFeels_like.Location = new System.Drawing.Point(484, 440);
+            this.labFeels_like.Location = new System.Drawing.Point(430, 352);
             this.labFeels_like.Name = "labFeels_like";
-            this.labFeels_like.Size = new System.Drawing.Size(79, 41);
+            this.labFeels_like.Size = new System.Drawing.Size(66, 35);
             this.labFeels_like.TabIndex = 15;
             this.labFeels_like.Text = "N/A";
             // 
@@ -588,9 +580,9 @@
             this.label13.BackColor = System.Drawing.Color.Transparent;
             this.label13.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.ForeColor = System.Drawing.SystemColors.Menu;
-            this.label13.Location = new System.Drawing.Point(227, 440);
+            this.label13.Location = new System.Drawing.Point(202, 352);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(239, 41);
+            this.label13.Size = new System.Drawing.Size(200, 35);
             this.label13.TabIndex = 14;
             this.label13.Text = "Cảm giác như ";
             // 
@@ -601,9 +593,9 @@
             this.labHumidity.BackColor = System.Drawing.Color.Transparent;
             this.labHumidity.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labHumidity.ForeColor = System.Drawing.SystemColors.Window;
-            this.labHumidity.Location = new System.Drawing.Point(249, 584);
+            this.labHumidity.Location = new System.Drawing.Point(221, 467);
             this.labHumidity.Name = "labHumidity";
-            this.labHumidity.Size = new System.Drawing.Size(62, 32);
+            this.labHumidity.Size = new System.Drawing.Size(51, 25);
             this.labHumidity.TabIndex = 69;
             this.labHumidity.Text = "N/A";
             // 
@@ -614,10 +606,9 @@
             this.pictureBox6.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox6.BackgroundImage")));
             this.pictureBox6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox6.ErrorImage = null;
-            this.pictureBox6.Location = new System.Drawing.Point(686, 522);
-            this.pictureBox6.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.pictureBox6.Location = new System.Drawing.Point(610, 418);
             this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(65, 58);
+            this.pictureBox6.Size = new System.Drawing.Size(58, 46);
             this.pictureBox6.TabIndex = 20;
             this.pictureBox6.TabStop = false;
             // 
@@ -629,10 +620,9 @@
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox2.Cursor = System.Windows.Forms.Cursors.AppStarting;
             this.pictureBox2.ErrorImage = null;
-            this.pictureBox2.Location = new System.Drawing.Point(255, 522);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.pictureBox2.Location = new System.Drawing.Point(227, 418);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(58, 58);
+            this.pictureBox2.Size = new System.Drawing.Size(52, 46);
             this.pictureBox2.TabIndex = 68;
             this.pictureBox2.TabStop = false;
             // 
@@ -643,9 +633,9 @@
             this.labSunset.BackColor = System.Drawing.Color.Transparent;
             this.labSunset.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labSunset.ForeColor = System.Drawing.SystemColors.Window;
-            this.labSunset.Location = new System.Drawing.Point(43, 584);
+            this.labSunset.Location = new System.Drawing.Point(38, 467);
             this.labSunset.Name = "labSunset";
-            this.labSunset.Size = new System.Drawing.Size(62, 32);
+            this.labSunset.Size = new System.Drawing.Size(51, 25);
             this.labSunset.TabIndex = 9;
             this.labSunset.Text = "N/A";
             // 
@@ -656,10 +646,9 @@
             this.pictureBox4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox4.BackgroundImage")));
             this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox4.ErrorImage = null;
-            this.pictureBox4.Location = new System.Drawing.Point(482, 522);
-            this.pictureBox4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.pictureBox4.Location = new System.Drawing.Point(428, 418);
             this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(58, 58);
+            this.pictureBox4.Size = new System.Drawing.Size(52, 46);
             this.pictureBox4.TabIndex = 10;
             this.pictureBox4.TabStop = false;
             // 
@@ -670,9 +659,9 @@
             this.labSunrise.BackColor = System.Drawing.Color.Transparent;
             this.labSunrise.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labSunrise.ForeColor = System.Drawing.SystemColors.Window;
-            this.labSunrise.Location = new System.Drawing.Point(43, 447);
+            this.labSunrise.Location = new System.Drawing.Point(38, 358);
             this.labSunrise.Name = "labSunrise";
-            this.labSunrise.Size = new System.Drawing.Size(62, 32);
+            this.labSunrise.Size = new System.Drawing.Size(51, 25);
             this.labSunrise.TabIndex = 6;
             this.labSunrise.Text = "N/A";
             // 
@@ -683,10 +672,9 @@
             this.pictureBox3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox3.BackgroundImage")));
             this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox3.ErrorImage = null;
-            this.pictureBox3.Location = new System.Drawing.Point(49, 522);
-            this.pictureBox3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.pictureBox3.Location = new System.Drawing.Point(44, 418);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(61, 58);
+            this.pictureBox3.Size = new System.Drawing.Size(54, 46);
             this.pictureBox3.TabIndex = 7;
             this.pictureBox3.TabStop = false;
             // 
@@ -697,10 +685,9 @@
             this.pictureBox5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox5.BackgroundImage")));
             this.pictureBox5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox5.ErrorImage = null;
-            this.pictureBox5.Location = new System.Drawing.Point(49, 385);
-            this.pictureBox5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.pictureBox5.Location = new System.Drawing.Point(44, 308);
             this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(61, 58);
+            this.pictureBox5.Size = new System.Drawing.Size(54, 46);
             this.pictureBox5.TabIndex = 0;
             this.pictureBox5.TabStop = false;
             // 
@@ -711,9 +698,9 @@
             this.labWindSpeed.BackColor = System.Drawing.Color.Transparent;
             this.labWindSpeed.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labWindSpeed.ForeColor = System.Drawing.SystemColors.Window;
-            this.labWindSpeed.Location = new System.Drawing.Point(440, 584);
+            this.labWindSpeed.Location = new System.Drawing.Point(391, 467);
             this.labWindSpeed.Name = "labWindSpeed";
-            this.labWindSpeed.Size = new System.Drawing.Size(62, 32);
+            this.labWindSpeed.Size = new System.Drawing.Size(51, 25);
             this.labWindSpeed.TabIndex = 11;
             this.labWindSpeed.Text = "N/A";
             // 
@@ -724,9 +711,9 @@
             this.labPressure.BackColor = System.Drawing.Color.Transparent;
             this.labPressure.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labPressure.ForeColor = System.Drawing.SystemColors.Window;
-            this.labPressure.Location = new System.Drawing.Point(656, 584);
+            this.labPressure.Location = new System.Drawing.Point(583, 467);
             this.labPressure.Name = "labPressure";
-            this.labPressure.Size = new System.Drawing.Size(62, 32);
+            this.labPressure.Size = new System.Drawing.Size(51, 25);
             this.labPressure.TabIndex = 13;
             this.labPressure.Text = "N/A";
             // 
@@ -737,10 +724,9 @@
             this.btnLocation.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnLocation.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLocation.ForeColor = System.Drawing.Color.White;
-            this.btnLocation.Location = new System.Drawing.Point(1332, 79);
-            this.btnLocation.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnLocation.Location = new System.Drawing.Point(1384, 62);
             this.btnLocation.Name = "btnLocation";
-            this.btnLocation.Size = new System.Drawing.Size(132, 62);
+            this.btnLocation.Size = new System.Drawing.Size(117, 50);
             this.btnLocation.TabIndex = 70;
             this.btnLocation.Text = "Vị trí";
             this.btnLocation.UseVisualStyleBackColor = false;
@@ -760,8 +746,7 @@
             this.chart1.Cursor = System.Windows.Forms.Cursors.Hand;
             legend1.Name = "Legend1";
             this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(942, 522);
-            this.chart1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.chart1.Location = new System.Drawing.Point(837, 418);
             this.chart1.Name = "chart1";
             this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
             this.chart1.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -781,7 +766,7 @@
             series1.Name = "Nhiệt độ";
             series1.ShadowColor = System.Drawing.Color.Transparent;
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(747, 354);
+            this.chart1.Size = new System.Drawing.Size(664, 283);
             this.chart1.TabIndex = 71;
             this.chart1.Text = "chart1";
             this.chart1.TextAntiAliasingQuality = System.Windows.Forms.DataVisualization.Charting.TextAntiAliasingQuality.Normal;
@@ -793,12 +778,11 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.GridColor = System.Drawing.Color.Black;
             this.dataGridView1.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.dataGridView1.Location = new System.Drawing.Point(942, 168);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dataGridView1.Location = new System.Drawing.Point(837, 134);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(747, 346);
+            this.dataGridView1.Size = new System.Drawing.Size(664, 277);
             this.dataGridView1.TabIndex = 72;
             // 
             // labDistrict
@@ -808,22 +792,21 @@
             this.labDistrict.BackColor = System.Drawing.Color.Transparent;
             this.labDistrict.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labDistrict.ForeColor = System.Drawing.Color.Transparent;
-            this.labDistrict.Location = new System.Drawing.Point(989, 25);
+            this.labDistrict.Location = new System.Drawing.Point(1284, 18);
             this.labDistrict.Name = "labDistrict";
-            this.labDistrict.Size = new System.Drawing.Size(115, 25);
+            this.labDistrict.Size = new System.Drawing.Size(87, 20);
             this.labDistrict.TabIndex = 73;
             this.labDistrict.Text = "Thành phố";
-            this.labDistrict.Click += new System.EventHandler(this.labDistrict_Click);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(2116, 889);
+            this.ClientSize = new System.Drawing.Size(1710, 711);
             this.Controls.Add(this.labDistrict);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.chart1);
@@ -854,7 +837,6 @@
             this.Controls.Add(this.label13);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Form1";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

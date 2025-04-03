@@ -8,6 +8,9 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Net;
 
 namespace Client
 {
@@ -17,7 +20,7 @@ namespace Client
         {
             InitializeComponent();
             InitializeChart();
-            UpdateDateTime();
+            UpdateTimeContinuously();
         }
 
         private void InitializeChart()
@@ -38,10 +41,14 @@ namespace Client
             chart1.Legends.Add(legend);
         }
 
-        private void UpdateDateTime()
+        private async void UpdateTimeContinuously()
         {
-            labDateTime.Text = "Giờ: " + DateTime.Now.ToString("HH:mm:ss");
-            labDateTime2.Text = "Ngày: " + DateTime.Now.ToString("dd/MM/yyyy");
+            while (true)
+            {
+                labDateTime.Text = "Giờ: " + DateTime.Now.ToString("HH:mm:ss");
+                labDateTime2.Text = "Ngày: " + DateTime.Now.ToString("dd/MM/yyyy");
+                await Task.Delay(1000);
+            }
         }
 
         private async void btnSearch_Click(object sender, EventArgs e)
@@ -91,13 +98,13 @@ namespace Client
                 labHumidity.Text = $"{weatherResponse.Humidity}%";
                 labWindSpeed.Text = $"{weatherResponse.WindSpeed} km/h";
                 labPressure.Text = $"{weatherResponse.Pressure} hPa";
-                labDetail2.Text = weatherResponse.Description;
+                labDetail2.Text = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(weatherResponse.Description.ToLower());
                 labSunset.Text = weatherResponse.Sunset;
                 labSunrise.Text = weatherResponse.Sunrise;
                 labDistrict.Text = $"{weatherResponse.City}, {weatherResponse.Country}";
                 labFeels_like.Text = $"{weatherResponse.Like_feel} °C";
-                labTemp_max.Text = $"{weatherResponse.Temp_max} °C";
-
+                labTemp_min.Text = $"{weatherResponse.Temp_min}°C";
+                labTemp_max.Text = $"{weatherResponse.Temp_max}°C";
 
                 if (!string.IsNullOrEmpty(weatherResponse.Icon))
                 {
@@ -120,11 +127,9 @@ namespace Client
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         private void DisplayForecastChart(List<DailyForecast> forecasts)
         {
             chart1.Series.Clear();
-
             // Add average temperature series
             Series avgSeries = new Series("Nhiệt độ TB")
             {
@@ -145,7 +150,7 @@ namespace Client
 
             Series maxSeries = new Series("Cao nhất")
             {
-                ChartType = SeriesChartType.Line,
+                ChartType = SeriesChartType.Point,
                 Color = Color.Red,
                 BorderWidth = 2,
                 IsValueShownAsLabel = true
@@ -169,28 +174,76 @@ namespace Client
 
         private void DisplayForecastDetails(List<DailyForecast> forecasts)
         {
+            // Tạo DataTable với các cột cần thiết (đã bỏ cột đầu tiên trống)
             DataTable dt = new DataTable();
             dt.Columns.Add("Ngày");
             dt.Columns.Add("Thứ");
-            dt.Columns.Add("Nhiệt độ TB");
             dt.Columns.Add("Thấp nhất");
             dt.Columns.Add("Cao nhất");
-            dt.Columns.Add("Thời tiết");
+            dt.Columns.Add("Mô tả");
+            dt.Columns.Add("Thời tiết", typeof(Image));
 
+            // Thêm dữ liệu vào các hàng (bỏ hàng cuối cùng trống)
             foreach (var forecast in forecasts)
             {
+                // Tải hình ảnh từ OpenWeatherMap
+                Image weatherIcon = null;
+                try
+                {
+                    using (var webClient = new WebClient())
+                    {
+                        byte[] imageData = webClient.DownloadData($"http://openweathermap.org/img/wn/{forecast.Icon}.png");
+                        using (var stream = new MemoryStream(imageData))
+                        {
+                            weatherIcon = Image.FromStream(stream);
+                        }
+                    }
+                }
+                catch
+                {
+                    weatherIcon = null;
+                }
+
+                // Viết hoa chữ cái đầu mô tả
+                string description = string.IsNullOrEmpty(forecast.Description)
+                    ? ""
+                    : char.ToUpper(forecast.Description[0]) + forecast.Description.Substring(1);
+
                 dt.Rows.Add(
                     forecast.Date.ToString("dd/MM"),
                     forecast.DayOfWeek,
-                    $"{forecast.AvgTemperature}°C",
                     $"{forecast.MinTemperature}°C",
                     $"{forecast.MaxTemperature}°C",
-                    forecast.Description
+                    description,
+                    weatherIcon
                 );
             }
 
+            // Gán DataTable vào DataGridView
             dataGridView1.DataSource = dt;
+
+            // Cấu hình hiển thị
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.RowHeadersVisible = false; // Ẩn cột đầu tiên (cột trống)
+
+            // Cấu hình cột biểu tượng
+            DataGridViewImageColumn imageColumn = (DataGridViewImageColumn)dataGridView1.Columns["Thời tiết"];
+            imageColumn.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            imageColumn.DefaultCellStyle.NullValue = null;
+            imageColumn.Width = 40;
+
+            // Căn chỉnh nội dung các cột
+            dataGridView1.Columns["Ngày"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView1.Columns["Thứ"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView1.Columns["Thấp nhất"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView1.Columns["Cao nhất"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView1.Columns["Mô tả"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+
+            // Đặt font cho cột mô tả
+            dataGridView1.Columns["Mô tả"].DefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Regular);
+
+            // Ẩn dòng trống cuối cùng (nếu có)
+            dataGridView1.AllowUserToAddRows = false;
         }
 
         private string GetWeatherAdvice(double temperature, string description)
@@ -221,10 +274,10 @@ namespace Client
             }
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            UpdateDateTime();
-        }
+        //private void timer1_Tick(object sender, EventArgs e)
+        //{
+        //    UpdateDateTime();
+        //}
 
         private void btnLocation_Click(object sender, EventArgs e)
         {
@@ -232,35 +285,6 @@ namespace Client
                 "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void labTemperature_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void labAdvice_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void picIcon_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void labDistrict_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void labTemp_min_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void labTemp_max_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 
     public class WeatherResponse

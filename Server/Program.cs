@@ -78,9 +78,11 @@ namespace WeatherServer
 
                     string currentJson = await currentResponse.Content.ReadAsStringAsync();
                     dynamic currentData = JsonConvert.DeserializeObject(currentJson);
+
                     // Lấy thông tin thời gian mặt trời mọc/lặn
                     DateTime sunriseTime = ConvertDateTime((long)currentData.sys.sunrise);
                     DateTime sunsetTime = ConvertDateTime((long)currentData.sys.sunset);
+
                     // Forecast
                     string forecastUrl = $"{OpenWeatherForecastUrl}?q={Uri.EscapeDataString(city)}&appid={OpenWeatherMapApiKey}&units=metric&lang=vi&cnt=40";
                     HttpResponseMessage forecastResponse = await httpClient.GetAsync(forecastUrl);
@@ -97,6 +99,31 @@ namespace WeatherServer
                     // Process forecast data
                     var dailyForecast = ProcessDailyForecast(forecastData.list);
 
+                    // Lấy nhiệt độ min/max từ dự báo ngày hôm nay
+                    DailyForecast todayForecast = null;
+                    foreach (var forecast in dailyForecast)
+                    {
+                        if (forecast.Date.Date == DateTime.Today)
+                        {
+                            todayForecast = forecast;
+                            break;
+                        }
+                    }
+                    // Nếu không tìm thấy dự báo cho hôm nay, lấy dự báo đầu tiên
+                    if (todayForecast == null && dailyForecast.Count > 0)
+                    {
+                        todayForecast = dailyForecast[0];
+                    }
+
+                    // Sử dụng giá trị từ dự báo nếu có, nếu không thì dùng giá trị từ current data
+                    string todayMinTemp = todayForecast != null ?
+                        Math.Round(todayForecast.MinTemperature, 0).ToString() :
+                        Math.Round((double)currentData.main.temp_min, 0).ToString();
+
+                    string todayMaxTemp = todayForecast != null ?
+                        Math.Round(todayForecast.MaxTemperature, 0).ToString() :
+                        Math.Round((double)currentData.main.temp_max, 0).ToString();
+
                     return new WeatherResponse
                     {
                         Success = true,
@@ -110,8 +137,9 @@ namespace WeatherServer
                         Icon = (string)currentData.weather[0].icon,
                         Sunrise = sunriseTime.ToString("HH:mm"),
                         Sunset = sunsetTime.ToString("HH:mm"),
-                        Like_feel = currentData.main.feels_like,
-
+                        Like_feel = Math.Round((double)currentData.main.feels_like, 0),
+                        Temp_min = todayMinTemp,
+                        Temp_max = todayMaxTemp,
                         DailyForecast = dailyForecast
                     };
                 }
