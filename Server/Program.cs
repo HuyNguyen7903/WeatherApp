@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Net.Mail;
+using Newtonsoft.Json.Linq;
 
 namespace WeatherServer
 {
@@ -181,7 +182,6 @@ namespace WeatherServer
 
             return dailyForecasts.OrderBy(d => d.Date).Take(7).ToList();
         }
-
     }
 
     public class WeatherResponse
@@ -199,6 +199,8 @@ namespace WeatherServer
         public string Sunset { get; set; }
         public string Sunrise { get; set; }
         public string ErrorMessage { get; set; }
+        public string Temp_min { get; set; }
+        public string Temp_max { get; set; }
         public List<DailyForecast> DailyForecast { get; set; } = new List<DailyForecast>();
     }
 

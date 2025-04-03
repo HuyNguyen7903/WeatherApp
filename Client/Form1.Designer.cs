@@ -1,6 +1,4 @@
-﻿using System.Windows.Forms.DataVisualization.Charting;
-
-namespace Client
+﻿namespace Client
 {
     partial class Form1
     {
@@ -8,8 +6,7 @@ namespace Client
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -31,497 +28,847 @@ namespace Client
         /// </summary>
         private void InitializeComponent()
         {
-            ChartArea chartArea1 = new ChartArea();
-            Legend legend1 = new Legend();
-            Series series1 = new Series();
-            label15 = new Label();
-            labTemperature = new Label();
-            btnSearch = new Button();
-            TBCity = new TextBox();
-            label1 = new Label();
-            labDateTime2 = new Label();
-            picIcon = new PictureBox();
-            labDateTime = new Label();
-            labTemp_min = new Label();
-            labTemp_max = new Label();
-            labAdvice = new Label();
-            labDetail2 = new Label();
-            labFeels_like = new Label();
-            label13 = new Label();
-            labHumidity = new Label();
-            pictureBox6 = new PictureBox();
-            pictureBox2 = new PictureBox();
-            labSunset = new Label();
-            pictureBox4 = new PictureBox();
-            labSunrise = new Label();
-            pictureBox3 = new PictureBox();
-            pictureBox5 = new PictureBox();
-            labWindSpeed = new Label();
-            labPressure = new Label();
-            btnLocation = new Button();
-            chart1 = new Chart();
-            dataGridView1 = new DataGridView();
-            labDistrict = new Label();
-            ((System.ComponentModel.ISupportInitialize)picIcon).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)chart1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
-            SuspendLayout();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            this.label15 = new System.Windows.Forms.Label();
+            this.labTemperature = new System.Windows.Forms.Label();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.TBCity = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.labDateTime2 = new System.Windows.Forms.Label();
+            this.picIcon = new System.Windows.Forms.PictureBox();
+            this.labDateTime = new System.Windows.Forms.Label();
+            this.labTemp_min = new System.Windows.Forms.Label();
+            this.labTemp_max = new System.Windows.Forms.Label();
+            this.labAdvice = new System.Windows.Forms.Label();
+            this.labDetail2 = new System.Windows.Forms.Label();
+            this.labFeels_like = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.labHumidity = new System.Windows.Forms.Label();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.labSunset = new System.Windows.Forms.Label();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.labSunrise = new System.Windows.Forms.Label();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.labWindSpeed = new System.Windows.Forms.Label();
+            this.labPressure = new System.Windows.Forms.Label();
+            this.btnLocation = new System.Windows.Forms.Button();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.labDistrict = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.picIcon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.SuspendLayout();
             // 
             // label15
             // 
-            label15.Anchor = AnchorStyles.Top;
-            label15.AutoSize = true;
-            label15.BackColor = Color.Transparent;
-            label15.Font = new Font("Times New Roman", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label15.ForeColor = SystemColors.Menu;
-            label15.Location = new Point(278, 309);
-            label15.Name = "label15";
-            label15.Size = new Size(23, 35);
-            label15.TabIndex = 67;
-            label15.Text = "/";
+            this.label15.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label15.AutoSize = true;
+            this.label15.BackColor = System.Drawing.Color.Transparent;
+            this.label15.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.ForeColor = System.Drawing.SystemColors.Menu;
+            this.label15.Location = new System.Drawing.Point(757, 438);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(28, 41);
+            this.label15.TabIndex = 67;
+            this.label15.Text = "/";
             // 
             // labTemperature
             // 
-            labTemperature.Anchor = AnchorStyles.Top;
-            labTemperature.AutoSize = true;
-            labTemperature.BackColor = Color.Transparent;
-            labTemperature.Font = new Font("Times New Roman", 72F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labTemperature.ForeColor = Color.Transparent;
-            labTemperature.Location = new Point(544, 110);
-            labTemperature.Name = "labTemperature";
-            labTemperature.Size = new Size(192, 135);
-            labTemperature.TabIndex = 54;
-            labTemperature.Text = "°C";
+            this.labTemperature.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.labTemperature.AutoSize = true;
+            this.labTemperature.BackColor = System.Drawing.Color.Transparent;
+            this.labTemperature.Font = new System.Drawing.Font("Times New Roman", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labTemperature.ForeColor = System.Drawing.Color.Transparent;
+            this.labTemperature.Location = new System.Drawing.Point(235, 168);
+            this.labTemperature.Name = "labTemperature";
+            this.labTemperature.Size = new System.Drawing.Size(231, 163);
+            this.labTemperature.TabIndex = 54;
+            this.labTemperature.Text = "°C";
+            this.labTemperature.Click += new System.EventHandler(this.labTemperature_Click);
             // 
             // btnSearch
             // 
-            btnSearch.Anchor = AnchorStyles.Top;
-            btnSearch.BackColor = Color.Transparent;
-            btnSearch.FlatStyle = FlatStyle.System;
-            btnSearch.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnSearch.ForeColor = Color.White;
-            btnSearch.Location = new Point(1072, 54);
-            btnSearch.Margin = new Padding(3, 4, 3, 4);
-            btnSearch.Name = "btnSearch";
-            btnSearch.Size = new Size(96, 44);
-            btnSearch.TabIndex = 53;
-            btnSearch.Text = "Tìm";
-            btnSearch.UseVisualStyleBackColor = false;
-            btnSearch.Click += btnSearch_Click;
+            this.btnSearch.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnSearch.BackColor = System.Drawing.Color.Transparent;
+            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnSearch.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearch.ForeColor = System.Drawing.Color.White;
+            this.btnSearch.Location = new System.Drawing.Point(1169, 79);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(136, 62);
+            this.btnSearch.TabIndex = 53;
+            this.btnSearch.Text = "Tìm";
+            this.btnSearch.UseVisualStyleBackColor = false;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // TBCity
             // 
-            TBCity.Anchor = AnchorStyles.Top;
-            TBCity.AutoCompleteCustomSource.AddRange(new string[] { "Quận 1", "Quận 2", "Quận 3", "Quận 4", "Quận 5", "Quận 6", "Quận 7", "Quận 8", "Quận 10", "Quận 11", "Quận 12", "Bình Tân", "Củ Chi", "Hóc Môn", "Bình Chánh", "Nhà Bè", "Cần Giờ", "Gò Vấp", "Bình Thạnh", "Tân Bình", "Tân Phú", "Phú Nhuận", "Thủ Đức", "An Giang", "Vũng Tàu", "Bạc Liêu", "Bắc Giang", "Bắc Kạn", "Bắc Ninh", "Bến Tre", "Bình Dương", "Bình Định", "Bình Phước", "Bình Thuận", "Cà Mau", "Cao Bằng", "Cần Thơ", "Đà Nẵng", "Đắk Lắk", "Đắk Nông", "Điện Biên", "Đồng Nai", "Đồng Tháp", "Gia Lai", "Hà Giang", "Hà Nam", "Hà Nội", "Hà Tĩnh", "Hải Dương", "Hải Phòng", "Hậu Giang", "Hòa Bình", "Hưng Yên", "Khánh Hòa", "Kiên Giang", "Kon Tum", "Lai Châu", "Lạng Sơn", "Lào Cai", "Lâm Đồng", "Tỉnh Long An", "Nam Định", "Tỉnh Nghệ An", "Tỉnh Ninh Bình", "Tỉnh Ninh Thuận", "Tỉnh Phú Thọ", "Tỉnh Phú Yên", "Tỉnh Quảng Bình", "Tỉnh Quảng Nam", "Tỉnh Quảng Ngãi", "Tỉnh Quảng Ninh", "Tỉnh Quảng Trị", "Tỉnh Sóc Trăng", "Sơn La", "Tây Ninh", "Tỉnh Thái Bình", "Thái Nguyên", "Thanh Hóa", "Thừa Thiên Huế", "Tỉnh Tiền Giang", "Thành Phố Hồ Chí Minh", "Tỉnh Trà Vinh", "Tỉnh Tuyên Quang", "Vĩnh Long", "Tỉnh Vĩnh Phúc", "Tỉnh Yên Bái", "============", "============", "Ấn Độ", "Aland Islands", "Albania", "Algeria", "American Samoa", "Andorra", "Angola", "Anguilla", "Antigua and Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Áo", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Bỉ", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia ", "Bonaire, Sint Eustatius and Saba", "Bosnia  Herzegovina", "Botswana", "Brazil", "British Indian Ocean Territory", "Brunei Darussalam", "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia", "Cameroon", "Canada", "Cayman Islands", "Central African Republic", "Chad", "Chile", "Trung Quốc", "Christmas Island", "Cocos (Keeling) Islands", "Colombia", "Comoros", "Cook Islands", "Costa Rica", "Croatia", "Cuba", "Curaçao", "Cyprus", "Cộng hòa Séc", "Côte d'Ivoire", "Democratic Republic of the Congo", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Ai Cập", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Falkland Islands", "Faroe Islands", "Federated States of Micronesia", "Fiji", "Phần Lan", "Former Yugoslav Republic of Macedonia", "Pháp", "French Guiana", "French Polynesia", "French Southern Territories", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guadeloupe", "Guam", "Guatemala", "Guernsey", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Holy See", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran ", "Iraq", "Ireland", "Isle of Man", "Israel", "Italy", "Jamaica", "Nhật Bản", "Jersey", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kuwait", "Kyrgyzstan", "Lào", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macau", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Martinique", "Mauritania", "Mauritius", "Mayotte", "Mexico", "Moldova", "Monaco", "Mongolia", "Montenegro", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "Niue", "Norfolk Island", "Triều Tiên", "Northern Mariana Islands", "Na Uy", "Oman", "Pakistan", "Palau", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Pitcairn", "Ba Lan", "Bồ Đào Nha", "Puerto Rico", "Qatar", "Republic of the Congo", "Romania", "Nga", "Rwanda", "Réunion", "Saint Barthélemy", "Saint Helena, Ascension and Tristan da Cunha", "Saint Kitts and Nevis", "Saint Lucia", "Saint Martin", "Saint Pierre and Miquelon", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Sint Maarten", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "Nam Phi", "South Georgia and the South Sandwich Islands", "Hàn Quốc", "South Sudan", "Tây Ban Nha", "Sri Lanka", "State of Palestine", "Sudan", "Suriname", "Svalbard and Jan Mayen", "Swaziland", "Sweden", "Switzerland", "Syrian Arab Republic", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor-Leste", "Togo", "Tokelau", "Tonga", "Trinidad and Tobago", "Tunisia", "Thổ Nhĩ Kì", "Turkmenistan", "Turks and Caicos Islands", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "Vương quốc Anh", "England", "Scotland", "Wales", "Northern Ireland", "United States Minor Outlying Islands", "Hoa Kỳ", "Uruguay", "Uzbekistan", "Vanuatu", "Venezuela", "Việt Nam", "Virgin Islands ", "Virgin Islands", "Wallis and Futuna", "Western Sahara", "Yemen", "Zambia", "Zimbabwe" });
-            TBCity.BackColor = Color.White;
-            TBCity.Font = new Font("Times New Roman", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            TBCity.ForeColor = Color.Black;
-            TBCity.Location = new Point(366, 54);
-            TBCity.Margin = new Padding(3, 4, 3, 4);
-            TBCity.Multiline = true;
-            TBCity.Name = "TBCity";
-            TBCity.Size = new Size(686, 43);
-            TBCity.TabIndex = 52;
+            this.TBCity.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.TBCity.AutoCompleteCustomSource.AddRange(new string[] {
+            "Quận 1",
+            "Quận 2",
+            "Quận 3",
+            "Quận 4",
+            "Quận 5",
+            "Quận 6",
+            "Quận 7",
+            "Quận 8",
+            "Quận 10",
+            "Quận 11",
+            "Quận 12",
+            "Bình Tân",
+            "Củ Chi",
+            "Hóc Môn",
+            "Bình Chánh",
+            "Nhà Bè",
+            "Cần Giờ",
+            "Gò Vấp",
+            "Bình Thạnh",
+            "Tân Bình",
+            "Tân Phú",
+            "Phú Nhuận",
+            "Thủ Đức",
+            "An Giang",
+            "Vũng Tàu",
+            "Bạc Liêu",
+            "Bắc Giang",
+            "Bắc Kạn",
+            "Bắc Ninh",
+            "Bến Tre",
+            "Bình Dương",
+            "Bình Định",
+            "Bình Phước",
+            "Bình Thuận",
+            "Cà Mau",
+            "Cao Bằng",
+            "Cần Thơ",
+            "Đà Nẵng",
+            "Đắk Lắk",
+            "Đắk Nông",
+            "Điện Biên",
+            "Đồng Nai",
+            "Đồng Tháp",
+            "Gia Lai",
+            "Hà Giang",
+            "Hà Nam",
+            "Hà Nội",
+            "Hà Tĩnh",
+            "Hải Dương",
+            "Hải Phòng",
+            "Hậu Giang",
+            "Hòa Bình",
+            "Hưng Yên",
+            "Khánh Hòa",
+            "Kiên Giang",
+            "Kon Tum",
+            "Lai Châu",
+            "Lạng Sơn",
+            "Lào Cai",
+            "Lâm Đồng",
+            "Tỉnh Long An",
+            "Nam Định",
+            "Tỉnh Nghệ An",
+            "Tỉnh Ninh Bình",
+            "Tỉnh Ninh Thuận",
+            "Tỉnh Phú Thọ",
+            "Tỉnh Phú Yên",
+            "Tỉnh Quảng Bình",
+            "Tỉnh Quảng Nam",
+            "Tỉnh Quảng Ngãi",
+            "Tỉnh Quảng Ninh",
+            "Tỉnh Quảng Trị",
+            "Tỉnh Sóc Trăng",
+            "Sơn La",
+            "Tây Ninh",
+            "Tỉnh Thái Bình",
+            "Thái Nguyên",
+            "Thanh Hóa",
+            "Thừa Thiên Huế",
+            "Tỉnh Tiền Giang",
+            "Thành Phố Hồ Chí Minh",
+            "Tỉnh Trà Vinh",
+            "Tỉnh Tuyên Quang",
+            "Vĩnh Long",
+            "Tỉnh Vĩnh Phúc",
+            "Tỉnh Yên Bái",
+            "============",
+            "============",
+            "Ấn Độ",
+            "Aland Islands",
+            "Albania",
+            "Algeria",
+            "American Samoa",
+            "Andorra",
+            "Angola",
+            "Anguilla",
+            "Antigua and Barbuda",
+            "Argentina",
+            "Armenia",
+            "Aruba",
+            "Australia",
+            "Áo",
+            "Azerbaijan",
+            "Bahamas",
+            "Bahrain",
+            "Bangladesh",
+            "Barbados",
+            "Belarus",
+            "Bỉ",
+            "Belize",
+            "Benin",
+            "Bermuda",
+            "Bhutan",
+            "Bolivia ",
+            "Bonaire, Sint Eustatius and Saba",
+            "Bosnia  Herzegovina",
+            "Botswana",
+            "Brazil",
+            "British Indian Ocean Territory",
+            "Brunei Darussalam",
+            "Bulgaria",
+            "Burkina Faso",
+            "Burundi",
+            "Cabo Verde",
+            "Cambodia",
+            "Cameroon",
+            "Canada",
+            "Cayman Islands",
+            "Central African Republic",
+            "Chad",
+            "Chile",
+            "Trung Quốc",
+            "Christmas Island",
+            "Cocos (Keeling) Islands",
+            "Colombia",
+            "Comoros",
+            "Cook Islands",
+            "Costa Rica",
+            "Croatia",
+            "Cuba",
+            "Curaçao",
+            "Cyprus",
+            "Cộng hòa Séc",
+            "Côte d\'Ivoire",
+            "Democratic Republic of the Congo",
+            "Denmark",
+            "Djibouti",
+            "Dominica",
+            "Dominican Republic",
+            "Ecuador",
+            "Ai Cập",
+            "El Salvador",
+            "Equatorial Guinea",
+            "Eritrea",
+            "Estonia",
+            "Ethiopia",
+            "Falkland Islands",
+            "Faroe Islands",
+            "Federated States of Micronesia",
+            "Fiji",
+            "Phần Lan",
+            "Former Yugoslav Republic of Macedonia",
+            "Pháp",
+            "French Guiana",
+            "French Polynesia",
+            "French Southern Territories",
+            "Gabon",
+            "Gambia",
+            "Georgia",
+            "Germany",
+            "Ghana",
+            "Gibraltar",
+            "Greece",
+            "Greenland",
+            "Grenada",
+            "Guadeloupe",
+            "Guam",
+            "Guatemala",
+            "Guernsey",
+            "Guinea",
+            "Guinea-Bissau",
+            "Guyana",
+            "Haiti",
+            "Holy See",
+            "Honduras",
+            "Hong Kong",
+            "Hungary",
+            "Iceland",
+            "India",
+            "Indonesia",
+            "Iran ",
+            "Iraq",
+            "Ireland",
+            "Isle of Man",
+            "Israel",
+            "Italy",
+            "Jamaica",
+            "Nhật Bản",
+            "Jersey",
+            "Jordan",
+            "Kazakhstan",
+            "Kenya",
+            "Kiribati",
+            "Kuwait",
+            "Kyrgyzstan",
+            "Lào",
+            "Latvia",
+            "Lebanon",
+            "Lesotho",
+            "Liberia",
+            "Libya",
+            "Liechtenstein",
+            "Lithuania",
+            "Luxembourg",
+            "Macau",
+            "Madagascar",
+            "Malawi",
+            "Malaysia",
+            "Maldives",
+            "Mali",
+            "Malta",
+            "Marshall Islands",
+            "Martinique",
+            "Mauritania",
+            "Mauritius",
+            "Mayotte",
+            "Mexico",
+            "Moldova",
+            "Monaco",
+            "Mongolia",
+            "Montenegro",
+            "Montserrat",
+            "Morocco",
+            "Mozambique",
+            "Myanmar",
+            "Namibia",
+            "Nauru",
+            "Nepal",
+            "Netherlands",
+            "New Caledonia",
+            "New Zealand",
+            "Nicaragua",
+            "Niger",
+            "Nigeria",
+            "Niue",
+            "Norfolk Island",
+            "Triều Tiên",
+            "Northern Mariana Islands",
+            "Na Uy",
+            "Oman",
+            "Pakistan",
+            "Palau",
+            "Panama",
+            "Papua New Guinea",
+            "Paraguay",
+            "Peru",
+            "Philippines",
+            "Pitcairn",
+            "Ba Lan",
+            "Bồ Đào Nha",
+            "Puerto Rico",
+            "Qatar",
+            "Republic of the Congo",
+            "Romania",
+            "Nga",
+            "Rwanda",
+            "Réunion",
+            "Saint Barthélemy",
+            "Saint Helena, Ascension and Tristan da Cunha",
+            "Saint Kitts and Nevis",
+            "Saint Lucia",
+            "Saint Martin",
+            "Saint Pierre and Miquelon",
+            "Saint Vincent and the Grenadines",
+            "Samoa",
+            "San Marino",
+            "Sao Tome and Principe",
+            "Saudi Arabia",
+            "Senegal",
+            "Serbia",
+            "Seychelles",
+            "Sierra Leone",
+            "Singapore",
+            "Sint Maarten",
+            "Slovakia",
+            "Slovenia",
+            "Solomon Islands",
+            "Somalia",
+            "Nam Phi",
+            "South Georgia and the South Sandwich Islands",
+            "Hàn Quốc",
+            "South Sudan",
+            "Tây Ban Nha",
+            "Sri Lanka",
+            "State of Palestine",
+            "Sudan",
+            "Suriname",
+            "Svalbard and Jan Mayen",
+            "Swaziland",
+            "Sweden",
+            "Switzerland",
+            "Syrian Arab Republic",
+            "Taiwan",
+            "Tajikistan",
+            "Tanzania",
+            "Thailand",
+            "Timor-Leste",
+            "Togo",
+            "Tokelau",
+            "Tonga",
+            "Trinidad and Tobago",
+            "Tunisia",
+            "Thổ Nhĩ Kì",
+            "Turkmenistan",
+            "Turks and Caicos Islands",
+            "Tuvalu",
+            "Uganda",
+            "Ukraine",
+            "United Arab Emirates",
+            "Vương quốc Anh",
+            "England",
+            "Scotland",
+            "Wales",
+            "Northern Ireland",
+            "United States Minor Outlying Islands",
+            "Hoa Kỳ",
+            "Uruguay",
+            "Uzbekistan",
+            "Vanuatu",
+            "Venezuela",
+            "Việt Nam",
+            "Virgin Islands ",
+            "Virgin Islands",
+            "Wallis and Futuna",
+            "Western Sahara",
+            "Yemen",
+            "Zambia",
+            "Zimbabwe"});
+            this.TBCity.BackColor = System.Drawing.Color.White;
+            this.TBCity.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TBCity.ForeColor = System.Drawing.Color.Black;
+            this.TBCity.Location = new System.Drawing.Point(234, 79);
+            this.TBCity.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.TBCity.Multiline = true;
+            this.TBCity.Name = "TBCity";
+            this.TBCity.Size = new System.Drawing.Size(905, 62);
+            this.TBCity.TabIndex = 52;
             // 
             // label1
             // 
-            label1.Anchor = AnchorStyles.Top;
-            label1.AutoSize = true;
-            label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.White;
-            label1.Location = new Point(200, 66);
-            label1.Name = "label1";
-            label1.Size = new Size(128, 25);
-            label1.TabIndex = 51;
-            label1.Text = "Nơi cần tìm";
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(43, 92);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(153, 32);
+            this.label1.TabIndex = 51;
+            this.label1.Text = "Nơi cần tìm";
             // 
             // labDateTime2
             // 
-            labDateTime2.AutoSize = true;
-            labDateTime2.BackColor = Color.Transparent;
-            labDateTime2.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labDateTime2.ForeColor = Color.White;
-            labDateTime2.Location = new Point(200, 18);
-            labDateTime2.Name = "labDateTime2";
-            labDateTime2.Size = new Size(72, 25);
-            labDateTime2.TabIndex = 57;
-            labDateTime2.Text = "Ngày:";
+            this.labDateTime2.AutoSize = true;
+            this.labDateTime2.BackColor = System.Drawing.Color.Transparent;
+            this.labDateTime2.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labDateTime2.ForeColor = System.Drawing.Color.White;
+            this.labDateTime2.Location = new System.Drawing.Point(228, 18);
+            this.labDateTime2.Name = "labDateTime2";
+            this.labDateTime2.Size = new System.Drawing.Size(85, 32);
+            this.labDateTime2.TabIndex = 57;
+            this.labDateTime2.Text = "Ngày:";
             // 
             // picIcon
             // 
-            picIcon.Anchor = AnchorStyles.Top;
-            picIcon.BackColor = Color.Transparent;
-            picIcon.ErrorImage = null;
-            picIcon.Location = new Point(869, 115);
-            picIcon.Margin = new Padding(3, 4, 3, 4);
-            picIcon.Name = "picIcon";
-            picIcon.Size = new Size(180, 176);
-            picIcon.SizeMode = PictureBoxSizeMode.Zoom;
-            picIcon.TabIndex = 55;
-            picIcon.TabStop = false;
+            this.picIcon.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.picIcon.BackColor = System.Drawing.Color.Transparent;
+            this.picIcon.ErrorImage = null;
+            this.picIcon.Location = new System.Drawing.Point(686, 168);
+            this.picIcon.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.picIcon.Name = "picIcon";
+            this.picIcon.Size = new System.Drawing.Size(202, 176);
+            this.picIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picIcon.TabIndex = 55;
+            this.picIcon.TabStop = false;
+            this.picIcon.Click += new System.EventHandler(this.picIcon_Click);
             // 
             // labDateTime
             // 
-            labDateTime.AutoSize = true;
-            labDateTime.BackColor = Color.Transparent;
-            labDateTime.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labDateTime.ForeColor = Color.White;
-            labDateTime.Location = new Point(40, 18);
-            labDateTime.Name = "labDateTime";
-            labDateTime.Size = new Size(56, 25);
-            labDateTime.TabIndex = 56;
-            labDateTime.Text = "Giờ:";
+            this.labDateTime.AutoSize = true;
+            this.labDateTime.BackColor = System.Drawing.Color.Transparent;
+            this.labDateTime.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labDateTime.ForeColor = System.Drawing.Color.White;
+            this.labDateTime.Location = new System.Drawing.Point(43, 18);
+            this.labDateTime.Name = "labDateTime";
+            this.labDateTime.Size = new System.Drawing.Size(69, 32);
+            this.labDateTime.TabIndex = 56;
+            this.labDateTime.Text = "Giờ:";
             // 
             // labTemp_min
             // 
-            labTemp_min.Anchor = AnchorStyles.Top;
-            labTemp_min.AutoSize = true;
-            labTemp_min.BackColor = Color.Transparent;
-            labTemp_min.Font = new Font("Times New Roman", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labTemp_min.ForeColor = SystemColors.Menu;
-            labTemp_min.Location = new Point(199, 309);
-            labTemp_min.Name = "labTemp_min";
-            labTemp_min.Size = new Size(66, 35);
-            labTemp_min.TabIndex = 49;
-            labTemp_min.Text = "N/A";
+            this.labTemp_min.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.labTemp_min.AutoSize = true;
+            this.labTemp_min.BackColor = System.Drawing.Color.Transparent;
+            this.labTemp_min.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labTemp_min.ForeColor = System.Drawing.SystemColors.Menu;
+            this.labTemp_min.Location = new System.Drawing.Point(672, 440);
+            this.labTemp_min.Name = "labTemp_min";
+            this.labTemp_min.Size = new System.Drawing.Size(79, 41);
+            this.labTemp_min.TabIndex = 49;
+            this.labTemp_min.Text = "N/A";
+            this.labTemp_min.Click += new System.EventHandler(this.labTemp_min_Click);
             // 
             // labTemp_max
             // 
-            labTemp_max.Anchor = AnchorStyles.Top;
-            labTemp_max.AutoSize = true;
-            labTemp_max.BackColor = Color.Transparent;
-            labTemp_max.Font = new Font("Times New Roman", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labTemp_max.ForeColor = SystemColors.Menu;
-            labTemp_max.Location = new Point(296, 309);
-            labTemp_max.Name = "labTemp_max";
-            labTemp_max.Size = new Size(66, 35);
-            labTemp_max.TabIndex = 50;
-            labTemp_max.Text = "N/A";
+            this.labTemp_max.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.labTemp_max.AutoSize = true;
+            this.labTemp_max.BackColor = System.Drawing.Color.Transparent;
+            this.labTemp_max.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labTemp_max.ForeColor = System.Drawing.SystemColors.Menu;
+            this.labTemp_max.Location = new System.Drawing.Point(809, 440);
+            this.labTemp_max.Name = "labTemp_max";
+            this.labTemp_max.Size = new System.Drawing.Size(79, 41);
+            this.labTemp_max.TabIndex = 50;
+            this.labTemp_max.Text = "N/A";
+            this.labTemp_max.Click += new System.EventHandler(this.labTemp_max_Click);
             // 
             // labAdvice
             // 
-            labAdvice.AutoSize = true;
-            labAdvice.BackColor = Color.Transparent;
-            labAdvice.Font = new Font("Times New Roman", 25.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labAdvice.ForeColor = SystemColors.Menu;
-            labAdvice.Location = new Point(188, 510);
-            labAdvice.Name = "labAdvice";
-            labAdvice.Size = new Size(235, 49);
-            labAdvice.TabIndex = 62;
-            labAdvice.Text = "Lời khuyên";
+            this.labAdvice.BackColor = System.Drawing.Color.Transparent;
+            this.labAdvice.Font = new System.Drawing.Font("Times New Roman", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labAdvice.ForeColor = System.Drawing.SystemColors.Menu;
+            this.labAdvice.Location = new System.Drawing.Point(37, 662);
+            this.labAdvice.Name = "labAdvice";
+            this.labAdvice.Size = new System.Drawing.Size(851, 202);
+            this.labAdvice.TabIndex = 62;
+            this.labAdvice.Text = "Lời khuyên";
+            this.labAdvice.Click += new System.EventHandler(this.labAdvice_Click);
             // 
             // labDetail2
             // 
-            labDetail2.AutoSize = true;
-            labDetail2.BackColor = Color.Transparent;
-            labDetail2.Font = new Font("Times New Roman", 19.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labDetail2.ForeColor = SystemColors.Menu;
-            labDetail2.Location = new Point(189, 448);
-            labDetail2.Name = "labDetail2";
-            labDetail2.Size = new Size(73, 37);
-            labDetail2.TabIndex = 4;
-            labDetail2.Text = "N/A";
+            this.labDetail2.AutoSize = true;
+            this.labDetail2.BackColor = System.Drawing.Color.Transparent;
+            this.labDetail2.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labDetail2.ForeColor = System.Drawing.SystemColors.Menu;
+            this.labDetail2.Location = new System.Drawing.Point(226, 367);
+            this.labDetail2.Name = "labDetail2";
+            this.labDetail2.Size = new System.Drawing.Size(89, 45);
+            this.labDetail2.TabIndex = 4;
+            this.labDetail2.Text = "N/A";
             // 
             // labFeels_like
             // 
-            labFeels_like.Anchor = AnchorStyles.Top;
-            labFeels_like.AutoSize = true;
-            labFeels_like.BackColor = Color.Transparent;
-            labFeels_like.Font = new Font("Times New Roman", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labFeels_like.ForeColor = SystemColors.Menu;
-            labFeels_like.Location = new Point(386, 380);
-            labFeels_like.Name = "labFeels_like";
-            labFeels_like.Size = new Size(66, 35);
-            labFeels_like.TabIndex = 15;
-            labFeels_like.Text = "N/A";
+            this.labFeels_like.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.labFeels_like.AutoSize = true;
+            this.labFeels_like.BackColor = System.Drawing.Color.Transparent;
+            this.labFeels_like.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labFeels_like.ForeColor = System.Drawing.SystemColors.Menu;
+            this.labFeels_like.Location = new System.Drawing.Point(484, 440);
+            this.labFeels_like.Name = "labFeels_like";
+            this.labFeels_like.Size = new System.Drawing.Size(79, 41);
+            this.labFeels_like.TabIndex = 15;
+            this.labFeels_like.Text = "N/A";
             // 
             // label13
             // 
-            label13.Anchor = AnchorStyles.Top;
-            label13.AutoSize = true;
-            label13.BackColor = Color.Transparent;
-            label13.Font = new Font("Times New Roman", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label13.ForeColor = SystemColors.Menu;
-            label13.Location = new Point(190, 380);
-            label13.Name = "label13";
-            label13.Size = new Size(200, 35);
-            label13.TabIndex = 14;
-            label13.Text = "Cảm giác như ";
+            this.label13.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label13.AutoSize = true;
+            this.label13.BackColor = System.Drawing.Color.Transparent;
+            this.label13.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.ForeColor = System.Drawing.SystemColors.Menu;
+            this.label13.Location = new System.Drawing.Point(227, 440);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(239, 41);
+            this.label13.TabIndex = 14;
+            this.label13.Text = "Cảm giác như ";
             // 
             // labHumidity
             // 
-            labHumidity.Anchor = AnchorStyles.Top;
-            labHumidity.AutoSize = true;
-            labHumidity.BackColor = Color.Transparent;
-            labHumidity.Font = new Font("Times New Roman", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labHumidity.ForeColor = SystemColors.Window;
-            labHumidity.Location = new Point(600, 380);
-            labHumidity.Name = "labHumidity";
-            labHumidity.Size = new Size(51, 25);
-            labHumidity.TabIndex = 69;
-            labHumidity.Text = "N/A";
-            //
-            // labWindSpeed
-            // 
-            labWindSpeed.Anchor = AnchorStyles.Top;
-            labWindSpeed.AutoSize = true;
-            labWindSpeed.BackColor = Color.Transparent;
-            labWindSpeed.Font = new Font("Times New Roman", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labWindSpeed.ForeColor = SystemColors.Window;
-            labWindSpeed.Location = new Point(600, 309);
-            labWindSpeed.Name = "labWindSpeed";
-            labWindSpeed.Size = new Size(51, 25);
-            labWindSpeed.TabIndex = 11;
-            labWindSpeed.Text = "N/A";
-            // 
-            // labPressure
-            // 
-            labPressure.Anchor = AnchorStyles.Top;
-            labPressure.AutoSize = true;
-            labPressure.BackColor = Color.Transparent;
-            labPressure.Font = new Font("Times New Roman", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labPressure.ForeColor = SystemColors.Window;
-            labPressure.Location = new Point(600, 460);
-            labPressure.Name = "labPressure";
-            labPressure.Size = new Size(51, 25);
-            labPressure.TabIndex = 13;
-            labPressure.Text = "N/A";
-            // 
+            this.labHumidity.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.labHumidity.AutoSize = true;
+            this.labHumidity.BackColor = System.Drawing.Color.Transparent;
+            this.labHumidity.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labHumidity.ForeColor = System.Drawing.SystemColors.Window;
+            this.labHumidity.Location = new System.Drawing.Point(249, 584);
+            this.labHumidity.Name = "labHumidity";
+            this.labHumidity.Size = new System.Drawing.Size(62, 32);
+            this.labHumidity.TabIndex = 69;
+            this.labHumidity.Text = "N/A";
             // 
             // pictureBox6
             // 
-            pictureBox6.Anchor = AnchorStyles.Top;
-            pictureBox6.BackColor = Color.Transparent;
-            pictureBox6.BackgroundImageLayout = ImageLayout.Stretch;
-            pictureBox6.ErrorImage = null;
-            pictureBox6.Location = new Point(912, 378);
-            pictureBox6.Margin = new Padding(3, 4, 3, 4);
-            pictureBox6.Name = "pictureBox6";
-            pictureBox6.Size = new Size(58, 58);
-            pictureBox6.TabIndex = 20;
-            pictureBox6.TabStop = false;
+            this.pictureBox6.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.pictureBox6.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox6.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox6.BackgroundImage")));
+            this.pictureBox6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox6.ErrorImage = null;
+            this.pictureBox6.Location = new System.Drawing.Point(686, 522);
+            this.pictureBox6.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(65, 58);
+            this.pictureBox6.TabIndex = 20;
+            this.pictureBox6.TabStop = false;
             // 
             // pictureBox2
             // 
-            pictureBox2.Anchor = AnchorStyles.Top;
-            pictureBox2.BackColor = Color.Transparent;
-            pictureBox2.BackgroundImageLayout = ImageLayout.Stretch;
-            pictureBox2.Cursor = Cursors.AppStarting;
-            pictureBox2.ErrorImage = null;
-            pictureBox2.Location = new Point(624, 378);
-            pictureBox2.Margin = new Padding(3, 4, 3, 4);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(52, 58);
-            pictureBox2.TabIndex = 68;
-            pictureBox2.TabStop = false;
+            this.pictureBox2.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
+            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox2.Cursor = System.Windows.Forms.Cursors.AppStarting;
+            this.pictureBox2.ErrorImage = null;
+            this.pictureBox2.Location = new System.Drawing.Point(255, 522);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(58, 58);
+            this.pictureBox2.TabIndex = 68;
+            this.pictureBox2.TabStop = false;
             // 
             // labSunset
             // 
-            labSunset.Anchor = AnchorStyles.Top;
-            labSunset.AutoSize = true;
-            labSunset.BackColor = Color.Transparent;
-            labSunset.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labSunset.ForeColor = SystemColors.Window;
-            labSunset.Location = new Point(320, 242);
-            labSunset.Name = "labSunset";
-            labSunset.Size = new Size(51, 25);
-            labSunset.TabIndex = 9;
-            labSunset.Text = "N/A";
+            this.labSunset.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.labSunset.AutoSize = true;
+            this.labSunset.BackColor = System.Drawing.Color.Transparent;
+            this.labSunset.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labSunset.ForeColor = System.Drawing.SystemColors.Window;
+            this.labSunset.Location = new System.Drawing.Point(43, 584);
+            this.labSunset.Name = "labSunset";
+            this.labSunset.Size = new System.Drawing.Size(62, 32);
+            this.labSunset.TabIndex = 9;
+            this.labSunset.Text = "N/A";
             // 
             // pictureBox4
             // 
-            pictureBox4.Anchor = AnchorStyles.Top;
-            pictureBox4.BackColor = Color.Transparent;
-            pictureBox4.BackgroundImageLayout = ImageLayout.Stretch;
-            pictureBox4.ErrorImage = null;
-            pictureBox4.Location = new Point(771, 378);
-            pictureBox4.Margin = new Padding(3, 4, 3, 4);
-            pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(52, 58);
-            pictureBox4.TabIndex = 10;
-            pictureBox4.TabStop = false;
+            this.pictureBox4.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.pictureBox4.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox4.BackgroundImage")));
+            this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox4.ErrorImage = null;
+            this.pictureBox4.Location = new System.Drawing.Point(482, 522);
+            this.pictureBox4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(58, 58);
+            this.pictureBox4.TabIndex = 10;
+            this.pictureBox4.TabStop = false;
             // 
             // labSunrise
             // 
-            labSunrise.Anchor = AnchorStyles.Top;
-            labSunrise.AutoSize = true;
-            labSunrise.BackColor = Color.Transparent;
-            labSunrise.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labSunrise.ForeColor = SystemColors.Window;
-            labSunrise.Location = new Point(191, 242);
-            labSunrise.Name = "labSunrise";
-            labSunrise.Size = new Size(51, 25);
-            labSunrise.TabIndex = 6;
-            labSunrise.Text = "N/A";
+            this.labSunrise.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.labSunrise.AutoSize = true;
+            this.labSunrise.BackColor = System.Drawing.Color.Transparent;
+            this.labSunrise.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labSunrise.ForeColor = System.Drawing.SystemColors.Window;
+            this.labSunrise.Location = new System.Drawing.Point(43, 447);
+            this.labSunrise.Name = "labSunrise";
+            this.labSunrise.Size = new System.Drawing.Size(62, 32);
+            this.labSunrise.TabIndex = 6;
+            this.labSunrise.Text = "N/A";
             // 
             // pictureBox3
             // 
-            pictureBox3.Anchor = AnchorStyles.Top;
-            pictureBox3.BackColor = Color.Transparent;
-            pictureBox3.BackgroundImageLayout = ImageLayout.Stretch;
-            pictureBox3.ErrorImage = null;
-            pictureBox3.Location = new Point(316, 181);
-            pictureBox3.Margin = new Padding(3, 4, 3, 4);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(52, 58);
-            pictureBox3.TabIndex = 7;
-            pictureBox3.TabStop = false;
+            this.pictureBox3.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.pictureBox3.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox3.BackgroundImage")));
+            this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox3.ErrorImage = null;
+            this.pictureBox3.Location = new System.Drawing.Point(49, 522);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(61, 58);
+            this.pictureBox3.TabIndex = 7;
+            this.pictureBox3.TabStop = false;
             // 
             // pictureBox5
             // 
-            pictureBox5.Anchor = AnchorStyles.Top;
-            pictureBox5.BackColor = Color.Transparent;
-            pictureBox5.BackgroundImageLayout = ImageLayout.Stretch;
-            pictureBox5.ErrorImage = null;
-            pictureBox5.Location = new Point(197, 181);
-            pictureBox5.Margin = new Padding(3, 4, 3, 4);
-            pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(54, 58);
-            pictureBox5.TabIndex = 0;
-            pictureBox5.TabStop = false;
+            this.pictureBox5.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.pictureBox5.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox5.BackgroundImage")));
+            this.pictureBox5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox5.ErrorImage = null;
+            this.pictureBox5.Location = new System.Drawing.Point(49, 385);
+            this.pictureBox5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(61, 58);
+            this.pictureBox5.TabIndex = 0;
+            this.pictureBox5.TabStop = false;
+            // 
+            // labWindSpeed
+            // 
+            this.labWindSpeed.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.labWindSpeed.AutoSize = true;
+            this.labWindSpeed.BackColor = System.Drawing.Color.Transparent;
+            this.labWindSpeed.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labWindSpeed.ForeColor = System.Drawing.SystemColors.Window;
+            this.labWindSpeed.Location = new System.Drawing.Point(440, 584);
+            this.labWindSpeed.Name = "labWindSpeed";
+            this.labWindSpeed.Size = new System.Drawing.Size(62, 32);
+            this.labWindSpeed.TabIndex = 11;
+            this.labWindSpeed.Text = "N/A";
+            // 
+            // labPressure
+            // 
+            this.labPressure.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.labPressure.AutoSize = true;
+            this.labPressure.BackColor = System.Drawing.Color.Transparent;
+            this.labPressure.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labPressure.ForeColor = System.Drawing.SystemColors.Window;
+            this.labPressure.Location = new System.Drawing.Point(656, 584);
+            this.labPressure.Name = "labPressure";
+            this.labPressure.Size = new System.Drawing.Size(62, 32);
+            this.labPressure.TabIndex = 13;
+            this.labPressure.Text = "N/A";
             // 
             // btnLocation
             // 
-            btnLocation.Anchor = AnchorStyles.Top;
-            btnLocation.BackColor = Color.Transparent;
-            btnLocation.FlatStyle = FlatStyle.System;
-            btnLocation.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnLocation.ForeColor = Color.White;
-            btnLocation.Location = new Point(1174, 54);
-            btnLocation.Margin = new Padding(3, 4, 3, 4);
-            btnLocation.Name = "btnLocation";
-            btnLocation.Size = new Size(96, 44);
-            btnLocation.TabIndex = 70;
-            btnLocation.Text = "Vị trí";
-            btnLocation.UseVisualStyleBackColor = false;
-            btnLocation.Click += btnLocation_Click;
+            this.btnLocation.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnLocation.BackColor = System.Drawing.Color.Transparent;
+            this.btnLocation.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnLocation.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLocation.ForeColor = System.Drawing.Color.White;
+            this.btnLocation.Location = new System.Drawing.Point(1332, 79);
+            this.btnLocation.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnLocation.Name = "btnLocation";
+            this.btnLocation.Size = new System.Drawing.Size(132, 62);
+            this.btnLocation.TabIndex = 70;
+            this.btnLocation.Text = "Vị trí";
+            this.btnLocation.UseVisualStyleBackColor = false;
+            this.btnLocation.Click += new System.EventHandler(this.btnLocation_Click);
             // 
             // chart1
             // 
-            chart1.Anchor = AnchorStyles.Bottom;
-            chart1.BackImageTransparentColor = Color.Transparent;
-            chart1.BackSecondaryColor = Color.Transparent;
-            chart1.BorderlineColor = Color.Transparent;
-            chartArea1.AlignmentOrientation = AreaAlignmentOrientations.Vertical | AreaAlignmentOrientations.Horizontal;
-            chartArea1.BackColor = Color.Transparent;
-            chartArea1.BackImageTransparentColor = Color.Transparent;
+            this.chart1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.chart1.BackImageTransparentColor = System.Drawing.Color.Transparent;
+            this.chart1.BackSecondaryColor = System.Drawing.Color.Transparent;
+            this.chart1.BorderlineColor = System.Drawing.Color.Transparent;
+            chartArea1.AlignmentOrientation = ((System.Windows.Forms.DataVisualization.Charting.AreaAlignmentOrientations)((System.Windows.Forms.DataVisualization.Charting.AreaAlignmentOrientations.Vertical | System.Windows.Forms.DataVisualization.Charting.AreaAlignmentOrientations.Horizontal)));
+            chartArea1.BackColor = System.Drawing.Color.Transparent;
+            chartArea1.BackImageTransparentColor = System.Drawing.Color.Transparent;
             chartArea1.Name = "ChartArea1";
-            chart1.ChartAreas.Add(chartArea1);
-            chart1.Cursor = Cursors.Hand;
+            this.chart1.ChartAreas.Add(chartArea1);
+            this.chart1.Cursor = System.Windows.Forms.Cursors.Hand;
             legend1.Name = "Legend1";
-            chart1.Legends.Add(legend1);
-            chart1.Location = new Point(12, 610);
-            chart1.Margin = new Padding(3, 4, 3, 4);
-            chart1.Name = "chart1";
-            chart1.Palette = ChartColorPalette.None;
-            chart1.RightToLeft = RightToLeft.No;
-            series1.BackGradientStyle = GradientStyle.TopBottom;
-            series1.BackImageTransparentColor = Color.Transparent;
-            series1.BackSecondaryColor = Color.Transparent;
-            series1.BorderColor = Color.Transparent;
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Location = new System.Drawing.Point(942, 522);
+            this.chart1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.chart1.Name = "chart1";
+            this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
+            this.chart1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            series1.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
+            series1.BackImageTransparentColor = System.Drawing.Color.Transparent;
+            series1.BackSecondaryColor = System.Drawing.Color.Transparent;
+            series1.BorderColor = System.Drawing.Color.Transparent;
             series1.ChartArea = "ChartArea1";
-            series1.Color = Color.DodgerBlue;
-            series1.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            series1.LabelBackColor = Color.Transparent;
-            series1.LabelBorderColor = Color.Transparent;
+            series1.Color = System.Drawing.Color.DodgerBlue;
+            series1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            series1.LabelBackColor = System.Drawing.Color.Transparent;
+            series1.LabelBorderColor = System.Drawing.Color.Transparent;
             series1.Legend = "Legend1";
-            series1.MarkerBorderColor = Color.Transparent;
-            series1.MarkerColor = Color.Transparent;
-            series1.MarkerImageTransparentColor = Color.Transparent;
+            series1.MarkerBorderColor = System.Drawing.Color.Transparent;
+            series1.MarkerColor = System.Drawing.Color.Transparent;
+            series1.MarkerImageTransparentColor = System.Drawing.Color.Transparent;
             series1.Name = "Nhiệt độ";
-            series1.ShadowColor = Color.Transparent;
-            chart1.Series.Add(series1);
-            chart1.Size = new Size(827, 346);
-            chart1.TabIndex = 71;
-            chart1.Text = "chart1";
-            chart1.TextAntiAliasingQuality = TextAntiAliasingQuality.Normal;
+            series1.ShadowColor = System.Drawing.Color.Transparent;
+            this.chart1.Series.Add(series1);
+            this.chart1.Size = new System.Drawing.Size(747, 354);
+            this.chart1.TabIndex = 71;
+            this.chart1.Text = "chart1";
+            this.chart1.TextAntiAliasingQuality = System.Windows.Forms.DataVisualization.Charting.TextAntiAliasingQuality.Normal;
             // 
             // dataGridView1
             // 
-            dataGridView1.Anchor = AnchorStyles.Bottom;
-            dataGridView1.BackgroundColor = Color.White;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.GridColor = Color.Black;
-            dataGridView1.ImeMode = ImeMode.On;
-            dataGridView1.Location = new Point(845, 610);
-            dataGridView1.Margin = new Padding(3, 4, 3, 4);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.RowTemplate.Height = 24;
-            dataGridView1.Size = new Size(565, 346);
-            dataGridView1.TabIndex = 72;
+            this.dataGridView1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.GridColor = System.Drawing.Color.Black;
+            this.dataGridView1.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.dataGridView1.Location = new System.Drawing.Point(942, 168);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersWidth = 51;
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.Size = new System.Drawing.Size(747, 346);
+            this.dataGridView1.TabIndex = 72;
             // 
             // labDistrict
             // 
-            labDistrict.Anchor = AnchorStyles.Top;
-            labDistrict.AutoSize = true;
-            labDistrict.BackColor = Color.Transparent;
-            labDistrict.Font = new Font("Microsoft Sans Serif", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            labDistrict.ForeColor = Color.Transparent;
-            labDistrict.Location = new Point(1170, 11);
-            labDistrict.Name = "labDistrict";
-            labDistrict.Size = new Size(87, 20);
-            labDistrict.TabIndex = 73;
-            labDistrict.Text = "Thành phố";
+            this.labDistrict.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.labDistrict.AutoSize = true;
+            this.labDistrict.BackColor = System.Drawing.Color.Transparent;
+            this.labDistrict.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labDistrict.ForeColor = System.Drawing.Color.Transparent;
+            this.labDistrict.Location = new System.Drawing.Point(989, 25);
+            this.labDistrict.Name = "labDistrict";
+            this.labDistrict.Size = new System.Drawing.Size(115, 25);
+            this.labDistrict.TabIndex = 73;
+            this.labDistrict.Text = "Thành phố";
+            this.labDistrict.Click += new System.EventHandler(this.labDistrict_Click);
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
-            AutoSize = true;
-            BackColor = SystemColors.ActiveCaption;
-            BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1430, 960);
-            Controls.Add(labDistrict);
-            Controls.Add(dataGridView1);
-            Controls.Add(chart1);
-            Controls.Add(btnLocation);
-            Controls.Add(labHumidity);
-            Controls.Add(pictureBox6);
-            Controls.Add(label15);
-            Controls.Add(pictureBox2);
-            Controls.Add(labSunset);
-            Controls.Add(labTemperature);
-            Controls.Add(pictureBox4);
-            Controls.Add(btnSearch);
-            Controls.Add(labSunrise);
-            Controls.Add(TBCity);
-            Controls.Add(pictureBox3);
-            Controls.Add(label1);
-            Controls.Add(pictureBox5);
-            Controls.Add(labWindSpeed);
-            Controls.Add(labDateTime2);
-            Controls.Add(labPressure);
-            Controls.Add(picIcon);
-            Controls.Add(labDateTime);
-            Controls.Add(labTemp_min);
-            Controls.Add(labTemp_max);
-            Controls.Add(labAdvice);
-            Controls.Add(labFeels_like);
-            Controls.Add(labDetail2);
-            Controls.Add(label13);
-            DoubleBuffered = true;
-            Margin = new Padding(3, 4, 3, 4);
-            Name = "Form1";
-            ShowInTaskbar = false;
-            StartPosition = FormStartPosition.CenterScreen;
-            Text = "WeatherApplication";
-            ((System.ComponentModel.ISupportInitialize)picIcon).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
-            ((System.ComponentModel.ISupportInitialize)chart1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
-            ResumeLayout(false);
-            PerformLayout();
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(2116, 889);
+            this.Controls.Add(this.labDistrict);
+            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.chart1);
+            this.Controls.Add(this.btnLocation);
+            this.Controls.Add(this.labHumidity);
+            this.Controls.Add(this.pictureBox6);
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.labSunset);
+            this.Controls.Add(this.labTemperature);
+            this.Controls.Add(this.pictureBox4);
+            this.Controls.Add(this.btnSearch);
+            this.Controls.Add(this.labSunrise);
+            this.Controls.Add(this.TBCity);
+            this.Controls.Add(this.pictureBox3);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.pictureBox5);
+            this.Controls.Add(this.labWindSpeed);
+            this.Controls.Add(this.labDateTime2);
+            this.Controls.Add(this.labPressure);
+            this.Controls.Add(this.picIcon);
+            this.Controls.Add(this.labDateTime);
+            this.Controls.Add(this.labTemp_min);
+            this.Controls.Add(this.labTemp_max);
+            this.Controls.Add(this.labAdvice);
+            this.Controls.Add(this.labFeels_like);
+            this.Controls.Add(this.labDetail2);
+            this.Controls.Add(this.label13);
+            this.DoubleBuffered = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Name = "Form1";
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "WeatherApplication";
+            ((System.ComponentModel.ISupportInitialize)(this.picIcon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -552,8 +899,10 @@ namespace Client
         private System.Windows.Forms.Label labWindSpeed;
         private System.Windows.Forms.Label labPressure;
         private System.Windows.Forms.Button btnLocation;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label labDistrict;
 
+        }
     }
-}
 

@@ -55,24 +55,32 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Huy\\.nuget\\packages\\": {}
+    "C:\\Users\\PHUCVU\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Huy KM21\\Lap trinh mang\\BTL\\Server\\Server.csproj",
+      "projectUniqueName": "E:\\Compuer\\HK8\\Lập trình mạng\\BTN\\Server\\Server.csproj",
       "projectName": "Server",
-      "projectPath": "D:\\Huy KM21\\Lap trinh mang\\BTL\\Server\\Server.csproj",
-      "packagesPath": "C:\\Users\\Huy\\.nuget\\packages\\",
-      "outputPath": "D:\\Huy KM21\\Lap trinh mang\\BTL\\Server\\obj\\",
+      "projectPath": "E:\\Compuer\\HK8\\Lập trình mạng\\BTN\\Server\\Server.csproj",
+      "packagesPath": "C:\\Users\\PHUCVU\\.nuget\\packages\\",
+      "outputPath": "E:\\Compuer\\HK8\\Lập trình mạng\\BTN\\Server\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Huy\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\PHUCVU\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Data;
 using System.Drawing;
 using System.Net.Sockets;
@@ -8,15 +8,14 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Collections.Generic;
+
 namespace Client
 {
     public partial class Form1 : Form
     {
-        private ToolTip toolTip1;
         public Form1()
         {
             InitializeComponent();
-            toolTip1 = new ToolTip(); 
             InitializeChart();
             UpdateDateTime();
         }
@@ -80,41 +79,35 @@ namespace Client
             {
                 var weatherResponse = JsonConvert.DeserializeObject<WeatherResponse>(jsonData);
 
-                if (weatherResponse == null || !weatherResponse.Success)
+                if (!weatherResponse.Success)
                 {
-                    MessageBox.Show(weatherResponse?.ErrorMessage ?? "Không thể đọc dữ liệu thời tiết", "Lỗi",
+                    MessageBox.Show(weatherResponse.ErrorMessage, "Lỗi",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                // Hiển thị thông tin cơ bản
+                // Display current weather
                 labTemperature.Text = $"{weatherResponse.Temperature}°C";
-                labDistrict.Text = $"{weatherResponse.City ?? "N/A"}, {weatherResponse.Country ?? "N/A"}";
-                labDetail2.Text = weatherResponse.Description ?? "N/A";
+                labHumidity.Text = $"{weatherResponse.Humidity}%";
+                labWindSpeed.Text = $"{weatherResponse.WindSpeed} km/h";
+                labPressure.Text = $"{weatherResponse.Pressure} hPa";
+                labDetail2.Text = weatherResponse.Description;
+                labSunset.Text = weatherResponse.Sunset;
+                labSunrise.Text = weatherResponse.Sunrise;
+                labDistrict.Text = $"{weatherResponse.City}, {weatherResponse.Country}";
+                labFeels_like.Text = $"{weatherResponse.Like_feel} °C";
+                labTemp_max.Text = $"{weatherResponse.Temp_max} °C";
 
-                SetLabelWithTooltip(labHumidity, $"Độ ẩm: {weatherResponse.Humidity}%", 
-                    $"Không khí {(weatherResponse.Humidity > 70 ? "ẩm ướt" : "khô ráo")}");
-        
-                SetLabelWithTooltip(labWindSpeed, $"Gió: {weatherResponse.WindSpeed} km/h", 
-                    $"{(weatherResponse.WindSpeed > 20 ? "Gió mạnh" : "Gió nhẹ")}");
-        
-                SetLabelWithTooltip(labPressure, $"Áp suất: {weatherResponse.Pressure} hPa", 
-                    $"{(weatherResponse.Pressure < 1000 ? "Có thể có thời tiết xấu" : "Ổn định")}");
-        
-                SetLabelWithTooltip(labFeels_like, $"{weatherResponse.Like_feel}°C", 
-                    $"{(weatherResponse.Like_feel > weatherResponse.Temperature ? "Nóng hơn thực tế" : "Mát hơn thực tế")}");
-
-                labSunrise.Text = $"Mọc: {weatherResponse.Sunrise ?? "N/A"}";
-                labSunset.Text = $"Lặn: {weatherResponse.Sunset ?? "N/A"}";
 
                 if (!string.IsNullOrEmpty(weatherResponse.Icon))
                 {
                     picIcon.ImageLocation = $"http://openweathermap.org/img/wn/{weatherResponse.Icon}@2x.png";
                 }
 
-                labAdvice.Text = GetWeatherAdvice(weatherResponse.Temperature, weatherResponse.Description ?? string.Empty);
+                labFeels_like.Text = $"~{weatherResponse.Temperature}°C";
+                labAdvice.Text = GetWeatherAdvice(weatherResponse.Temperature, weatherResponse.Description);
 
-                // Hiển thị dự báo
+                // Display forecast
                 if (weatherResponse.DailyForecast != null && weatherResponse.DailyForecast.Count > 0)
                 {
                     DisplayForecastChart(weatherResponse.DailyForecast);
@@ -126,14 +119,6 @@ namespace Client
                 MessageBox.Show($"Lỗi khi hiển thị dữ liệu: {ex.Message}", "Lỗi",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-        private void SetLabelWithTooltip(Label label, string mainText, string tooltipText)
-        {
-            label.Text = mainText;
-            toolTip1.SetToolTip(label, tooltipText);
-            toolTip1.IsBalloon = true; 
-            toolTip1.ShowAlways = true; 
-    
         }
 
         private void DisplayForecastChart(List<DailyForecast> forecasts)
@@ -210,16 +195,12 @@ namespace Client
 
         private string GetWeatherAdvice(double temperature, string description)
         {
-            if (temperature > 35)
-                return "Trời rất nóng, có thể oi bức và khó chịu. Nhiệt độ cao dễ gây mất nước và mệt mỏi.";
-            else if (temperature > 30)
-                return "Thời tiết nóng với nhiệt độ cao, có thể có nắng gắt vào ban ngày.";
-            else if (temperature >= 20 && temperature <= 30)
-                return "Thời tiết ấm áp, không quá nóng cũng không quá lạnh, thích hợp cho các hoạt động ngoài trời.";
-            else if (temperature >= 10 && temperature < 20)
-                return "Trời mát, có thể se lạnh vào sáng sớm hoặc ban đêm.";
+            if (temperature > 30)
+                return "Nắng nóng, nên mặc đồ thoáng mát và uống nhiều nước";
+            else if (temperature < 20)
+                return "Trời mát/lạnh, nên mặc áo ấm";
             else
-                return "Trời lạnh, nhiệt độ thấp có thể gây rét buốt, nhất là vào ban đêm.";
+                return "Thời tiết dễ chịu, thích hợp cho các hoạt động ngoài trời";
         }
 
         private async Task<string> GetWeatherDataFromServerAsync(string city)
@@ -250,6 +231,36 @@ namespace Client
             MessageBox.Show("Chức năng lấy vị trí hiện tại chưa được triển khai!",
                 "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
+        private void labTemperature_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labAdvice_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void picIcon_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labDistrict_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labTemp_min_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labTemp_max_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
     public class WeatherResponse
@@ -261,25 +272,27 @@ namespace Client
         public double Pressure { get; set; }
         public double Like_feel { get; set; }
 
-        public string Description { get; set; } = string.Empty;
-        public string City { get; set; } = string.Empty;
-        public string Country { get; set; } = string.Empty;
-        public string Icon { get; set; } = string.Empty;
-        public string Sunset { get; set; } = string.Empty;
-        public string Sunrise { get; set; } = string.Empty;
-        public string ErrorMessage { get; set; } = string.Empty;
+        public string Description { get; set; }
+        public string City { get; set; }
+        public string Country { get; set; }
+        public string Icon { get; set; }
+        public string Sunset { get; set; }
+        public string Sunrise { get; set; }
+        public string ErrorMessage { get; set; }
+        public string Temp_min { get; set; }
+        public string Temp_max { get; set; }
+
         public List<DailyForecast> DailyForecast { get; set; } = new List<DailyForecast>();
     }
 
     public class DailyForecast
     {
         public DateTime Date { get; set; }
-        public string DayOfWeek { get; set; } = string.Empty;
+        public string DayOfWeek { get; set; }
         public double AvgTemperature { get; set; }
         public double MinTemperature { get; set; }
         public double MaxTemperature { get; set; }
-        public string Description { get; set; } = string.Empty;
-        public string Icon { get; set; } = string.Empty;
+        public string Description { get; set; }
+        public string Icon { get; set; }
     }
 }
-
