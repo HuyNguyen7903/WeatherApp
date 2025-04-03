@@ -20,7 +20,7 @@ namespace Client
         {
             InitializeComponent();
             InitializeChart();
-            UpdateTimeContinuously();
+            InitializeDateTimeTimer();
         }
 
         private void InitializeChart()
@@ -40,14 +40,35 @@ namespace Client
             Legend legend = new Legend();
             chart1.Legends.Add(legend);
         }
-
-        private async void UpdateTimeContinuously()
+        private System.Windows.Forms.Timer timerDateTime;
+        private void InitializeDateTimeTimer()
         {
-            while (true)
+            timerDateTime = new System.Windows.Forms.Timer();
+            timerDateTime.Interval = 1000;
+            timerDateTime.Tick += TimerDateTime_Tick;
+            timerDateTime.Start();
+            UpdateDateTime();
+        }
+
+        private void TimerDateTime_Tick(object sender, EventArgs e)
+        {
+            UpdateDateTime();
+        }
+
+        private void UpdateDateTime()
+        {
+            // Sử dụng Invoke nếu cần thiết để tránh cross-thread operation
+            if (labDateTime.InvokeRequired || labDateTime2.InvokeRequired)
+            {
+                this.Invoke((MethodInvoker)delegate {
+                    labDateTime.Text = "Giờ: " + DateTime.Now.ToString("HH:mm:ss");
+                    labDateTime2.Text = "Ngày: " + DateTime.Now.ToString("dd/MM/yyyy");
+                });
+            }
+            else
             {
                 labDateTime.Text = "Giờ: " + DateTime.Now.ToString("HH:mm:ss");
                 labDateTime2.Text = "Ngày: " + DateTime.Now.ToString("dd/MM/yyyy");
-                await Task.Delay(1000);
             }
         }
 
@@ -102,7 +123,6 @@ namespace Client
                 labSunset.Text = weatherResponse.Sunset;
                 labSunrise.Text = weatherResponse.Sunrise;
                 labDistrict.Text = $"{weatherResponse.City}, {weatherResponse.Country}";
-                labFeels_like.Text = $"{weatherResponse.Like_feel} °C";
                 labTemp_min.Text = $"{weatherResponse.Temp_min}°C";
                 labTemp_max.Text = $"{weatherResponse.Temp_max}°C";
 
@@ -111,7 +131,7 @@ namespace Client
                     picIcon.ImageLocation = $"http://openweathermap.org/img/wn/{weatherResponse.Icon}@2x.png";
                 }
 
-                labFeels_like.Text = $"~{weatherResponse.Temperature}°C";
+                labFeels_like.Text = $"~{weatherResponse.Like_feel}°C";
                 labAdvice.Text = GetWeatherAdvice(weatherResponse.Temperature, weatherResponse.Description);
 
                 // Display forecast
@@ -274,10 +294,6 @@ namespace Client
             }
         }
 
-        //private void timer1_Tick(object sender, EventArgs e)
-        //{
-        //    UpdateDateTime();
-        //}
 
         private void btnLocation_Click(object sender, EventArgs e)
         {
