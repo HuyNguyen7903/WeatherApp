@@ -7,16 +7,15 @@ using System.Text;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using System.Net.Mail;
 using Newtonsoft.Json.Linq;
+using System.Globalization;
 
 namespace WeatherServer
 {
     class Program
     {
-        private const string OpenWeatherMapApiKey = "26653ec7090961b6a70cc1709679d31d";
-        private const string OpenWeatherMapBaseUrl = "http://api.openweathermap.org/data/2.5/weather";
-        private const string OpenWeatherForecastUrl = "http://api.openweathermap.org/data/2.5/forecast";
+        private const string AccuWeatherApiKey = "UEKh0o5TRg7meXD00Uovj8atYD8UeYDV";
+        private const string AccuWeatherBaseUrl = "http://dataservice.accuweather.com";
 
         static async Task Main(string[] args)
         {
@@ -29,11 +28,6 @@ namespace WeatherServer
                 TcpClient client = await server.AcceptTcpClientAsync();
                 _ = HandleClientAsync(client);
             }
-        }
-        private static DateTime ConvertDateTime(long timestamp)
-        {
-            DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(timestamp);
-            return dateTimeOffset.LocalDateTime;
         }
 
         static async Task HandleClientAsync(TcpClient client)
@@ -66,149 +60,113 @@ namespace WeatherServer
             {
                 try
                 {
-                    // Current weather
-                    string currentUrl = $"{OpenWeatherMapBaseUrl}?q={Uri.EscapeDataString(city)}&appid={OpenWeatherMapApiKey}&units=metric&lang=vi";
+                    // 1. Get Location Key
+                    string locationUrl = $"{AccuWeatherBaseUrl}/locations/v1/cities/search?apikey={AccuWeatherApiKey}&q={Uri.EscapeDataString(city)}";
+                    HttpResponseMessage locationResponse = await httpClient.GetAsync(locationUrl);
+
+                    if (!locationResponse.IsSuccessStatusCode)
+                    {
+                        string errorContent = await locationResponse.Content.ReadAsStringAsync();
+                        throw new Exception($"Location API failed: {errorContent}");
+                    }
+
+                    string locationJson = await locationResponse.Content.ReadAsStringAsync();
+                    JArray locationArray = JArray.Parse(locationJson);
+
+                    if (locationArray == null || locationArray.Count == 0)
+                    {
+                        throw new Exception("No location data found");
+                    }
+
+                    string locationKey = locationArray[0]["Key"].ToString();
+                    string country = locationArray[0]["Country"]?["LocalizedName"]?.ToString() ?? "N/A";
+
+                    // 2. Get Current Weather
+                    string currentUrl = $"{AccuWeatherBaseUrl}/currentconditions/v1/{locationKey}?apikey={AccuWeatherApiKey}";
                     HttpResponseMessage currentResponse = await httpClient.GetAsync(currentUrl);
 
                     if (!currentResponse.IsSuccessStatusCode)
                     {
-                        string errorContent = await currentResponse.Content.ReadAsStringAsync();
-                        throw new Exception($"API request failed: {currentResponse.StatusCode}, {errorContent}");
+                        throw new Exception("Current weather API failed");
                     }
 
                     string currentJson = await currentResponse.Content.ReadAsStringAsync();
-                    dynamic currentData = JsonConvert.DeserializeObject(currentJson);
+                    JArray currentArray = JArray.Parse(currentJson);
+                    JObject currentData = (JObject)currentArray[0];
 
-                    // Lấy thông tin thời gian mặt trời mọc/lặn
-                    DateTime sunriseTime = ConvertDateTime((long)currentData.sys.sunrise);
-                    DateTime sunsetTime = ConvertDateTime((long)currentData.sys.sunset);
-
-                    // Forecast
-                    string forecastUrl = $"{OpenWeatherForecastUrl}?q={Uri.EscapeDataString(city)}&appid={OpenWeatherMapApiKey}&units=metric&lang=vi&cnt=40";
+                    // 3. Get 5-day Forecast
+                    string forecastUrl = $"{AccuWeatherBaseUrl}/forecasts/v1/daily/5day/{locationKey}?apikey={AccuWeatherApiKey}";
                     HttpResponseMessage forecastResponse = await httpClient.GetAsync(forecastUrl);
 
                     if (!forecastResponse.IsSuccessStatusCode)
                     {
-                        string errorContent = await forecastResponse.Content.ReadAsStringAsync();
-                        throw new Exception($"Forecast API failed: {forecastResponse.StatusCode}, {errorContent}");
+                        throw new Exception("Forecast API failed");
                     }
 
                     string forecastJson = await forecastResponse.Content.ReadAsStringAsync();
-                    dynamic forecastData = JsonConvert.DeserializeObject(forecastJson);
+                    JObject forecastData = JObject.Parse(forecastJson);
 
-                    // Process forecast data
-                    var dailyForecast = ProcessDailyForecast(forecastData.list);
-
-                    // Lấy nhiệt độ min/max từ dự báo ngày hôm nay
-                    DailyForecast todayForecast = null;
-                    foreach (var forecast in dailyForecast)
-                    {
-                        if (forecast.Date.Date == DateTime.Today)
-                        {
-                            todayForecast = forecast;
-                            break;
-                        }
-                    }
-                    // Nếu không tìm thấy dự báo cho hôm nay, lấy dự báo đầu tiên
-                    if (todayForecast == null && dailyForecast.Count > 0)
-                    {
-                        todayForecast = dailyForecast[0];
-                    }
-
-                    // Sử dụng giá trị từ dự báo nếu có, nếu không thì dùng giá trị từ current data
-                    string todayMinTemp = todayForecast != null ?
-                        Math.Round(todayForecast.MinTemperature, 0).ToString() :
-                        Math.Round((double)currentData.main.temp_min, 0).ToString();
-
-                    string todayMaxTemp = todayForecast != null ?
-                        Math.Round(todayForecast.MaxTemperature, 0).ToString() :
-                        Math.Round((double)currentData.main.temp_max, 0).ToString();
+                    // Process data
+                    List<DailyForecast> forecasts = ParseForecastData(forecastJson);
 
                     return new WeatherResponse
                     {
                         Success = true,
-                        Temperature = Math.Round((double)currentData.main.temp, 0),
-                        Humidity = (int)currentData.main.humidity,
-                        WindSpeed = Math.Round((double)currentData.wind.speed * 3.6, 1),
-                        Pressure = (double)currentData.main.pressure,
-                        Description = (string)currentData.weather[0].description,
-                        City = (string)currentData.name,
-                        Country = (string)currentData.sys.country,
-                        Icon = (string)currentData.weather[0].icon,
-                        Sunrise = sunriseTime.ToString("HH:mm"),
-                        Sunset = sunsetTime.ToString("HH:mm"),
-                        Like_feel = Math.Round((double)currentData.main.feels_like, 0),
-                        Temp_min = todayMinTemp,
-                        Temp_max = todayMaxTemp,
-                        DailyForecast = dailyForecast
+                        Temperature = currentData["Temperature"]?["Metric"]?["Value"]?.Value<double>() ?? 0,
+                        Humidity = currentData["RelativeHumidity"]?.Value<int>() ?? 0,
+                        WindSpeed = currentData["Wind"]?["Speed"]?["Metric"]?["Value"]?.Value<double>() ?? 0,
+                        Description = currentData["WeatherText"]?.Value<string>() ?? "N/A",
+                        City = city,
+                        Country = country,
+                        Icon = currentData["WeatherIcon"]?.Value<int>().ToString("00") ?? "01",
+                        DailyForecast = forecasts
                     };
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Error getting weather data: {ex}");
+                    Console.WriteLine($"Error: {ex.Message}");
                     return new WeatherResponse
                     {
                         Success = false,
-                        ErrorMessage = "Không thể lấy dữ liệu thời tiết. Vui lòng thử lại sau."
+                        ErrorMessage = ex.Message
                     };
                 }
             }
         }
 
-        private static List<DailyForecast> ProcessDailyForecast(dynamic forecastList)
+        private static List<DailyForecast> ParseForecastData(string json)
         {
-            var dailyForecasts = new List<DailyForecast>();
-            var groupedByDay = new Dictionary<string, List<dynamic>>();
+            List<DailyForecast> forecasts = new List<DailyForecast>();
 
-            foreach (var item in forecastList)
+            try
             {
-                DateTime dt = DateTime.Parse(item.dt_txt.ToString());
-                string dateKey = dt.ToString("yyyy-MM-dd");
+                JObject data = JObject.Parse(json);
+                JArray dailyForecasts = data["DailyForecasts"] as JArray;
 
-                if (!groupedByDay.ContainsKey(dateKey))
+                if (dailyForecasts == null) return forecasts;
+
+                foreach (var day in dailyForecasts)
                 {
-                    groupedByDay[dateKey] = new List<dynamic>();
-                }
-                groupedByDay[dateKey].Add(item);
-            }
+                    DateTime date = day["Date"].Value<DateTime>();
+                    JObject temp = day["Temperature"] as JObject;
 
-            foreach (var day in groupedByDay)
-            {
-                double avgTemp = 0;
-                double minTemp = double.MaxValue;
-                double maxTemp = double.MinValue;
-                string description = "";
-                string icon = "";
-
-                foreach (var item in day.Value)
-                {
-                    double temp = (double)item.main.temp;
-                    avgTemp += temp;
-                    minTemp = Math.Min(minTemp, (double)item.main.temp_min);
-                    maxTemp = Math.Max(maxTemp, (double)item.main.temp_max);
-
-                    if (string.IsNullOrEmpty(description))
+                    forecasts.Add(new DailyForecast
                     {
-                        description = item.weather[0].description;
-                        icon = item.weather[0].icon;
-                    }
+                        Date = date,
+                        DayOfWeek = date.ToString("dddd", new CultureInfo("vi-VN")),
+                        MinTemperature = temp?["Minimum"]?["Value"]?.Value<double>() ?? 0,
+                        MaxTemperature = temp?["Maximum"]?["Value"]?.Value<double>() ?? 0,
+                        Description = day["Day"]?["IconPhrase"]?.Value<string>() ?? "N/A",
+                        Icon = day["Day"]?["Icon"]?.Value<int>().ToString("00") ?? "01"
+                    });
                 }
-
-                avgTemp /= day.Value.Count;
-
-                dailyForecasts.Add(new DailyForecast
-                {
-                    Date = DateTime.Parse(day.Key),
-                    DayOfWeek = DateTime.Parse(day.Key).ToString("dddd"),
-                    AvgTemperature = Math.Round(avgTemp, 1),
-                    MinTemperature = Math.Round(minTemp, 1),
-                    MaxTemperature = Math.Round(maxTemp, 1),
-                    Description = description,
-                    Icon = icon
-                });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Forecast parse error: {ex.Message}");
             }
 
-            return dailyForecasts.OrderBy(d => d.Date).Take(7).ToList();
+            return forecasts;
         }
     }
 
@@ -218,17 +176,11 @@ namespace WeatherServer
         public double Temperature { get; set; }
         public int Humidity { get; set; }
         public double WindSpeed { get; set; }
-        public double Pressure { get; set; }
-        public double Like_feel { get; set; }
         public string Description { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
         public string Icon { get; set; }
-        public string Sunset { get; set; }
-        public string Sunrise { get; set; }
         public string ErrorMessage { get; set; }
-        public string Temp_min { get; set; }
-        public string Temp_max { get; set; }
         public List<DailyForecast> DailyForecast { get; set; } = new List<DailyForecast>();
     }
 
@@ -236,7 +188,6 @@ namespace WeatherServer
     {
         public DateTime Date { get; set; }
         public string DayOfWeek { get; set; }
-        public double AvgTemperature { get; set; }
         public double MinTemperature { get; set; }
         public double MaxTemperature { get; set; }
         public string Description { get; set; }
