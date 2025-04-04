@@ -6,6 +6,7 @@ using System.Windows.Forms;
 
 namespace Client
 {
+    [System.Runtime.Versioning.SupportedOSPlatform("windows7.0")]
     internal static class Program
     {
         /// <summary>
