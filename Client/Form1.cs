@@ -14,11 +14,13 @@ using System.Net;
 
 namespace Client
 {
+    [System.Runtime.Versioning.SupportedOSPlatform("windows7.0")]
     public partial class Form1 : Form
     {
         public Form1()
         {
             InitializeComponent();
+            timerDateTime = new System.Windows.Forms.Timer();
             InitializeChart();
             InitializeDateTimeTimer();
         }
@@ -43,14 +45,14 @@ namespace Client
         private System.Windows.Forms.Timer timerDateTime;
         private void InitializeDateTimeTimer()
         {
-            timerDateTime = new System.Windows.Forms.Timer();
+            //timerDateTime = new System.Windows.Forms.Timer();
             timerDateTime.Interval = 1000;
             timerDateTime.Tick += TimerDateTime_Tick;
             timerDateTime.Start();
             UpdateDateTime();
         }
 
-        private void TimerDateTime_Tick(object sender, EventArgs e)
+        private void TimerDateTime_Tick(object? sender, EventArgs e)
         {
             UpdateDateTime();
         }
@@ -210,9 +212,9 @@ namespace Client
                 Image weatherIcon = null;
                 try
                 {
-                    using (var webClient = new WebClient())
+                    using (var httpClient = new HttpClient())
                     {
-                        byte[] imageData = webClient.DownloadData($"http://openweathermap.org/img/wn/{forecast.Icon}.png");
+                        byte[] imageData = httpClient.GetByteArrayAsync($"http://openweathermap.org/img/wn/{forecast.Icon}.png").Result;
                         using (var stream = new MemoryStream(imageData))
                         {
                             weatherIcon = Image.FromStream(stream);
@@ -247,10 +249,14 @@ namespace Client
             dataGridView1.RowHeadersVisible = false; // Ẩn cột đầu tiên (cột trống)
 
             // Cấu hình cột biểu tượng
-            DataGridViewImageColumn imageColumn = (DataGridViewImageColumn)dataGridView1.Columns["Thời tiết"];
-            imageColumn.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            imageColumn.DefaultCellStyle.NullValue = null;
-            imageColumn.Width = 40;
+            // Cấu hình cột biểu tượng
+            var imageColumn = dataGridView1.Columns["Thời tiết"] as DataGridViewImageColumn;
+            if (imageColumn != null)
+            {
+                imageColumn.ImageLayout = DataGridViewImageCellLayout.Zoom;
+                imageColumn.DefaultCellStyle.NullValue = null;
+                imageColumn.Width = 40;
+            }
 
             // Căn chỉnh nội dung các cột
             dataGridView1.Columns["Ngày"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -265,6 +271,7 @@ namespace Client
             // Ẩn dòng trống cuối cùng (nếu có)
             dataGridView1.AllowUserToAddRows = false;
         }
+
 
         private string GetWeatherAdvice(double temperature, string description)
         {
@@ -312,15 +319,15 @@ namespace Client
         public double Pressure { get; set; }
         public double Like_feel { get; set; }
 
-        public string Description { get; set; }
-        public string City { get; set; }
-        public string Country { get; set; }
-        public string Icon { get; set; }
-        public string Sunset { get; set; }
-        public string Sunrise { get; set; }
-        public string ErrorMessage { get; set; }
-        public string Temp_min { get; set; }
-        public string Temp_max { get; set; }
+        public string? Description { get; set; }
+        public string? City { get; set; }
+        public string? Country { get; set; }
+        public string? Icon { get; set; }
+        public string? Sunset { get; set; }
+        public string? Sunrise { get; set; }
+        public string? ErrorMessage { get; set; }
+        public string? Temp_min { get; set; }
+        public string? Temp_max { get; set; }
 
         public List<DailyForecast> DailyForecast { get; set; } = new List<DailyForecast>();
     }
@@ -328,11 +335,11 @@ namespace Client
     public class DailyForecast
     {
         public DateTime Date { get; set; }
-        public string DayOfWeek { get; set; }
+        public string? DayOfWeek { get; set; }
         public double AvgTemperature { get; set; }
         public double MinTemperature { get; set; }
         public double MaxTemperature { get; set; }
-        public string Description { get; set; }
-        public string Icon { get; set; }
+        public string? Description { get; set; }
+        public string? Icon { get; set; }
     }
 }

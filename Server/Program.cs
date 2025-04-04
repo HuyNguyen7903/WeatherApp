@@ -220,26 +220,26 @@ namespace WeatherServer
         public double WindSpeed { get; set; }
         public double Pressure { get; set; }
         public double Like_feel { get; set; }
-        public string Description { get; set; }
-        public string City { get; set; }
-        public string Country { get; set; }
-        public string Icon { get; set; }
-        public string Sunset { get; set; }
-        public string Sunrise { get; set; }
-        public string ErrorMessage { get; set; }
-        public string Temp_min { get; set; }
-        public string Temp_max { get; set; }
+        public string? Description { get; set; }
+        public string? City { get; set; }
+        public string? Country { get; set; }
+        public string? Icon { get; set; }
+        public string? Sunset { get; set; }
+        public string? Sunrise { get; set; }
+        public string? ErrorMessage { get; set; }
+        public string? Temp_min { get; set; }
+        public string? Temp_max { get; set; }
         public List<DailyForecast> DailyForecast { get; set; } = new List<DailyForecast>();
     }
 
     public class DailyForecast
     {
         public DateTime Date { get; set; }
-        public string DayOfWeek { get; set; }
+        public string? DayOfWeek { get; set; }
         public double AvgTemperature { get; set; }
         public double MinTemperature { get; set; }
         public double MaxTemperature { get; set; }
-        public string Description { get; set; }
-        public string Icon { get; set; }
+        public string? Description { get; set; }
+        public string? Icon { get; set; }
     }
 }
