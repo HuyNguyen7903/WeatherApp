@@ -59,15 +59,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Client",
+              "Title": "Client.csproj",
               "DocumentMoniker": "D:\\Thai_Van_Tinh\\NET\\BTL\\WeatherApp\\Client\\Client.csproj",
               "RelativeDocumentMoniker": "Client\\Client.csproj",
               "ToolTip": "D:\\Thai_Van_Tinh\\NET\\BTL\\WeatherApp\\Client\\Client.csproj",
               "RelativeToolTip": "Client\\Client.csproj",
               "ViewState": "AgIAABIAAAAAAAAAAAAYwCMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-04-04T14:00:39.615Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-04T14:00:39.615Z"
             },
             {
               "$type": "Document",
@@ -91,8 +90,7 @@
               "RelativeToolTip": "Client\\Form1.Designer.cs",
               "ViewState": "AgIAABQAAAAAAAAAAAASwB8AAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-30T13:19:20.267Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-30T13:19:20.267Z"
             },
             {
               "$type": "Document",
@@ -104,8 +102,7 @@
               "RelativeToolTip": "Client\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-26T11:58:40.18Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-26T11:58:40.18Z"
             },
             {
               "$type": "Document",
@@ -130,8 +127,7 @@
               "RelativeToolTip": "Server\\Program.cs",
               "ViewState": "AgIAAFAAAAAAAAAAAAAgwFQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-26T11:55:35.139Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-26T11:55:35.139Z"
             }
           ]
         }

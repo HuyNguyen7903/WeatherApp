@@ -275,12 +275,39 @@ namespace Client
 
         private string GetWeatherAdvice(double temperature, string description)
         {
-            if (temperature > 30)
-                return "Nắng nóng, nên mặc đồ thoáng mát và uống nhiều nước";
+            description = description.ToLower();
+            string advice = "";
+
+            if (temperature > 35)
+                advice = "Nắng cực điểm, tránh ra ngoài giờ cao điểm 11-15h. ";
+            else if (temperature > 30)
+                advice = "Trời nắng nóng, cần che chắn cẩn thận. ";
+            else if (temperature < 10)
+                advice = "Trời rét đậm, mặc nhiều lớp áo ấm. ";
             else if (temperature < 20)
-                return "Trời mát/lạnh, nên mặc áo ấm";
+                advice = "Tiết trời mát mẻ dễ chịu. ";
             else
-                return "Thời tiết dễ chịu, thích hợp cho các hoạt động ngoài trời";
+                advice = "Thời tiết ôn hòa lý tưởng. ";
+
+            if (description.Contains("mưa lớn"))
+                advice += "Mưa to kèm gió mạnh, hạn chế di chuyển. Mang áo mưa loại tốt.";
+            else if (description.Contains("mưa") || description.Contains("mây đen"))
+                advice += "Trời có mưa, nhớ mang theo ô. Mưa lạnh cần mặc áo khoác.";
+            else if (description.Contains("dông") || description.Contains("storm"))
+                advice = "Cảnh báo dông bão! Ở trong nhà, tránh cây cối, công trình cao.";
+            else if (description.Contains("nắng gắt"))
+                advice += "Bôi kem chống nắng, đội mũ rộng vành, uống đủ nước.";
+            else if (description.Contains("sương mù"))
+                advice += "Sương mù dày đặc, lái xe bật đèn, giảm tốc độ.";
+            else if (description.Contains("nhiều mây"))
+                advice += "Trời nhiều mây, vẫn cần đề phòng nắng gắt buổi trưa.";
+
+            if (temperature > 30)
+                advice += " Uống nhiều nước, ăn đồ mát.";
+            else if (temperature < 15)
+                advice += " Giữ ấm cổ và tay chân.";
+
+            return advice;
         }
 
         private async Task<string> GetWeatherDataFromServerAsync(string city)
@@ -302,11 +329,71 @@ namespace Client
         }
 
 
-        private void btnLocation_Click(object sender, EventArgs e)
+        private async void btnLocation_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Chức năng lấy vị trí hiện tại chưa được triển khai!",
-                "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            try
+            {
+                Cursor = Cursors.WaitCursor;
+                btnLocation.Enabled = false;
+
+                // Lấy vị trí hiện tại qua IP
+                var location = await GetLocationByIPAsync();
+
+                if (location != null)
+                {
+                    TBCity.Text = location.City;
+
+                    // Tự động gọi hàm lấy thời tiết
+                    string response = await GetWeatherDataFromServerAsync(location.City);
+                    DisplayWeatherData(response);
+                }
+                else
+                {
+                    MessageBox.Show("Không thể xác định vị trí hiện tại", "Lỗi",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi lấy vị trí: {ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Cursor = Cursors.Default;
+                btnLocation.Enabled = true;
+            }
         }
+
+        private async Task<LocationInfo?> GetLocationByIPAsync()
+        {
+            try
+            {
+                using (var httpClient = new HttpClient())
+                {
+                    // Sử dụng IP-API.com (miễn phí)
+                    var response = await httpClient.GetStringAsync("http://ip-api.com/json/");
+                    var locationData = JsonConvert.DeserializeObject<LocationInfo>(response);
+
+                    if (locationData?.Status == "success")
+                    {
+                        return locationData;
+                    }
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Không thể lấy vị trí từ IP: {ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return null;
+            }
+        }
+    }
+    public class LocationInfo
+    {
+        public string? Status { get; set; }
+        public string? City { get; set; }
 
     }
 
