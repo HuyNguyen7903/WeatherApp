@@ -17,10 +17,12 @@ namespace Client
     [System.Runtime.Versioning.SupportedOSPlatform("windows7.0")]
     public partial class Form1 : Form
     {
+         private ToolTip toolTip1;
         public Form1()
         {
             InitializeComponent();
             timerDateTime = new System.Windows.Forms.Timer();
+            toolTip1 = new ToolTip(); 
             InitializeChart();
             InitializeDateTimeTimer();
         }
@@ -117,16 +119,24 @@ namespace Client
                 }
 
                 // Display current weather
-                labTemperature.Text = $"{weatherResponse.Temperature}°C";
-                labHumidity.Text = $"{weatherResponse.Humidity}%";
-                labWindSpeed.Text = $"{weatherResponse.WindSpeed} km/h";
-                labPressure.Text = $"{weatherResponse.Pressure} hPa";
-                labDetail2.Text = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(weatherResponse.Description.ToLower());
-                labSunset.Text = weatherResponse.Sunset;
-                labSunrise.Text = weatherResponse.Sunrise;
-                labDistrict.Text = $"{weatherResponse.City}, {weatherResponse.Country}";
-                labTemp_min.Text = $"{weatherResponse.Temp_min}°C";
+                labDistrict.Text = $"{weatherResponse.City ?? "N/A"}, {weatherResponse.Country ?? "N/A"}"; labTemp_min.Text = $"{weatherResponse.Temp_min}°C";
                 labTemp_max.Text = $"{weatherResponse.Temp_max}°C";
+                labDetail2.Text = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(weatherResponse.Description.ToLower());
+                labTemperature.Text = $"{weatherResponse.Temperature}°C";
+                 SetLabelWithTooltip(labHumidity, $"{weatherResponse.Humidity}%", 
+                     $"Không khí {(weatherResponse.Humidity > 70 ? "ẩm ướt" : "khô ráo")}");
+         
+                 SetLabelWithTooltip(labWindSpeed, $"{weatherResponse.WindSpeed} km/h", 
+                     $"{(weatherResponse.WindSpeed > 20 ? "Gió mạnh" : "Gió nhẹ")}");
+         
+                 SetLabelWithTooltip(labPressure, $"{weatherResponse.Pressure} hPa", 
+                     $"{(weatherResponse.Pressure < 1000 ? "Có thể có thời tiết xấu" : "Ổn định")}");
+         
+                 SetLabelWithTooltip(labFeels_like, $"{weatherResponse.Like_feel}°C", 
+                     $"{(weatherResponse.Like_feel > weatherResponse.Temperature ? "Nóng hơn thực tế" : "Mát hơn thực tế")}");
+ 
+                 labSunrise.Text = $"{weatherResponse.Sunrise ?? "N/A"}";
+                 labSunset.Text = $"{weatherResponse.Sunset ?? "N/A"}";
 
                 if (!string.IsNullOrEmpty(weatherResponse.Icon))
                 {
@@ -149,6 +159,14 @@ namespace Client
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private void SetLabelWithTooltip(Label label, string mainText, string tooltipText)
+         {
+             label.Text = mainText;
+             toolTip1.SetToolTip(label, tooltipText);
+             toolTip1.IsBalloon = true; 
+             toolTip1.ShowAlways = true; 
+     
+         }
         private void DisplayForecastChart(List<DailyForecast> forecasts)
         {
             chart1.Series.Clear();
