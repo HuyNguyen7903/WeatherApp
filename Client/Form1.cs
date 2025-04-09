@@ -17,33 +17,16 @@ namespace Client
     [System.Runtime.Versioning.SupportedOSPlatform("windows7.0")]
     public partial class Form1 : Form
     {
-         private ToolTip toolTip1;
+        private ToolTip toolTip1;
         public Form1()
         {
             InitializeComponent();
             timerDateTime = new System.Windows.Forms.Timer();
             toolTip1 = new ToolTip(); 
-            InitializeChart();
             InitializeDateTimeTimer();
         }
 
-        private void InitializeChart()
-        {
-            chart1.Series.Clear();
-            chart1.ChartAreas.Clear();
-            chart1.Titles.Clear();
-
-            // Create chart area
-            ChartArea chartArea = new ChartArea("ForecastArea");
-            chartArea.AxisX.Title = "Ngày";
-            chartArea.AxisY.Title = "Nhiệt độ (°C)";
-            chartArea.AxisX.Interval = 1;
-            chart1.ChartAreas.Add(chartArea);
-
-            // Add legend
-            Legend legend = new Legend();
-            chart1.Legends.Add(legend);
-        }
+       
         private System.Windows.Forms.Timer timerDateTime;
         private void InitializeDateTimeTimer()
         {
@@ -76,6 +59,7 @@ namespace Client
             }
         }
 
+        // Cập nhật phương thức btnSearch_Click
         private async void btnSearch_Click(object sender, EventArgs e)
         {
             string city = TBCity.Text.Trim();
@@ -90,8 +74,24 @@ namespace Client
                 Cursor = Cursors.WaitCursor;
                 btnSearch.Enabled = false;
 
-                string response = await GetWeatherDataFromServerAsync(city);
-                DisplayWeatherData(response);
+                // Tạo request object mới bao gồm cả yêu cầu lấy thành phố lân cận
+                var request = new
+                {
+                    city = city,
+                    withNearby = true // Yêu cầu lấy thông tin các thành phố lân cận
+                };
+
+                string requestJson = JsonConvert.SerializeObject(request);
+                string response = await GetWeatherDataFromServerAsync(requestJson);
+
+                // Phân tích response mới
+                dynamic responseData = JsonConvert.DeserializeObject(response);
+
+                // Hiển thị thời tiết chính
+                DisplayWeatherData(JsonConvert.SerializeObject(responseData.MainWeather));
+
+                // Hiển thị các thành phố lân cận
+                DisplayNearbyCities(responseData.NearbyCities.ToObject<List<WeatherResponse>>());
             }
             catch (Exception ex)
             {
@@ -119,7 +119,8 @@ namespace Client
                 }
 
                 // Display current weather
-                labDistrict.Text = $"{weatherResponse.City ?? "N/A"}, {weatherResponse.Country ?? "N/A"}"; labTemp_min.Text = $"{weatherResponse.Temp_min}°C";
+                labDistrict.Text = $"{weatherResponse.City ?? "N/A"}, {weatherResponse.Country ?? "N/A"}"; 
+                labTemp_min.Text = $"{weatherResponse.Temp_min}°C";
                 labTemp_max.Text = $"{weatherResponse.Temp_max}°C";
                 labDetail2.Text = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(weatherResponse.Description.ToLower());
                 labTemperature.Text = $"{weatherResponse.Temperature}°C";
@@ -149,7 +150,6 @@ namespace Client
                 // Display forecast
                 if (weatherResponse.DailyForecast != null && weatherResponse.DailyForecast.Count > 0)
                 {
-                    DisplayForecastChart(weatherResponse.DailyForecast);
                     DisplayForecastDetails(weatherResponse.DailyForecast);
                 }
             }
@@ -167,50 +167,7 @@ namespace Client
              toolTip1.ShowAlways = true; 
      
          }
-        private void DisplayForecastChart(List<DailyForecast> forecasts)
-        {
-            chart1.Series.Clear();
-            // Add average temperature series
-            Series avgSeries = new Series("Nhiệt độ TB")
-            {
-                ChartType = SeriesChartType.Column,
-                Color = Color.DeepSkyBlue,
-                BorderWidth = 2,
-                IsValueShownAsLabel = true
-            };
-
-            // Add min/max series
-            Series minSeries = new Series("Thấp nhất")
-            {
-                ChartType = SeriesChartType.Line,
-                Color = Color.Blue,
-                BorderWidth = 2,
-                IsValueShownAsLabel = true
-            };
-
-            Series maxSeries = new Series("Cao nhất")
-            {
-                ChartType = SeriesChartType.Point,
-                Color = Color.Red,
-                BorderWidth = 2,
-                IsValueShownAsLabel = true
-            };
-
-            foreach (var forecast in forecasts)
-            {
-                string dayLabel = forecast.Date.ToString("dd/MM");
-                avgSeries.Points.AddXY(dayLabel, forecast.AvgTemperature);
-                minSeries.Points.AddXY(dayLabel, forecast.MinTemperature);
-                maxSeries.Points.AddXY(dayLabel, forecast.MaxTemperature);
-            }
-
-            chart1.Series.Add(avgSeries);
-            chart1.Series.Add(minSeries);
-            chart1.Series.Add(maxSeries);
-
-            chart1.Titles.Clear();
-            chart1.Titles.Add("DỰ BÁO THỜI TIẾT 7 NGÀY");
-        }
+        
 
         private void DisplayForecastDetails(List<DailyForecast> forecasts)
         {
@@ -328,7 +285,8 @@ namespace Client
             return advice;
         }
 
-        private async Task<string> GetWeatherDataFromServerAsync(string city)
+        // Cập nhật phương thức GetWeatherDataFromServerAsync
+        private async Task<string> GetWeatherDataFromServerAsync(string requestData)
         {
             using (TcpClient client = new TcpClient())
             {
@@ -336,7 +294,7 @@ namespace Client
 
                 using (NetworkStream stream = client.GetStream())
                 {
-                    byte[] data = Encoding.UTF8.GetBytes(city);
+                    byte[] data = Encoding.UTF8.GetBytes(requestData);
                     await stream.WriteAsync(data, 0, data.Length);
 
                     byte[] buffer = new byte[4096];
@@ -345,7 +303,84 @@ namespace Client
                 }
             }
         }
+        // Thêm phương thức mới để hiển thị các thành phố lân cận
+        private void DisplayNearbyCities(List<WeatherResponse> nearbyCities)
+        {
+            if (nearbyCities == null || nearbyCities.Count == 0)
+            {
+                dataGridView2.Visible = false;
+                return;
+            }
 
+            dataGridView2.Visible = true;
+
+            // Tạo DataTable với các cột cần thiết
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Thành phố");
+            dt.Columns.Add("Nhiệt độ");
+            dt.Columns.Add("Độ ẩm");
+            dt.Columns.Add("Gió");
+            dt.Columns.Add("Mô tả");
+            dt.Columns.Add("Thời tiết", typeof(Image));
+
+            // Thêm dữ liệu vào các hàng
+            foreach (var city in nearbyCities)
+            {
+                // Tải hình ảnh từ OpenWeatherMap
+                Image weatherIcon = null;
+                try
+                {
+                    using (var httpClient = new HttpClient())
+                    {
+                        byte[] imageData = httpClient.GetByteArrayAsync($"http://openweathermap.org/img/wn/{city.Icon}.png").Result;
+                        using (var stream = new MemoryStream(imageData))
+                        {
+                            weatherIcon = Image.FromStream(stream);
+                        }
+                    }
+                }
+                catch
+                {
+                    weatherIcon = null;
+                }
+
+                // Viết hoa chữ cái đầu mô tả
+                string description = string.IsNullOrEmpty(city.Description)
+                    ? ""
+                    : char.ToUpper(city.Description[0]) + city.Description.Substring(1);
+
+                dt.Rows.Add(
+                    $"{city.City}, {city.Country}",
+                    $"{city.Temperature}°C",
+                    $"{city.Humidity}%",
+                    $"{city.WindSpeed} km/h",
+                    description,
+                    weatherIcon
+                );
+            }
+
+            // Gán DataTable vào DataGridView
+            dataGridView2.DataSource = dt;
+
+            // Cấu hình hiển thị
+            dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView2.RowHeadersVisible = false;
+
+            // Cấu hình cột biểu tượng
+            var imageColumn = dataGridView2.Columns["Thời tiết"] as DataGridViewImageColumn;
+            if (imageColumn != null)
+            {
+                imageColumn.ImageLayout = DataGridViewImageCellLayout.Zoom;
+                imageColumn.DefaultCellStyle.NullValue = null;
+                imageColumn.Width = 40;
+            }
+
+            // Căn chỉnh nội dung các cột
+            dataGridView2.Columns["Nhiệt độ"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView2.Columns["Độ ẩm"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView2.Columns["Gió"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView2.AllowUserToAddRows = false;
+        }
 
         private async void btnLocation_Click(object sender, EventArgs e)
         {
@@ -357,13 +392,26 @@ namespace Client
                 // Lấy vị trí hiện tại qua IP
                 var location = await GetLocationByIPAsync();
 
-                if (location != null)
+                if (location != null && location.Lat.HasValue && location.Lon.HasValue)
                 {
                     TBCity.Text = location.City;
 
-                    // Tự động gọi hàm lấy thời tiết
-                    string response = await GetWeatherDataFromServerAsync(location.City);
-                    DisplayWeatherData(response);
+                    // Gửi yêu cầu theo lat/lon thay vì tên thành phố
+                    var request = new
+                    {
+                        lat = location.Lat.Value,
+                        lon = location.Lon.Value,
+                        withNearby = true
+                    };
+
+                    string requestJson = JsonConvert.SerializeObject(request);
+                    string response = await GetWeatherDataFromServerAsync(requestJson);
+
+                    // Phân tích response
+                    dynamic responseData = JsonConvert.DeserializeObject(response);
+
+                    DisplayWeatherData(JsonConvert.SerializeObject(responseData.MainWeather));
+                    DisplayNearbyCities(responseData.NearbyCities.ToObject<List<WeatherResponse>>());
                 }
                 else
                 {
@@ -412,8 +460,10 @@ namespace Client
     {
         public string? Status { get; set; }
         public string? City { get; set; }
-
+        public double? Lat { get; set; }
+        public double? Lon { get; set; }
     }
+
 
     public class WeatherResponse
     {
@@ -435,8 +485,14 @@ namespace Client
         public string? Temp_max { get; set; }
 
         public List<DailyForecast> DailyForecast { get; set; } = new List<DailyForecast>();
-    }
+        public Coordinates? Coordinates { get; set; }
 
+    }
+    public class Coordinates
+    {
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+    }
     public class DailyForecast
     {
         public DateTime Date { get; set; }

@@ -45,11 +45,52 @@ namespace WeatherServer
                 {
                     byte[] buffer = new byte[1024];
                     int bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
-                    string city = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-                    Console.WriteLine($"Received request for city: {city}");
+                    string requestData = Encoding.UTF8.GetString(buffer, 0, bytesRead);
 
-                    var weatherResponse = await GetRealWeatherData(city);
-                    string jsonResponse = JsonConvert.SerializeObject(weatherResponse);
+                    // Phân tích request - có thể là tên thành phố hoặc tọa độ
+                    dynamic request = JsonConvert.DeserializeObject(requestData);
+
+                    WeatherResponse weatherResponse;
+                    List<WeatherResponse> nearbyCities = new List<WeatherResponse>();
+
+                    if (request.city != null)
+                    {
+                        // Lấy thời tiết thành phố chính
+                        weatherResponse = await GetRealWeatherData((string)request.city);
+                        string cityName = (string)request.city;
+                        Console.WriteLine($"Received request for city: {cityName}");
+
+                        // Nếu có tọa độ, lấy các thành phố lân cận
+                        if (weatherResponse.Success && request.withNearby == true && weatherResponse.Coordinates != null)
+                        {
+                            nearbyCities = await GetNearbyCitiesWeatherData(
+                                weatherResponse.Coordinates.Latitude,
+                                weatherResponse.Coordinates.Longitude);
+                        }
+                    }
+                    else if (request.lat != null && request.lon != null)
+                    {
+                        // Lấy thời tiết theo tọa độ
+                        weatherResponse = await GetWeatherByCoordinates((double)request.lat, (double)request.lon);
+
+                        if (weatherResponse.Success && request.withNearby == true)
+                        {
+                            nearbyCities = await GetNearbyCitiesWeatherData((double)request.lat, (double)request.lon);
+                        }
+                    }
+                    else
+                    {
+                        weatherResponse = new WeatherResponse { Success = false, ErrorMessage = "Invalid request" };
+                    }
+
+                    // Tạo response object mới chứa cả dữ liệu chính và các thành phố lân cận
+                    var fullResponse = new
+                    {
+                        MainWeather = weatherResponse,
+                        NearbyCities = nearbyCities
+                    };
+
+                    string jsonResponse = JsonConvert.SerializeObject(fullResponse);
                     byte[] responseData = Encoding.UTF8.GetBytes(jsonResponse);
                     await stream.WriteAsync(responseData, 0, responseData.Length);
                 }
@@ -140,7 +181,12 @@ namespace WeatherServer
                         Like_feel = Math.Round((double)currentData.main.feels_like, 0),
                         Temp_min = todayMinTemp,
                         Temp_max = todayMaxTemp,
-                        DailyForecast = dailyForecast
+                        DailyForecast = dailyForecast,
+                        Coordinates = new Coordinates
+                        {
+                            Latitude = (double)currentData.coord.lat,
+                            Longitude = (double)currentData.coord.lon
+                        }
                     };
                 }
                 catch (Exception ex)
@@ -154,7 +200,113 @@ namespace WeatherServer
                 }
             }
         }
+        static async Task<WeatherResponse> GetWeatherByCoordinates(double lat, double lon)
+        {
+            using (HttpClient httpClient = new HttpClient())
+            {
+                try
+                {
+                    // Current weather by coordinates
+                    string currentUrl = $"{OpenWeatherMapBaseUrl}?lat={lat}&lon={lon}&appid={OpenWeatherMapApiKey}&units=metric&lang=vi";
+                    HttpResponseMessage currentResponse = await httpClient.GetAsync(currentUrl);
 
+                    if (!currentResponse.IsSuccessStatusCode)
+                    {
+                        string errorContent = await currentResponse.Content.ReadAsStringAsync();
+                        throw new Exception($"API request failed: {currentResponse.StatusCode}, {errorContent}");
+                    }
+
+                    string currentJson = await currentResponse.Content.ReadAsStringAsync();
+                    dynamic currentData = JsonConvert.DeserializeObject(currentJson);
+
+                    // Lấy thông tin thời gian mặt trời mọc/lặn
+                    DateTime sunriseTime = ConvertDateTime((long)currentData.sys.sunrise);
+                    DateTime sunsetTime = ConvertDateTime((long)currentData.sys.sunset);
+
+                    return new WeatherResponse
+                    {
+                        Success = true,
+                        Temperature = Math.Round((double)currentData.main.temp, 0),
+                        Humidity = (int)currentData.main.humidity,
+                        WindSpeed = Math.Round((double)currentData.wind.speed * 3.6, 1),
+                        Pressure = (double)currentData.main.pressure,
+                        Description = (string)currentData.weather[0].description,
+                        City = (string)currentData.name,
+                        Country = (string)currentData.sys.country,
+                        Icon = (string)currentData.weather[0].icon,
+                        Sunrise = sunriseTime.ToString("HH:mm"),
+                        Sunset = sunsetTime.ToString("HH:mm"),
+                        Like_feel = Math.Round((double)currentData.main.feels_like, 0),
+                        Temp_min = Math.Round((double)currentData.main.temp_min, 0).ToString(),
+                        Temp_max = Math.Round((double)currentData.main.temp_max, 0).ToString(),
+                        Coordinates = new Coordinates
+                        {
+                            Latitude = (double)currentData.coord.lat,
+                            Longitude = (double)currentData.coord.lon
+                        }
+                    };
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error getting weather by coordinates: {ex}");
+                    return new WeatherResponse
+                    {
+                        Success = false,
+                        ErrorMessage = "Không thể lấy dữ liệu thời tiết. Vui lòng thử lại sau."
+                    };
+                }
+            }
+        }
+        private static async Task<List<WeatherResponse>> GetNearbyCitiesWeatherData(double lat, double lon)
+        {
+            using (HttpClient httpClient = new HttpClient())
+            {
+                try
+                {
+                    // Lấy danh sách các thành phố trong bán kính 50km
+                    string nearbyUrl = $"http://api.openweathermap.org/data/2.5/find?lat={lat}&lon={lon}&cnt=5&appid={OpenWeatherMapApiKey}&units=metric&lang=vi";
+                    HttpResponseMessage nearbyResponse = await httpClient.GetAsync(nearbyUrl);
+
+                    if (!nearbyResponse.IsSuccessStatusCode)
+                    {
+                        string errorContent = await nearbyResponse.Content.ReadAsStringAsync();
+                        throw new Exception($"Nearby cities API failed: {nearbyResponse.StatusCode}, {errorContent}");
+                    }
+
+                    string nearbyJson = await nearbyResponse.Content.ReadAsStringAsync();
+                    dynamic nearbyData = JsonConvert.DeserializeObject(nearbyJson);
+
+                    var nearbyCities = new List<WeatherResponse>();
+
+                    foreach (var city in nearbyData.list)
+                    {
+                        var weatherResponse = new WeatherResponse
+                        {
+                            Success = true,
+                            Temperature = Math.Round((double)city.main.temp, 0),
+                            Humidity = (int)city.main.humidity,
+                            WindSpeed = Math.Round((double)city.wind.speed * 3.6, 1),
+                            Pressure = (double)city.main.pressure,
+                            Description = (string)city.weather[0].description,
+                            City = (string)city.name,
+                            Country = (string)city.sys?.country ?? "N/A",
+                            Icon = (string)city.weather[0].icon,
+                            Like_feel = Math.Round((double)city.main.feels_like, 0),
+                            Temp_min = Math.Round((double)city.main.temp_min, 0).ToString(),
+                            Temp_max = Math.Round((double)city.main.temp_max, 0).ToString()
+                        };
+                        nearbyCities.Add(weatherResponse);
+                    }
+
+                    return nearbyCities;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error getting nearby cities data: {ex}");
+                    return new List<WeatherResponse>();
+                }
+            }
+        }
         private static List<DailyForecast> ProcessDailyForecast(dynamic forecastList)
         {
             var dailyForecasts = new List<DailyForecast>();
@@ -230,8 +382,13 @@ namespace WeatherServer
         public string? Temp_min { get; set; }
         public string? Temp_max { get; set; }
         public List<DailyForecast> DailyForecast { get; set; } = new List<DailyForecast>();
+        public Coordinates? Coordinates { get; set; }
     }
-
+    public class Coordinates
+    {
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+    }
     public class DailyForecast
     {
         public DateTime Date { get; set; }
