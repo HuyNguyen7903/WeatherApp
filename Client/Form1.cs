@@ -18,7 +18,19 @@ namespace Client
     public partial class Form1 : Form
     {
         private ToolTip toolTip1;
-
+        private Panel panelChatContainer;
+        private RichTextBox chatContent;
+        private TextBox userInput;
+        private Button sendButton;
+        private Button clearChatButton;
+        private Panel chatHeader;
+        private Label chatTitle;
+        private Label closeChat;
+        private Panel fabWrapper;
+        private Label fab;
+        private PictureBox fabIcon;
+        private Label fabTitle;
+        private PictureBox resizeIcon;
         public Form1()
         {
             InitializeComponent();
@@ -26,10 +38,151 @@ namespace Client
             toolTip1 = new ToolTip(); 
             InitializeWebView2Async();
             InitializeDateTimeTimer();
+            InitializeChat();
         }
-        
+        private bool isChatExpanded = false;
+        private bool isResizeExpanded = false;
 
-       private async void InitializeWebView2Async()
+        private void InitializeChat()
+        {
+            // Sự kiện click cho nút chat
+            this.fab.Click += (sender, e) => ToggleChat();
+            this.fabIcon.Click += (sender, e) => ToggleChat();
+
+            // Sự kiện cho nút đóng chat
+            this.closeChat.Click += (sender, e) => ToggleChat();
+
+            // Sự kiện gửi tin nhắn
+            this.sendButton.Click += (sender, e) => SendMessage();
+            this.userInput.KeyDown += (sender, e) =>
+            {
+                if (e.KeyCode == Keys.Enter && !e.Shift)
+                {
+                    e.SuppressKeyPress = true;
+                    SendMessage();
+                }
+            };
+
+            // Sự kiện xóa chat
+            this.clearChatButton.Click += (sender, e) => this.chatContent.Clear();
+
+            // Sự kiện phóng to/thu nhỏ
+            this.resizeIcon.Click += (sender, e) => ToggleResize();
+
+            // Hiệu ứng hover cho nút chat
+            this.fab.MouseEnter += (sender, e) => this.fabTitle.Visible = true;
+            this.fab.MouseLeave += (sender, e) => this.fabTitle.Visible = false;
+
+            // Animation cho nút chat
+            StartFabAnimation();
+        }
+
+        private void ToggleChat()
+        {
+            this.panelChatContainer.Visible = !this.panelChatContainer.Visible;
+            if (this.panelChatContainer.Visible)
+            {
+                this.panelChatContainer.BringToFront();
+            }
+        }
+
+        private async void SendMessage()
+        {
+            string userInput = this.userInput.Text.Trim();
+            if (string.IsNullOrEmpty(userInput)) return;
+
+            // Hiển thị tin nhắn người dùng
+            AddMessageToChat("Bạn", userInput, true);
+            this.userInput.Clear();
+
+            try
+            {
+                var response = await GetChatbotResponse(userInput);
+                AddMessageToChat("Vistral", response, false);
+            }
+            catch (Exception ex)
+            {
+                AddMessageToChat("Vistral", "Lỗi kết nối đến server.", false);
+            }
+        }
+
+        private void AddMessageToChat(string sender, string message, bool isUser)
+        {
+            this.chatContent.SelectionStart = this.chatContent.TextLength;
+            this.chatContent.SelectionLength = 0;
+
+            // Đặt màu và font cho tên người gửi
+            this.chatContent.SelectionColor = isUser ? Color.FromArgb(76, 175, 80) : Color.FromArgb(217, 0, 27);
+            this.chatContent.SelectionFont = new Font(this.chatContent.Font, FontStyle.Bold);
+            this.chatContent.AppendText(sender + "\n");
+
+            // Đặt lại font và màu cho nội dung tin nhắn
+            this.chatContent.SelectionColor = Color.Black;
+            this.chatContent.SelectionFont = new Font(this.chatContent.Font, FontStyle.Regular);
+            this.chatContent.AppendText(message + "\n\n");
+
+            // Cuộn xuống dưới cùng
+            this.chatContent.ScrollToCaret();
+        }
+
+        private async Task<string> GetChatbotResponse(string message)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                var request = new
+                {
+                    model = "vistral-7b-chat",
+                    messages = new[] { new { role = "user", content = message } }
+                };
+
+                var content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
+                var response = await client.PostAsync("http://localhost:1234/v1/chat/completions", content);
+                var result = await response.Content.ReadAsStringAsync();
+                dynamic data = JsonConvert.DeserializeObject(result);
+
+                return data?.choices?[0]?.message?.content ?? "Chatbot không phản hồi.";
+            }
+        }
+
+        private void ToggleResize()
+        {
+            if (isResizeExpanded)
+            {
+                // Thu nhỏ
+                this.userInput.Height = 40;
+                this.userInput.Width = 240;
+                this.sendButton.Visible = true;
+                this.clearChatButton.Visible = true;
+                this.resizeIcon.Location = new Point(250, 440);
+            }
+            else
+            {
+                // Phóng to
+                this.userInput.Height = 150;
+                this.userInput.Width = 380;
+                this.sendButton.Visible = false;
+                this.clearChatButton.Visible = false;
+                this.resizeIcon.Location = new Point(370, 430);
+            }
+
+            isResizeExpanded = !isResizeExpanded;
+        }
+
+        private void StartFabAnimation()
+        {
+            System.Windows.Forms.Timer animationTimer = new System.Windows.Forms.Timer();
+            animationTimer.Interval = 1500;
+            animationTimer.Tick += (sender, e) =>
+            {
+                // Tạo hiệu ứng phóng to thu nhỏ
+                this.fabWrapper.Size = new Size(
+                    (int)(80 * (1 + 0.1 * Math.Sin(DateTime.Now.Millisecond / 1000.0 * Math.PI * 2))),
+                    (int)(80 * (1 + 0.1 * Math.Sin(DateTime.Now.Millisecond / 1000.0 * Math.PI * 2))));
+            };
+            animationTimer.Start();
+        }
+
+        private async void InitializeWebView2Async()
 {
     try
     {

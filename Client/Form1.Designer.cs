@@ -1,5 +1,4 @@
-﻿
-using Microsoft.Web.WebView2.WinForms;
+﻿using Microsoft.Web.WebView2.WinForms;
 
 namespace Client
 {
@@ -61,6 +60,19 @@ namespace Client
             labDistrict = new Label();
             dataGridView2 = new DataGridView();
             webViewWeather = new WebView2();
+            panelChatContainer = new Panel();
+            chatContent = new RichTextBox();
+            userInput = new TextBox();
+            sendButton = new Button();
+            clearChatButton = new Button();
+            chatHeader = new Panel();
+            chatTitle = new Label();
+            closeChat = new Label();
+            resizeIcon = new PictureBox();
+            fabWrapper = new Panel();
+            fabIcon = new PictureBox();
+            fab = new Label();
+            fabTitle = new Label();
             ((System.ComponentModel.ISupportInitialize)picIcon).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -70,6 +82,12 @@ namespace Client
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)webViewWeather).BeginInit();
+            panelChatContainer.SuspendLayout();
+            chatHeader.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)resizeIcon).BeginInit();
+            fabWrapper.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)fabIcon).BeginInit();
+            fab.SuspendLayout();
             SuspendLayout();
             // 
             // label15
@@ -105,7 +123,7 @@ namespace Client
             btnSearch.FlatStyle = FlatStyle.System;
             btnSearch.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnSearch.ForeColor = Color.White;
-            btnSearch.Location = new Point(1228, 79);
+            btnSearch.Location = new Point(1237, 79);
             btnSearch.Margin = new Padding(3, 4, 3, 4);
             btnSearch.Name = "btnSearch";
             btnSearch.Size = new Size(121, 62);
@@ -124,7 +142,7 @@ namespace Client
             TBCity.Margin = new Padding(3, 4, 3, 4);
             TBCity.Multiline = true;
             TBCity.Name = "TBCity";
-            TBCity.Size = new Size(949, 62);
+            TBCity.Size = new Size(968, 62);
             TBCity.TabIndex = 52;
             // 
             // label1
@@ -208,7 +226,7 @@ namespace Client
             labAdvice.BackColor = Color.Transparent;
             labAdvice.Font = new Font("Times New Roman", 30F, FontStyle.Bold, GraphicsUnit.Point, 0);
             labAdvice.ForeColor = SystemColors.Menu;
-            labAdvice.Location = new Point(927, 582);
+            labAdvice.Location = new Point(-1, 414);
             labAdvice.Name = "labAdvice";
             labAdvice.Size = new Size(756, 202);
             labAdvice.TabIndex = 62;
@@ -395,7 +413,7 @@ namespace Client
             btnLocation.FlatStyle = FlatStyle.System;
             btnLocation.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnLocation.ForeColor = Color.White;
-            btnLocation.Location = new Point(1384, 78);
+            btnLocation.Location = new Point(1412, 79);
             btnLocation.Margin = new Padding(3, 4, 3, 4);
             btnLocation.Name = "btnLocation";
             btnLocation.Size = new Size(117, 62);
@@ -411,7 +429,7 @@ namespace Client
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.GridColor = Color.Black;
             dataGridView1.ImeMode = ImeMode.On;
-            dataGridView1.Location = new Point(837, 260);
+            dataGridView1.Location = new Point(887, 538);
             dataGridView1.Margin = new Padding(3, 4, 3, 4);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
@@ -426,7 +444,7 @@ namespace Client
             labDistrict.BackColor = Color.Transparent;
             labDistrict.Font = new Font("Microsoft Sans Serif", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             labDistrict.ForeColor = Color.Transparent;
-            labDistrict.Location = new Point(1284, 22);
+            labDistrict.Location = new Point(1221, 23);
             labDistrict.Name = "labDistrict";
             labDistrict.Size = new Size(87, 20);
             labDistrict.TabIndex = 73;
@@ -436,7 +454,7 @@ namespace Client
             // 
             dataGridView2.BackgroundColor = SystemColors.ButtonHighlight;
             dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Location = new Point(837, 582);
+            dataGridView2.Location = new Point(887, 209);
             dataGridView2.Name = "dataGridView2";
             dataGridView2.RowHeadersWidth = 51;
             dataGridView2.Size = new Size(664, 282);
@@ -447,22 +465,162 @@ namespace Client
             webViewWeather.AllowExternalDrop = true;
             webViewWeather.CreationProperties = null;
             webViewWeather.DefaultBackgroundColor = Color.White;
-            webViewWeather.ForeColor = SystemColors.Window;
-            webViewWeather.Location = new Point(4, 385);
+            webViewWeather.Location = new Point(0, 0);
             webViewWeather.Name = "webViewWeather";
-            webViewWeather.Size = new Size(600, 500);
+            webViewWeather.Size = new Size(0, 0);
             webViewWeather.TabIndex = 75;
             webViewWeather.ZoomFactor = 1D;
+            // 
+            // panelChatContainer
+            // 
+            panelChatContainer.BackColor = Color.White;
+            panelChatContainer.BorderStyle = BorderStyle.FixedSingle;
+            panelChatContainer.Controls.Add(chatContent);
+            panelChatContainer.Controls.Add(userInput);
+            panelChatContainer.Controls.Add(sendButton);
+            panelChatContainer.Controls.Add(clearChatButton);
+            panelChatContainer.Controls.Add(chatHeader);
+            panelChatContainer.Controls.Add(resizeIcon);
+            panelChatContainer.Controls.Add(labAdvice);
+            panelChatContainer.Location = new Point(2, 450);
+            panelChatContainer.Name = "panelChatContainer";
+            panelChatContainer.Size = new Size(400, 500);
+            panelChatContainer.TabIndex = 0;
+            panelChatContainer.Visible = false;
+            // 
+            // chatContent
+            // 
+            chatContent.BackColor = Color.FromArgb(249, 249, 249);
+            chatContent.BorderStyle = BorderStyle.None;
+            chatContent.Location = new Point(0, 39);
+            chatContent.Name = "chatContent";
+            chatContent.ReadOnly = true;
+            chatContent.Size = new Size(398, 380);
+            chatContent.TabIndex = 0;
+            chatContent.Text = "";
+            // 
+            // userInput
+            // 
+            userInput.Location = new Point(10, 430);
+            userInput.Multiline = true;
+            userInput.Name = "userInput";
+            userInput.ScrollBars = ScrollBars.Vertical;
+            userInput.Size = new Size(240, 40);
+            userInput.TabIndex = 1;
+            // 
+            // sendButton
+            // 
+            sendButton.BackColor = Color.FromArgb(0, 51, 102);
+            sendButton.ForeColor = Color.White;
+            sendButton.Location = new Point(260, 430);
+            sendButton.Name = "sendButton";
+            sendButton.Size = new Size(60, 40);
+            sendButton.TabIndex = 2;
+            sendButton.Text = "GỬI";
+            sendButton.UseVisualStyleBackColor = false;
+            // 
+            // clearChatButton
+            // 
+            clearChatButton.BackColor = Color.FromArgb(244, 67, 54);
+            clearChatButton.ForeColor = Color.White;
+            clearChatButton.Location = new Point(330, 430);
+            clearChatButton.Name = "clearChatButton";
+            clearChatButton.Size = new Size(60, 40);
+            clearChatButton.TabIndex = 3;
+            clearChatButton.Text = "Xóa";
+            clearChatButton.UseVisualStyleBackColor = false;
+            // 
+            // chatHeader
+            // 
+            chatHeader.BackColor = Color.FromArgb(0, 51, 102);
+            chatHeader.Controls.Add(chatTitle);
+            chatHeader.Controls.Add(closeChat);
+            chatHeader.Location = new Point(0, 0);
+            chatHeader.Name = "chatHeader";
+            chatHeader.Size = new Size(400, 40);
+            chatHeader.TabIndex = 4;
+            // 
+            // chatTitle
+            // 
+            chatTitle.AutoSize = true;
+            chatTitle.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Bold);
+            chatTitle.ForeColor = Color.White;
+            chatTitle.Location = new Point(10, 10);
+            chatTitle.Name = "chatTitle";
+            chatTitle.Size = new Size(74, 20);
+            chatTitle.TabIndex = 0;
+            chatTitle.Text = "Chatbot";
+            // 
+            // closeChat
+            // 
+            closeChat.AutoSize = true;
+            closeChat.Cursor = Cursors.Hand;
+            closeChat.Font = new Font("Microsoft Sans Serif", 16F, FontStyle.Bold);
+            closeChat.ForeColor = Color.White;
+            closeChat.Location = new Point(370, 5);
+            closeChat.Name = "closeChat";
+            closeChat.Size = new Size(31, 31);
+            closeChat.TabIndex = 1;
+            closeChat.Text = "×";
+            // 
+            // resizeIcon
+            // 
+            resizeIcon.Location = new Point(0, 0);
+            resizeIcon.Name = "resizeIcon";
+            resizeIcon.Size = new Size(100, 50);
+            resizeIcon.TabIndex = 5;
+            resizeIcon.TabStop = false;
+            // 
+            // fabWrapper
+            // 
+            fabWrapper.Controls.Add(fabIcon);
+            fabWrapper.Location = new Point(12, 842);
+            fabWrapper.Name = "fabWrapper";
+            fabWrapper.Size = new Size(80, 80);
+            fabWrapper.TabIndex = 1;
+            // 
+            // fabIcon
+            // 
+            fabIcon.Location = new Point(-50, 30);
+            fabIcon.Name = "fabIcon";
+            fabIcon.Size = new Size(100, 50);
+            fabIcon.TabIndex = 0;
+            fabIcon.TabStop = false;
+            // 
+            // fab
+            // 
+            fab.BackColor = Color.FromArgb(215, 0, 24);
+            fab.Controls.Add(fabTitle);
+            fab.Cursor = Cursors.Hand;
+            fab.Location = new Point(12, 862);
+            fab.Name = "fab";
+            fab.Size = new Size(60, 60);
+            fab.TabIndex = 0;
+            // 
+            // fabTitle
+            // 
+            fabTitle.AutoSize = true;
+            fabTitle.BackColor = Color.FromArgb(218, 0, 24);
+            fabTitle.ForeColor = Color.White;
+            fabTitle.Location = new Point(-70, 20);
+            fabTitle.Name = "fabTitle";
+            fabTitle.Size = new Size(75, 20);
+            fabTitle.TabIndex = 1;
+            fabTitle.Text = "Chat ngay";
+            fabTitle.Visible = false;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            //AutoSize = true;
+            AutoSize = true;
             BackColor = SystemColors.ActiveCaption;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1710, 951);
+            Controls.Add(fab);
+            Controls.Add(panelChatContainer);
+            Controls.Add(fabWrapper);
             Controls.Add(dataGridView2);
             Controls.Add(labDistrict);
             Controls.Add(dataGridView1);
@@ -487,7 +645,6 @@ namespace Client
             Controls.Add(labDateTime);
             Controls.Add(labTemp_min);
             Controls.Add(labTemp_max);
-            Controls.Add(labAdvice);
             Controls.Add(labFeels_like);
             Controls.Add(labDetail2);
             Controls.Add(label13);
@@ -508,6 +665,15 @@ namespace Client
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             ((System.ComponentModel.ISupportInitialize)webViewWeather).EndInit();
+            panelChatContainer.ResumeLayout(false);
+            panelChatContainer.PerformLayout();
+            chatHeader.ResumeLayout(false);
+            chatHeader.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)resizeIcon).EndInit();
+            fabWrapper.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)fabIcon).EndInit();
+            fab.ResumeLayout(false);
+            fab.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
 
