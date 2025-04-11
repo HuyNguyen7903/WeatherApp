@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Net;
-using Microsoft.Web.WebView2.WinForms;
 
 namespace Client
 {
@@ -19,23 +18,12 @@ namespace Client
     public partial class Form1 : Form
     {
         private ToolTip toolTip1;
-        private WebView2 webViewWeather;
 
         public Form1()
         {
             InitializeComponent();
             timerDateTime = new System.Windows.Forms.Timer();
             toolTip1 = new ToolTip(); 
-            // Khởi tạo WebBrowser
-            webViewWeather = new WebView2();
-            webViewWeather.Location = new Point(360, 500);
-            webViewWeather.Size = new Size(600, 500);
-    
-            this.Controls.Add(webViewWeather);
-            webViewWeather.BringToFront();
-            webViewWeather.BackColor = Color.Black;
-            webViewWeather.DefaultBackgroundColor = System.Drawing.Color.Black;
-
             InitializeWebView2Async();
             InitializeDateTimeTimer();
         }

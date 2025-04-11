@@ -116,6 +116,15 @@ D:\Huy KM21\Lap trinh mang\BTL\Client\obj\Debug\net9.0-windows\refint\Client.dll
 D:\Huy KM21\Lap trinh mang\BTL\Client\obj\Debug\net9.0-windows\Client.pdb
 D:\Huy KM21\Lap trinh mang\BTL\Client\obj\Debug\net9.0-windows\Client.genruntimeconfig.cache
 D:\Huy KM21\Lap trinh mang\BTL\Client\obj\Debug\net9.0-windows\ref\Client.dll
+D:\Huy KM21\Lap trinh mang\BTL\Client\bin\Debug\net9.0-windows\runtimes\win-x86\native\WebView2Loader.dll
+D:\Huy KM21\Lap trinh mang\BTL\Client\bin\Debug\net9.0-windows\runtimes\win-x64\native\WebView2Loader.dll
+D:\Huy KM21\Lap trinh mang\BTL\Client\bin\Debug\net9.0-windows\runtimes\win-arm64\native\WebView2Loader.dll
+D:\Huy KM21\Lap trinh mang\BTL\Client\bin\Debug\net9.0-windows\Microsoft.Web.WebView2.Core.dll
+D:\Huy KM21\Lap trinh mang\BTL\Client\bin\Debug\net9.0-windows\Microsoft.Web.WebView2.WinForms.dll
+D:\Huy KM21\Lap trinh mang\BTL\Client\bin\Debug\net9.0-windows\Microsoft.Web.WebView2.Wpf.dll
+D:\Thai_Van_Tinh\NET\BTL\WeatherApp\Client\bin\Debug\net9.0-windows\runtimes\win-x86\native\WebView2Loader.dll
+D:\Thai_Van_Tinh\NET\BTL\WeatherApp\Client\bin\Debug\net9.0-windows\runtimes\win-x64\native\WebView2Loader.dll
+D:\Thai_Van_Tinh\NET\BTL\WeatherApp\Client\bin\Debug\net9.0-windows\runtimes\win-arm64\native\WebView2Loader.dll
 D:\Thai_Van_Tinh\NET\BTL\WeatherApp\Client\bin\Debug\net9.0-windows\Resources\if-weather-2-2682849_90781.ico
 D:\Thai_Van_Tinh\NET\BTL\WeatherApp\Client\bin\Debug\net9.0-windows\Client.exe
 D:\Thai_Van_Tinh\NET\BTL\WeatherApp\Client\bin\Debug\net9.0-windows\Client.dll.config
@@ -136,6 +145,9 @@ D:\Thai_Van_Tinh\NET\BTL\WeatherApp\Client\bin\Debug\net9.0-windows\Microsoft.Id
 D:\Thai_Van_Tinh\NET\BTL\WeatherApp\Client\bin\Debug\net9.0-windows\Microsoft.IdentityModel.Protocols.dll
 D:\Thai_Van_Tinh\NET\BTL\WeatherApp\Client\bin\Debug\net9.0-windows\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 D:\Thai_Van_Tinh\NET\BTL\WeatherApp\Client\bin\Debug\net9.0-windows\Microsoft.IdentityModel.Tokens.dll
+D:\Thai_Van_Tinh\NET\BTL\WeatherApp\Client\bin\Debug\net9.0-windows\Microsoft.Web.WebView2.Core.dll
+D:\Thai_Van_Tinh\NET\BTL\WeatherApp\Client\bin\Debug\net9.0-windows\Microsoft.Web.WebView2.WinForms.dll
+D:\Thai_Van_Tinh\NET\BTL\WeatherApp\Client\bin\Debug\net9.0-windows\Microsoft.Web.WebView2.Wpf.dll
 D:\Thai_Van_Tinh\NET\BTL\WeatherApp\Client\bin\Debug\net9.0-windows\Newtonsoft.Json.dll
 D:\Thai_Van_Tinh\NET\BTL\WeatherApp\Client\bin\Debug\net9.0-windows\System.ComponentModel.Composition.dll
 D:\Thai_Van_Tinh\NET\BTL\WeatherApp\Client\bin\Debug\net9.0-windows\System.ComponentModel.Composition.Registration.dll
@@ -234,9 +246,3 @@ D:\Thai_Van_Tinh\NET\BTL\WeatherApp\Client\obj\Debug\net9.0-windows\refint\Clien
 D:\Thai_Van_Tinh\NET\BTL\WeatherApp\Client\obj\Debug\net9.0-windows\Client.pdb
 D:\Thai_Van_Tinh\NET\BTL\WeatherApp\Client\obj\Debug\net9.0-windows\Client.genruntimeconfig.cache
 D:\Thai_Van_Tinh\NET\BTL\WeatherApp\Client\obj\Debug\net9.0-windows\ref\Client.dll
-D:\Huy KM21\Lap trinh mang\BTL\Client\bin\Debug\net9.0-windows\runtimes\win-x86\native\WebView2Loader.dll
-D:\Huy KM21\Lap trinh mang\BTL\Client\bin\Debug\net9.0-windows\runtimes\win-x64\native\WebView2Loader.dll
-D:\Huy KM21\Lap trinh mang\BTL\Client\bin\Debug\net9.0-windows\runtimes\win-arm64\native\WebView2Loader.dll
-D:\Huy KM21\Lap trinh mang\BTL\Client\bin\Debug\net9.0-windows\Microsoft.Web.WebView2.Core.dll
-D:\Huy KM21\Lap trinh mang\BTL\Client\bin\Debug\net9.0-windows\Microsoft.Web.WebView2.WinForms.dll
-D:\Huy KM21\Lap trinh mang\BTL\Client\bin\Debug\net9.0-windows\Microsoft.Web.WebView2.Wpf.dll

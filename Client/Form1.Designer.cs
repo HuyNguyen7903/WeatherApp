@@ -1,4 +1,7 @@
-﻿namespace Client
+﻿
+using Microsoft.Web.WebView2.WinForms;
+
+namespace Client
 {
     partial class Form1
     {
@@ -57,6 +60,7 @@
             dataGridView1 = new DataGridView();
             labDistrict = new Label();
             dataGridView2 = new DataGridView();
+            webViewWeather = new WebView2();
             ((System.ComponentModel.ISupportInitialize)picIcon).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -65,6 +69,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)webViewWeather).BeginInit();
             SuspendLayout();
             // 
             // label15
@@ -203,7 +208,7 @@
             labAdvice.BackColor = Color.Transparent;
             labAdvice.Font = new Font("Times New Roman", 30F, FontStyle.Bold, GraphicsUnit.Point, 0);
             labAdvice.ForeColor = SystemColors.Menu;
-            labAdvice.Location = new Point(33, 662);
+            labAdvice.Location = new Point(927, 582);
             labAdvice.Name = "labAdvice";
             labAdvice.Size = new Size(756, 202);
             labAdvice.TabIndex = 62;
@@ -406,7 +411,7 @@
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.GridColor = Color.Black;
             dataGridView1.ImeMode = ImeMode.On;
-            dataGridView1.Location = new Point(837, 236);
+            dataGridView1.Location = new Point(837, 260);
             dataGridView1.Margin = new Padding(3, 4, 3, 4);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
@@ -437,15 +442,27 @@
             dataGridView2.Size = new Size(664, 282);
             dataGridView2.TabIndex = 74;
             // 
+            // webViewWeather
+            // 
+            webViewWeather.AllowExternalDrop = true;
+            webViewWeather.CreationProperties = null;
+            webViewWeather.DefaultBackgroundColor = Color.White;
+            webViewWeather.ForeColor = SystemColors.Window;
+            webViewWeather.Location = new Point(4, 385);
+            webViewWeather.Name = "webViewWeather";
+            webViewWeather.Size = new Size(600, 500);
+            webViewWeather.TabIndex = 75;
+            webViewWeather.ZoomFactor = 1D;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            AutoSize = true;
+            //AutoSize = true;
             BackColor = SystemColors.ActiveCaption;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1710, 889);
+            ClientSize = new Size(1710, 951);
             Controls.Add(dataGridView2);
             Controls.Add(labDistrict);
             Controls.Add(dataGridView1);
@@ -474,6 +491,7 @@
             Controls.Add(labFeels_like);
             Controls.Add(labDetail2);
             Controls.Add(label13);
+            Controls.Add(webViewWeather);
             DoubleBuffered = true;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 4, 3, 4);
@@ -489,6 +507,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)webViewWeather).EndInit();
             ResumeLayout(false);
             PerformLayout();
 
@@ -524,6 +543,8 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label labDistrict;
         private DataGridView dataGridView2;
+        private WebView2 webViewWeather;
+
     }
-    }
+}
 
