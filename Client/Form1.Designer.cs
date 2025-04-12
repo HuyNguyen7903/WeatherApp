@@ -61,7 +61,6 @@ namespace Client
             dataGridView2 = new DataGridView();
             webViewWeather = new WebView2();
             panelChatContainer = new Panel();
-            chatContent = new RichTextBox();
             userInput = new TextBox();
             sendButton = new Button();
             clearChatButton = new Button();
@@ -69,8 +68,7 @@ namespace Client
             chatTitle = new Label();
             closeChat = new Label();
             resizeIcon = new PictureBox();
-            fabWrapper = new Panel();
-            fabIcon = new PictureBox();
+            chatContent = new RichTextBox();
             fab = new Label();
             fabTitle = new Label();
             ((System.ComponentModel.ISupportInitialize)picIcon).BeginInit();
@@ -85,8 +83,6 @@ namespace Client
             panelChatContainer.SuspendLayout();
             chatHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)resizeIcon).BeginInit();
-            fabWrapper.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)fabIcon).BeginInit();
             fab.SuspendLayout();
             SuspendLayout();
             // 
@@ -226,9 +222,9 @@ namespace Client
             labAdvice.BackColor = Color.Transparent;
             labAdvice.Font = new Font("Times New Roman", 30F, FontStyle.Bold, GraphicsUnit.Point, 0);
             labAdvice.ForeColor = SystemColors.Menu;
-            labAdvice.Location = new Point(-1, 414);
+            labAdvice.Location = new Point(888, 844);
             labAdvice.Name = "labAdvice";
-            labAdvice.Size = new Size(756, 202);
+            labAdvice.Size = new Size(470, 58);
             labAdvice.TabIndex = 62;
             labAdvice.Text = "Lời khuyên";
             // 
@@ -481,23 +477,11 @@ namespace Client
             panelChatContainer.Controls.Add(clearChatButton);
             panelChatContainer.Controls.Add(chatHeader);
             panelChatContainer.Controls.Add(resizeIcon);
-            panelChatContainer.Controls.Add(labAdvice);
-            panelChatContainer.Location = new Point(2, 450);
+            panelChatContainer.Location = new Point(1, 448);
             panelChatContainer.Name = "panelChatContainer";
             panelChatContainer.Size = new Size(400, 500);
             panelChatContainer.TabIndex = 0;
             panelChatContainer.Visible = false;
-            // 
-            // chatContent
-            // 
-            chatContent.BackColor = Color.FromArgb(249, 249, 249);
-            chatContent.BorderStyle = BorderStyle.None;
-            chatContent.Location = new Point(0, 39);
-            chatContent.Name = "chatContent";
-            chatContent.ReadOnly = true;
-            chatContent.Size = new Size(398, 380);
-            chatContent.TabIndex = 0;
-            chatContent.Text = "";
             // 
             // userInput
             // 
@@ -571,27 +555,23 @@ namespace Client
             resizeIcon.TabIndex = 5;
             resizeIcon.TabStop = false;
             // 
-            // fabWrapper
+            // chatContent
             // 
-            fabWrapper.Controls.Add(fabIcon);
-            fabWrapper.Location = new Point(12, 842);
-            fabWrapper.Name = "fabWrapper";
-            fabWrapper.Size = new Size(80, 80);
-            fabWrapper.TabIndex = 1;
-            // 
-            // fabIcon
-            // 
-            fabIcon.Location = new Point(-50, 30);
-            fabIcon.Name = "fabIcon";
-            fabIcon.Size = new Size(100, 50);
-            fabIcon.TabIndex = 0;
-            fabIcon.TabStop = false;
+            chatContent.BackColor = Color.FromArgb(249, 249, 249);
+            chatContent.BorderStyle = BorderStyle.None;
+            chatContent.Location = new Point(-1, 39);
+            chatContent.Name = "chatContent";
+            chatContent.ReadOnly = true;
+            chatContent.Size = new Size(398, 380);
+            chatContent.TabIndex = 0;
+            chatContent.Text = "";
             // 
             // fab
             // 
-            fab.BackColor = Color.FromArgb(215, 0, 24);
+            fab.BackColor = Color.White;
             fab.Controls.Add(fabTitle);
             fab.Cursor = Cursors.Hand;
+            fab.Image = (Image)resources.GetObject("fab.Image");
             fab.Location = new Point(12, 862);
             fab.Name = "fab";
             fab.Size = new Size(60, 60);
@@ -620,11 +600,11 @@ namespace Client
             ClientSize = new Size(1710, 951);
             Controls.Add(fab);
             Controls.Add(panelChatContainer);
-            Controls.Add(fabWrapper);
             Controls.Add(dataGridView2);
             Controls.Add(labDistrict);
             Controls.Add(dataGridView1);
             Controls.Add(btnLocation);
+            Controls.Add(labAdvice);
             Controls.Add(labHumidity);
             Controls.Add(pictureBox6);
             Controls.Add(label15);
@@ -670,8 +650,6 @@ namespace Client
             chatHeader.ResumeLayout(false);
             chatHeader.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)resizeIcon).EndInit();
-            fabWrapper.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)fabIcon).EndInit();
             fab.ResumeLayout(false);
             fab.PerformLayout();
             ResumeLayout(false);

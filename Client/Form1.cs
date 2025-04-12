@@ -26,9 +26,7 @@ namespace Client
         private Panel chatHeader;
         private Label chatTitle;
         private Label closeChat;
-        private Panel fabWrapper;
         private Label fab;
-        private PictureBox fabIcon;
         private Label fabTitle;
         private PictureBox resizeIcon;
         public Form1()
@@ -36,7 +34,7 @@ namespace Client
             InitializeComponent();
             timerDateTime = new System.Windows.Forms.Timer();
             toolTip1 = new ToolTip(); 
-            InitializeWebView2Async();
+            //InitializeWebView2Async();
             InitializeDateTimeTimer();
             InitializeChat();
         }
@@ -47,8 +45,6 @@ namespace Client
         {
             // Sự kiện click cho nút chat
             this.fab.Click += (sender, e) => ToggleChat();
-            this.fabIcon.Click += (sender, e) => ToggleChat();
-
             // Sự kiện cho nút đóng chat
             this.closeChat.Click += (sender, e) => ToggleChat();
 
@@ -172,43 +168,36 @@ namespace Client
         {
             System.Windows.Forms.Timer animationTimer = new System.Windows.Forms.Timer();
             animationTimer.Interval = 1500;
-            animationTimer.Tick += (sender, e) =>
-            {
-                // Tạo hiệu ứng phóng to thu nhỏ
-                this.fabWrapper.Size = new Size(
-                    (int)(80 * (1 + 0.1 * Math.Sin(DateTime.Now.Millisecond / 1000.0 * Math.PI * 2))),
-                    (int)(80 * (1 + 0.1 * Math.Sin(DateTime.Now.Millisecond / 1000.0 * Math.PI * 2))));
-            };
             animationTimer.Start();
         }
 
-        private async void InitializeWebView2Async()
-{
-    try
-    {
-        // Khởi tạo môi trường WebView2
-        await webViewWeather.EnsureCoreWebView2Async(null);
+//        private async void InitializeWebView2Async()
+//{
+//    try
+//    {
+//        // Khởi tạo môi trường WebView2
+//        await webViewWeather.EnsureCoreWebView2Async(null);
         
-        // Tải file HTML
-        string htmlPath = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..\..\weather.html"));
+//        // Tải file HTML
+//        string htmlPath = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..\..\weather.html"));
         
-        if (File.Exists(htmlPath))
-        {
-            webViewWeather.Source = new Uri(htmlPath);
-        }
-        else
-        {
+//        if (File.Exists(htmlPath))
+//        {
+//            webViewWeather.Source = new Uri(htmlPath);
+//        }
+//        else
+//        {
             
-            MessageBox.Show("Không tìm thấy file weather.html", "Lỗi", 
-                          MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        }
-    }
-    catch (Exception ex)
-    {
-        MessageBox.Show($"Lỗi khi khởi tạo WebView2: {ex.Message}", "Lỗi",
-                      MessageBoxButtons.OK, MessageBoxIcon.Error);
-    }
-}
+//            MessageBox.Show("Không tìm thấy file weather.html", "Lỗi", 
+//                          MessageBoxButtons.OK, MessageBoxIcon.Warning);
+//        }
+//    }
+//    catch (Exception ex)
+//    {
+//        MessageBox.Show($"Lỗi khi khởi tạo WebView2: {ex.Message}", "Lỗi",
+//                      MessageBoxButtons.OK, MessageBoxIcon.Error);
+//    }
+//}
 
 
         private System.Windows.Forms.Timer timerDateTime;
