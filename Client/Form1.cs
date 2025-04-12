@@ -69,8 +69,6 @@ namespace Client
             this.fab.MouseEnter += (sender, e) => this.fabTitle.Visible = true;
             this.fab.MouseLeave += (sender, e) => this.fabTitle.Visible = false;
 
-            // Animation cho nút chat
-            StartFabAnimation();
         }
 
         private void ToggleChat()
@@ -94,7 +92,7 @@ namespace Client
             try
             {
                 var response = await GetChatbotResponse(userInput);
-                AddMessageToChat("Vistral", response, false);
+                AddMessageToChat("Chatbot", response, false);
             }
             catch (Exception ex)
             {
@@ -107,15 +105,32 @@ namespace Client
             this.chatContent.SelectionStart = this.chatContent.TextLength;
             this.chatContent.SelectionLength = 0;
 
+            // Thêm khoảng cách cho tin nhắn người dùng
+            if (isUser)
+            {
+                this.chatContent.AppendText("\t\t");
+            }
+
             // Đặt màu và font cho tên người gửi
-            this.chatContent.SelectionColor = isUser ? Color.FromArgb(76, 175, 80) : Color.FromArgb(217, 0, 27);
-            this.chatContent.SelectionFont = new Font(this.chatContent.Font, FontStyle.Bold);
+            this.chatContent.SelectionColor = isUser ? Color.FromArgb(0, 100, 0) : Color.FromArgb(217, 0, 27);
+            this.chatContent.SelectionFont = new Font("Segoe UI", 12F, FontStyle.Bold);
+    
+            // Căn lề cho tên người gửi
+            this.chatContent.SelectionAlignment = isUser ? HorizontalAlignment.Right : HorizontalAlignment.Left;
             this.chatContent.AppendText(sender + "\n");
 
-            // Đặt lại font và màu cho nội dung tin nhắn
-            this.chatContent.SelectionColor = Color.Black;
-            this.chatContent.SelectionFont = new Font(this.chatContent.Font, FontStyle.Regular);
-            this.chatContent.AppendText(message + "\n\n");
+            // Reset alignment trước khi hiển thị nội dung chatbot
+            if (!isUser)
+            {
+                this.chatContent.SelectionAlignment = HorizontalAlignment.Left;
+            }
+            // Nội dung tin nhắn với cỡ chữ tùy theo chatbot hay người dùng
+            float messageFontSize = isUser ? 11F : 11F;
+            this.chatContent.SelectionFont = new Font("Segoe UI", messageFontSize, FontStyle.Bold);
+
+    
+            // Hiển thị nội dung - sẽ sát lề trái cho chatbot
+            this.chatContent.AppendText(message.Trim() + "\n");
 
             // Cuộn xuống dưới cùng
             this.chatContent.ScrollToCaret();
@@ -164,41 +179,7 @@ namespace Client
             isResizeExpanded = !isResizeExpanded;
         }
 
-        private void StartFabAnimation()
-        {
-            System.Windows.Forms.Timer animationTimer = new System.Windows.Forms.Timer();
-            animationTimer.Interval = 1500;
-            animationTimer.Start();
-        }
-
-//        private async void InitializeWebView2Async()
-//{
-//    try
-//    {
-//        // Khởi tạo môi trường WebView2
-//        await webViewWeather.EnsureCoreWebView2Async(null);
         
-//        // Tải file HTML
-//        string htmlPath = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..\..\weather.html"));
-        
-//        if (File.Exists(htmlPath))
-//        {
-//            webViewWeather.Source = new Uri(htmlPath);
-//        }
-//        else
-//        {
-            
-//            MessageBox.Show("Không tìm thấy file weather.html", "Lỗi", 
-//                          MessageBoxButtons.OK, MessageBoxIcon.Warning);
-//        }
-//    }
-//    catch (Exception ex)
-//    {
-//        MessageBox.Show($"Lỗi khi khởi tạo WebView2: {ex.Message}", "Lỗi",
-//                      MessageBoxButtons.OK, MessageBoxIcon.Error);
-//    }
-//}
-
 
         private System.Windows.Forms.Timer timerDateTime;
         private void InitializeDateTimeTimer()

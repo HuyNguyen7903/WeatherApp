@@ -222,9 +222,9 @@ namespace Client
             labAdvice.BackColor = Color.Transparent;
             labAdvice.Font = new Font("Times New Roman", 30F, FontStyle.Bold, GraphicsUnit.Point, 0);
             labAdvice.ForeColor = SystemColors.Menu;
-            labAdvice.Location = new Point(888, 844);
+             labAdvice.Location = new Point(33, 662);
             labAdvice.Name = "labAdvice";
-            labAdvice.Size = new Size(470, 58);
+           labAdvice.Size = new Size(756, 202);
             labAdvice.TabIndex = 62;
             labAdvice.Text = "Lời khuyên";
             // 
@@ -478,6 +478,7 @@ namespace Client
             panelChatContainer.Controls.Add(chatHeader);
             panelChatContainer.Controls.Add(resizeIcon);
             panelChatContainer.Location = new Point(1, 448);
+            panelChatContainer.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Bold);
             panelChatContainer.Name = "panelChatContainer";
             panelChatContainer.Size = new Size(400, 500);
             panelChatContainer.TabIndex = 0;
@@ -571,11 +572,14 @@ namespace Client
             fab.BackColor = Color.White;
             fab.Controls.Add(fabTitle);
             fab.Cursor = Cursors.Hand;
-            fab.Image = (Image)resources.GetObject("fab.Image");
+            fab.BackgroundImage = Image.FromFile("./resources/bot.png");
+            fab.BackgroundImageLayout = ImageLayout.Zoom;
             fab.Location = new Point(12, 862);
             fab.Name = "fab";
             fab.Size = new Size(60, 60);
             fab.TabIndex = 0;
+            fab.BackColor = Color.Transparent;
+
             // 
             // fabTitle
             // 
