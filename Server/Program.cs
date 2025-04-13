@@ -24,17 +24,79 @@ namespace WeatherServer
             server.Start();
             Console.WriteLine("Server started on port 8888...");
 
+            // ✅ Kiểm tra kết nối chatbot server tại localhost:1234
+            bool chatbotAvailable = await CheckChatbotConnectionAsync();
+            Console.WriteLine(chatbotAvailable
+                ? "✅ Chatbot server is available at port 1234."
+                : "❌ Không thể kết nối chatbot tại port 1234.");
+
             while (true)
             {
                 TcpClient client = await server.AcceptTcpClientAsync();
                 _ = HandleClientAsync(client);
+            }       
+        }
+        private static async Task<bool> CheckChatbotConnectionAsync()
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    var testMessage = new
+                    {
+                model = "vistral-7b-chat",
+                        messages = new[] { new { role = "user", content = "ping" } }
+                    };
+
+                    var content = new StringContent(JsonConvert.SerializeObject(testMessage), Encoding.UTF8, "application/json");
+                    var response = await client.PostAsync("http://localhost:1234/v1/chat/completions", content);
+
+                    return response.IsSuccessStatusCode;
+                }
+            }
+            catch
+            {
+                return false;
             }
         }
-        private static DateTime ConvertDateTime(long timestamp)
+
+        public class ChatbotApiClient
         {
-            DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(timestamp);
-            return dateTimeOffset.LocalDateTime;
+            private readonly HttpClient _httpClient;
+            private const string ApiBaseUrl = "http://localhost:1234/v1/chat/completions";        
+            public ChatbotApiClient()
+            {
+                _httpClient = new HttpClient();
+            }
+
+            public async Task<string> GetChatbotResponse(string message)
+            {
+                try
+                {
+                    var request = new
+                    {
+                        model = "vistral-7b-chat",
+                        messages = new[] { new { role = "user", content = message } }
+                    };
+
+                    var content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
+                    var response = await _httpClient.PostAsync(ApiBaseUrl, content);
+                    response.EnsureSuccessStatusCode();
+                    
+                    var result = await response.Content.ReadAsStringAsync();
+                    dynamic data = JsonConvert.DeserializeObject(result);
+
+                    return data?.choices?[0]?.message?.content ?? "Chatbot không phản hồi.";
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Chatbot error: {ex.Message}");
+                    return $"Lỗi khi kết nối với chatbot: {ex.Message}";
+                }
+            }
         }
+
+        
 
         static async Task HandleClientAsync(TcpClient client)
         {
@@ -43,63 +105,97 @@ namespace WeatherServer
                 using (client)
                 using (NetworkStream stream = client.GetStream())
                 {
-                    byte[] buffer = new byte[1024];
+                    byte[] buffer = new byte[2048];
                     int bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
                     string requestData = Encoding.UTF8.GetString(buffer, 0, bytesRead);
 
-                    // Phân tích request - có thể là tên thành phố hoặc tọa độ
-                    dynamic request = JsonConvert.DeserializeObject(requestData);
-
-                    WeatherResponse weatherResponse;
-                    List<WeatherResponse> nearbyCities = new List<WeatherResponse>();
-
-                    if (request.city != null)
+                    try
                     {
-                        // Lấy thời tiết thành phố chính
+                        dynamic request = JsonConvert.DeserializeObject(requestData);
+
+                        // Xử lý yêu cầu chatbot
+                        if (request?.chat != null)
+                        {
+                            var chatbot = new ChatbotApiClient();
+                            string botReply = await chatbot.GetChatbotResponse((string)request.chat);
+                            var responseObj = new { response = botReply };
+                            await SendJsonResponse(stream, responseObj);
+                            return;
+                        }
+
+                        // Xử lý yêu cầu thời tiết
+                        WeatherResponse weatherResponse;
+                        List<WeatherResponse> nearbyCities = new List<WeatherResponse>();
+
+                        if (request?.city != null)
+                        {
                         weatherResponse = await GetRealWeatherData((string)request.city);
-                        string cityName = (string)request.city;
-                        Console.WriteLine($"Received request for city: {cityName}");
-
-                        // Nếu có tọa độ, lấy các thành phố lân cận
-                        if (weatherResponse.Success && request.withNearby == true && weatherResponse.Coordinates != null)
-                        {
-                            nearbyCities = await GetNearbyCitiesWeatherData(
-                                weatherResponse.Coordinates.Latitude,
-                                weatherResponse.Coordinates.Longitude);
+                            if (weatherResponse.Success && request?.withNearby == true && weatherResponse.Coordinates != null)
+                            {
+                                nearbyCities = await GetNearbyCitiesWeatherData(
+                                    weatherResponse.Coordinates.Latitude,
+                                    weatherResponse.Coordinates.Longitude);
+                            }
                         }
-                    }
-                    else if (request.lat != null && request.lon != null)
-                    {
-                        // Lấy thời tiết theo tọa độ
-                        weatherResponse = await GetWeatherByCoordinates((double)request.lat, (double)request.lon);
-
-                        if (weatherResponse.Success && request.withNearby == true)
+                        else if (request?.lat != null && request?.lon != null)
                         {
-                            nearbyCities = await GetNearbyCitiesWeatherData((double)request.lat, (double)request.lon);
+                            weatherResponse = await GetWeatherByCoordinates((double)request.lat, (double)request.lon);
+                            if (weatherResponse.Success && request?.withNearby == true)
+                            {
+                                nearbyCities = await GetNearbyCitiesWeatherData((double)request.lat, (double)request.lon);
+                            }
                         }
-                    }
-                    else
-                    {
-                        weatherResponse = new WeatherResponse { Success = false, ErrorMessage = "Invalid request" };
-                    }
+                        else
+                        {
+                            weatherResponse = new WeatherResponse 
+                            { 
+                                Success = false, 
+                                ErrorMessage = "Yêu cầu không hợp lệ. Vui lòng cung cấp thành phố hoặc tọa độ." 
+                            };
+                        }
 
-                    // Tạo response object mới chứa cả dữ liệu chính và các thành phố lân cận
-                    var fullResponse = new
-                    {
+                        var fullResponse = new
+                        {
                         MainWeather = weatherResponse,
-                        NearbyCities = nearbyCities
-                    };
+                            NearbyCities = nearbyCities
+                        };
 
-                    string jsonResponse = JsonConvert.SerializeObject(fullResponse);
-                    byte[] responseData = Encoding.UTF8.GetBytes(jsonResponse);
-                    await stream.WriteAsync(responseData, 0, responseData.Length);
+                        await SendJsonResponse(stream, fullResponse);
+                    }
+                    catch (JsonException)
+                    {
+                        var errorResponse = new { error = "Định dạng JSON không hợp lệ" };
+                        await SendJsonResponse(stream, errorResponse);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error processing request: {ex.Message}");
+                        var errorResponse = new { error = $"Lỗi xử lý yêu cầu: {ex.Message}" };
+                        await SendJsonResponse(stream, errorResponse);
+                    }
                 }
+            }
+            catch (IOException ex)
+            {
+                Console.WriteLine($"Network error: {ex.Message}");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error handling client: {ex}");
+                Console.WriteLine($"Unexpected error: {ex.Message}");
             }
+    }
+
+        private static DateTime ConvertDateTime(long timestamp)
+        {
+            DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(timestamp);
+            return dateTimeOffset.LocalDateTime;
         }
+        private static async Task SendJsonResponse(NetworkStream stream, object responseObj)
+        {
+            string jsonResponse = JsonConvert.SerializeObject(responseObj);
+            byte[] responseData = Encoding.UTF8.GetBytes(jsonResponse);
+            await stream.WriteAsync(responseData, 0, responseData.Length);
+    }
 
         static async Task<WeatherResponse> GetRealWeatherData(string city)
         {
@@ -200,6 +296,7 @@ namespace WeatherServer
                 }
             }
         }
+
         static async Task<WeatherResponse> GetWeatherByCoordinates(double lat, double lon)
         {
             using (HttpClient httpClient = new HttpClient())
