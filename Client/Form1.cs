@@ -79,13 +79,12 @@ namespace Client
             }
         }
         private async void SendMessage()
-        {
+        {   // Lấy nội dung người dùng nhập
             string userText = this.userInput.Text.Trim();
             if (string.IsNullOrEmpty(userText)) return;
-
+            // Hiển thị nội dung người dùng trong chat
             AddMessageToChat("Bạn", userText, true);
             this.userInput.Clear();
-
             try
             {
                 // Kết nối đến server
@@ -94,13 +93,11 @@ namespace Client
                     // Thêm timeout để không bị treo quá lâu
                     var connectTask = client.ConnectAsync("127.0.0.1", 8888);
                     var timeoutTask = Task.Delay(3000); // Timeout 3 giây
-            
                     if (await Task.WhenAny(connectTask, timeoutTask) == timeoutTask)
                     {
                         AddMessageToChat("Hệ thống", "Lỗi kết nối", false);
                         return;
                     }
-
                     using (NetworkStream stream = client.GetStream())
                     {
                         // Gửi yêu cầu
@@ -108,45 +105,40 @@ namespace Client
                         string requestJson = JsonConvert.SerializeObject(requestObj);
                         byte[] requestData = Encoding.UTF8.GetBytes(requestJson);
                         await stream.WriteAsync(requestData, 0, requestData.Length);
-
                         // Nhận phản hồi
                         byte[] buffer = new byte[2048];
                         int bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
                         string responseJson = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-                
                         dynamic response = JsonConvert.DeserializeObject(responseJson);
                         string botReply = response?.response ?? "Lỗi kết nối";
-                
                         AddMessageToChat("Chatbot", botReply, false);
                     }
                 }
             }
+            // Xử lý ngoại lệ khi không thể kết nối đến server
             catch (Exception)
             {
                 // Bắt tất cả các loại exception và hiển thị thông báo chung
                 AddMessageToChat("Hệ thống", "Lỗi kết nối", false);
             }
         }
+        // Hiển thị tin nhắn lên giao diện chat
         private void AddMessageToChat(string sender, string message, bool isUser)
-        {
+        {   // Đặt vị trí bắt đầu và độ dài vùng chọn
             this.chatContent.SelectionStart = this.chatContent.TextLength;
             this.chatContent.SelectionLength = 0;
-
             // Thêm khoảng cách cho tin nhắn người dùng
             if (isUser)
             {
                 this.chatContent.AppendText("\t\t");
             }
-
             // Đặt màu và font cho tên người gửi
             this.chatContent.SelectionColor = isUser ? Color.FromArgb(0, 100, 0) : Color.FromArgb(217, 0, 27);
             this.chatContent.SelectionFont = new Font("Segoe UI", 12F, FontStyle.Bold);
-    
             // Căn lề cho tên người gửi
             this.chatContent.SelectionAlignment = isUser ? HorizontalAlignment.Right : HorizontalAlignment.Left;
             this.chatContent.AppendText(sender + "\n");
-
-            // Reset alignment trước khi hiển thị nội dung chatbot
+            // Đặt lại căn lề nếu là Chatbot
             if (!isUser)
             {
                 this.chatContent.SelectionAlignment = HorizontalAlignment.Left;
@@ -154,15 +146,12 @@ namespace Client
             // Nội dung tin nhắn với cỡ chữ tùy theo chatbot hay người dùng
             float messageFontSize = isUser ? 11F : 11F;
             this.chatContent.SelectionFont = new Font("Segoe UI", messageFontSize, FontStyle.Bold);
-
-    
             // Hiển thị nội dung - sẽ sát lề trái cho chatbot
             this.chatContent.AppendText(message.Trim() + "\n");
-
             // Cuộn xuống dưới cùng
             this.chatContent.ScrollToCaret();
         }
-      
+        // Phương thức để phóng to/thu nhỏ khung chat
         private void ToggleResize()
         {
             if (isResizeExpanded)
@@ -183,25 +172,22 @@ namespace Client
                 this.clearChatButton.Visible = false;
                 this.resizeIcon.Location = new Point(370, 430);
             }
-
+            // Đảo trạng thái
             isResizeExpanded = !isResizeExpanded;
         }
-        
         private System.Windows.Forms.Timer timerDateTime;
         private void InitializeDateTimeTimer()
         {
-            //timerDateTime = new System.Windows.Forms.Timer();
             timerDateTime.Interval = 1000;
             timerDateTime.Tick += TimerDateTime_Tick;
             timerDateTime.Start();
             UpdateDateTime();
         }
-
         private void TimerDateTime_Tick(object? sender, EventArgs e)
         {
             UpdateDateTime();
         }
-
+        // Hiển thị thời gian và ngày hiện tại lên giao diện
         private void UpdateDateTime()
         {
             // Sử dụng Invoke nếu cần thiết để tránh cross-thread operation
@@ -218,193 +204,181 @@ namespace Client
                 labDateTime2.Text = "Ngày: " + DateTime.Now.ToString("dd/MM/yyyy");
             }
         }
-
-        // Cập nhật phương thức btnSearch_Click
+        //  Lấy dữ liệu thời tiết từ server dựa trên tên thành phố mà người dùng nhập vào
         private async void btnSearch_Click(object sender, EventArgs e)
-{
-    string city = TBCity.Text.Trim();
-    if (string.IsNullOrEmpty(city))
-    {
-        MessageBox.Show("Vui lòng nhập tên thành phố!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        return;
-    }
-
-    try
-    {
-        Cursor = Cursors.WaitCursor;
-        btnSearch.Enabled = false;
-
-        // Tạo request object
-        var request = new
-        {
-            city = city,
-            withNearby = true
-        };
-
-        string requestJson = JsonConvert.SerializeObject(request);
-        string response = await GetWeatherDataFromServerAsync(requestJson);
-
-        // Phân tích response
-        dynamic responseData = JsonConvert.DeserializeObject(response);
-
-        // Hiển thị thời tiết chính (sẽ tự động gửi chatbot trong DisplayWeatherData)
-        DisplayWeatherData(JsonConvert.SerializeObject(responseData.MainWeather));
-
-        // Hiển thị các thành phố lân cận
-        DisplayNearbyCities(responseData.NearbyCities.ToObject<List<WeatherResponse>>());
-    }
-    catch (Exception ex)
-    {
-        MessageBox.Show($"Lỗi khi lấy dữ liệu thời tiết: {ex.Message}", "Lỗi",
-            MessageBoxButtons.OK, MessageBoxIcon.Error);
-    }
-    finally
-    {
-        Cursor = Cursors.Default;
-        btnSearch.Enabled = true;
-    }
-}
-
+        {   // Kiểm tra xem người dùng đã nhập tên thành phố chưa
+            string city = TBCity.Text.Trim();
+            if (string.IsNullOrEmpty(city))
+            {
+                MessageBox.Show("Vui lòng nhập tên thành phố!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            try
+            {   // Đặt con trỏ chuột thành đợi
+                Cursor = Cursors.WaitCursor;
+                btnSearch.Enabled = false;
+                // Tạo request object
+                var request = new
+                {
+                    city = city,
+                    withNearby = true
+                };
+                string requestJson = JsonConvert.SerializeObject(request);
+                // Gửi yêu cầu đến server
+                string response = await GetWeatherDataFromServerAsync(requestJson);
+                // Phân tích response
+                dynamic responseData = JsonConvert.DeserializeObject(response);
+                // Hiển thị thời tiết chính (sẽ tự động gửi chatbot trong DisplayWeatherData)
+                DisplayWeatherData(JsonConvert.SerializeObject(responseData.MainWeather));
+                // Hiển thị các thành phố lân cận
+                DisplayNearbyCities(responseData.NearbyCities.ToObject<List<WeatherResponse>>());
+            }
+            // Xử lý ngoại lệ khi không thể kết nối đến server
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi lấy dữ liệu thời tiết: {ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            // Khôi phục trạng thái ban đầu
+            finally
+            {
+                Cursor = Cursors.Default;
+                btnSearch.Enabled = true;
+            }
+        }
+        // Hiển thị thông tin thời tiết lên giao diện dựa trên dữ liệu JSON nhận được từ server
         private async void DisplayWeatherData(string jsonData)
-  {
-      try
-      {
-          var weatherResponse = JsonConvert.DeserializeObject<WeatherResponse>(jsonData);
-
-          if (!weatherResponse.Success)
-          {
-              MessageBox.Show(weatherResponse.ErrorMessage, "Lỗi",
-                  MessageBoxButtons.OK, MessageBoxIcon.Error);
-              return;
-          }
-
-          // Display current weather
-          labDistrict.Text = $"{weatherResponse.City ?? "N/A"}, {weatherResponse.Country ?? "N/A"}";
-          labTemp_min.Text = $"{weatherResponse.Temp_min}°C";
-          labTemp_max.Text = $"{weatherResponse.Temp_max}°C";
-          labDetail2.Text = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(weatherResponse.Description.ToLower());
-          labTemperature.Text = $"{weatherResponse.Temperature}°C";
-          SetLabelWithTooltip(labHumidity, $"{weatherResponse.Humidity}%",
-              $"Không khí {(weatherResponse.Humidity > 70 ? "ẩm ướt" : "khô ráo")}");
-
-          SetLabelWithTooltip(labWindSpeed, $"{weatherResponse.WindSpeed} km/h",
-              $"{(weatherResponse.WindSpeed > 20 ? "Gió mạnh" : "Gió nhẹ")}");
-
-          SetLabelWithTooltip(labPressure, $"{weatherResponse.Pressure} hPa",
-              $"{(weatherResponse.Pressure < 1000 ? "Có thể có thời tiết xấu" : "Ổn định")}");
-
-          SetLabelWithTooltip(labFeels_like, $"{weatherResponse.Like_feel}°C",
-              $"{(weatherResponse.Like_feel > weatherResponse.Temperature ? "Nóng hơn thực tế" : "Mát hơn thực tế")}");
-
-          labSunrise.Text = $"{weatherResponse.Sunrise ?? "N/A"}";
-          labSunset.Text = $"{weatherResponse.Sunset ?? "N/A"}";
-
-          if (!string.IsNullOrEmpty(weatherResponse.Icon))
-          {
-              picIcon.ImageLocation = $"http://openweathermap.org/img/wn/{weatherResponse.Icon}@2x.png";
-          }
-
-          labFeels_like.Text = $"~{weatherResponse.Like_feel}°C";
-          labAdvice.Text = GetWeatherAdvice(weatherResponse.Temperature, weatherResponse.Description);
-
-          // Display forecast
-          if (weatherResponse.DailyForecast != null && weatherResponse.DailyForecast.Count > 0)
-          {
-              DisplayForecastDetails(weatherResponse.DailyForecast);
-          }
-
-          // Tự động gửi thông tin thời tiết cho chatbot
-          await SendWeatherToChatbot(weatherResponse);
-      }
-      catch (Exception ex)
-      {
-          MessageBox.Show($"Lỗi khi hiển thị dữ liệu: {ex.Message}", "Lỗi",
-              MessageBoxButtons.OK, MessageBoxIcon.Error);
-      }
-    }
+        {
+            try
+            {   // Chuyển JSON thành object WeatherResponse
+                var weatherResponse = JsonConvert.DeserializeObject<WeatherResponse>(jsonData);
+                // Kiểm tra xem dữ liệu có hợp lệ
+                if (!weatherResponse.Success)
+                {
+                    MessageBox.Show(weatherResponse.ErrorMessage, "Lỗi",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                // Hiển thị thông tin thời tiết lên các label
+                labDistrict.Text = $"{weatherResponse.City ?? "N/A"}, {weatherResponse.Country ?? "N/A"}";
+                labTemp_min.Text = $"{weatherResponse.Temp_min}°C";
+                labTemp_max.Text = $"{weatherResponse.Temp_max}°C";
+                labDetail2.Text = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(weatherResponse.Description.ToLower());
+                labTemperature.Text = $"{weatherResponse.Temperature}°C";
+                // Hiển thị các chỉ số khác với Tooltip
+                SetLabelWithTooltip(labHumidity, $"{weatherResponse.Humidity}%",
+                    $"Không khí {(weatherResponse.Humidity > 70 ? "ẩm ướt" : "khô ráo")}");
+                SetLabelWithTooltip(labWindSpeed, $"{weatherResponse.WindSpeed} km/h",
+                    $"{(weatherResponse.WindSpeed > 20 ? "Gió mạnh" : "Gió nhẹ")}");
+                SetLabelWithTooltip(labPressure, $"{weatherResponse.Pressure} hPa",
+                    $"{(weatherResponse.Pressure < 1000 ? "Có thể có thời tiết xấu" : "Ổn định")}");
+                SetLabelWithTooltip(labFeels_like, $"{weatherResponse.Like_feel}°C",
+                    $"{(weatherResponse.Like_feel > weatherResponse.Temperature ? "Nóng hơn thực tế" : "Mát hơn thực tế")}");
+                // Hiển thị thời gian mặt trời mọc/lặn
+                labSunrise.Text = $"{weatherResponse.Sunrise ?? "N/A"}";
+                labSunset.Text = $"{weatherResponse.Sunset ?? "N/A"}";
+                // Hiển thị biểu tượng thời tiết
+                if (!string.IsNullOrEmpty(weatherResponse.Icon))
+                {
+                    picIcon.ImageLocation = $"http://openweathermap.org/img/wn/{weatherResponse.Icon}@2x.png";
+                }
+                // Hiển thị lời khuyên thời tiết
+                labFeels_like.Text = $"~{weatherResponse.Like_feel}°C";
+                labAdvice.Text = GetWeatherAdvice(weatherResponse.Temperature, weatherResponse.Description);
+                // Hiển thị dự báo thời tiết hàng ngày
+                if (weatherResponse.DailyForecast != null && weatherResponse.DailyForecast.Count > 0)
+                {
+                    DisplayForecastDetails(weatherResponse.DailyForecast);
+                    // Gửi thông tin thời tiết cho chatbot
+                    await SendWeatherToChatbot(weatherResponse);
+                }
+            }
+            // Xử lý ngoại lệ khi không thể phân tích dữ liệu JSON
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi hiển thị dữ liệu: {ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         // Thêm phương thức mới để gửi thông tin thời tiết cho chatbot
-  private async Task SendWeatherToChatbot(WeatherResponse weatherData)
-  {
-      if (string.IsNullOrEmpty(weatherData.City)) return;
-
-      try
-      {
-          // Tạo thông điệp chứa dữ liệu thời tiết
-          string weatherInfo = BuildWeatherInfoMessage(weatherData);
-
-          // Gửi yêu cầu đến chatbot
-          var response = await GetChatbotAdvice(weatherInfo);
-
-          // Hiển thị trong chat
-          AddMessageToChat("Chatbot", response, false);
-      }
-      catch (Exception ex)
-      {
-          AddMessageToChat("Vistral", $"Không thể lấy lời khuyên từ chatbot: {ex.Message}", false);
-      }
-  }
-  // Cập nhật phương thức BuildWeatherInfoMessage
-  private string BuildWeatherInfoMessage(WeatherResponse weatherData)
-  {
-      StringBuilder sb = new StringBuilder();
-      sb.AppendLine($"- Vị trí: {weatherData.City}, {weatherData.Country}");
-      sb.AppendLine($"- Nhiệt độ: {weatherData.Temperature}°C");
-      sb.AppendLine($"- Cảm giác như: {weatherData.Like_feel}°C");
-      sb.AppendLine($"- Độ ẩm: {weatherData.Humidity}%");
-      sb.AppendLine($"- Áp suất: {weatherData.Pressure} hPa");
-      sb.AppendLine($"- Tốc độ gió: {weatherData.WindSpeed} km/h");
-      sb.AppendLine($"- Mô tả: {CultureInfo.CurrentCulture.TextInfo.ToTitleCase(weatherData.Description.ToLower())}");
-      sb.AppendLine($"- Nhiệt độ thấp nhất/cao nhất: {weatherData.Temp_min}°C/{weatherData.Temp_max}°C");
-      sb.AppendLine($"- Mặt trời mọc/lặn: {weatherData.Sunrise ?? "N/A"}/{weatherData.Sunset ?? "N/A"}");
-
-      return sb.ToString();
-  }
-
-  // Giữ nguyên phương thức GetChatbotAdvice như trước
-  private async Task<string> GetChatbotAdvice(string weatherInfo)
-  {
-      using (HttpClient client = new HttpClient())
-      {
-          var request = new
-          {
-              model = "vistral-7b-chat",
-              messages = new[]
-              {
-          new
-          {
-              role = "system",
-              content = "Bạn là một trợ lý thời tiết thông minh. " +
-                       "Hãy đưa ra lời khuyên về các hoạt động phù hợp " +
-                       "và địa điểm du lịch thích hợp dựa trên thông tin thời tiết được cung cấp. " +
-                       "Hãy trả lời ngắn gọn (tối đa 80 từ), rõ ràng và hữu ích. " +
-                       "Bắt đầu bằng 'Dựa trên thời tiết hiện tại tại [địa điểm]...'"
-          },
-          new
-          {
-              role = "user",
-              content = $"Hãy phân tích thời tiết và đưa ra lời khuyên hoạt động/du lịch:\n{weatherInfo}"
-          }
-      }
-          };
-
-          var content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
-          var response = await client.PostAsync("http://localhost:1234/v1/chat/completions", content);
-          var result = await response.Content.ReadAsStringAsync();
-          dynamic data = JsonConvert.DeserializeObject(result);
-
-          return data?.choices?[0]?.message?.content ?? "Hiện không thể đưa ra lời khuyên. Vui lòng thử lại sau.";
-      }
-  }
+        private async Task SendWeatherToChatbot(WeatherResponse weatherData)
+        {   // Kiểm tra xem thành phố có hợp lệ không
+            if (string.IsNullOrEmpty(weatherData.City)) return;
+            try
+            {
+                // Tạo thông điệp chứa dữ liệu thời tiết
+                string weatherInfo = BuildWeatherInfoMessage(weatherData);
+                // Gửi yêu cầu đến chatbot
+                var response = await GetChatbotAdvice(weatherInfo);
+                // Hiển thị trong chat
+                AddMessageToChat("Chatbot", response, false);
+            }
+            catch (Exception ex)
+            {
+                AddMessageToChat("Vistral", $"Không thể lấy lời khuyên từ chatbot: {ex.Message}", false);
+            }
+        }
+        // Chứa dữ liệu thời tiết thành một chuỗi văn bản có định dạng rõ ràng để sử dụng trong chatbot hoặc giao diện
+        private string BuildWeatherInfoMessage(WeatherResponse weatherData)
+        {   // Tạo một StringBuilder để xây dựng chuỗi thông tin thời tiết
+            StringBuilder sb = new StringBuilder();
+            // Thêm thông tin thời tiết vào chuỗi
+            sb.AppendLine($"- Vị trí: {weatherData.City}, {weatherData.Country}");
+            sb.AppendLine($"- Nhiệt độ: {weatherData.Temperature}°C");
+            sb.AppendLine($"- Cảm giác như: {weatherData.Like_feel}°C");
+            sb.AppendLine($"- Độ ẩm: {weatherData.Humidity}%");
+            sb.AppendLine($"- Áp suất: {weatherData.Pressure} hPa");
+            sb.AppendLine($"- Tốc độ gió: {weatherData.WindSpeed} km/h");
+            sb.AppendLine($"- Mô tả: {CultureInfo.CurrentCulture.TextInfo.ToTitleCase(weatherData.Description.ToLower())}");
+            sb.AppendLine($"- Nhiệt độ thấp nhất/cao nhất: {weatherData.Temp_min}°C/{weatherData.Temp_max}°C");
+            sb.AppendLine($"- Mặt trời mọc/lặn: {weatherData.Sunrise ?? "N/A"}/{weatherData.Sunset ?? "N/A"}");
+            // Trả về chuỗi hoàn chỉnh
+            return sb.ToString();
+        }
+        // Gửi thông tin thời tiết đến chatbot AI
+        private async Task<string> GetChatbotAdvice(string weatherInfo)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                var request = new
+                {
+                    model = "vistral-7b-chat",
+                    messages = new[]
+                    {
+                new
+                {
+                    role = "system",
+                    content = "Bạn là một trợ lý thời tiết thông minh. " +
+                            "Hãy đưa ra lời khuyên về các hoạt động phù hợp " +
+                            "và địa điểm du lịch thích hợp dựa trên thông tin thời tiết được cung cấp. " +
+                            "Hãy trả lời ngắn gọn (tối đa 80 từ), rõ ràng và hữu ích. " +
+                            "Bắt đầu bằng 'Dựa trên thời tiết hiện tại tại [địa điểm]...'"
+                },
+                new
+                {
+                    role = "user",
+                    content = $"Hãy phân tích thời tiết và đưa ra lời khuyên hoạt động/du lịch:\n{weatherInfo}"
+                }
+            }
+                };
+                // Gửi yêu cầu đến chatbot
+                var content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
+                var response = await client.PostAsync("http://localhost:1234/v1/chat/completions", content);
+                // Kiểm tra phản hồi
+                var result = await response.Content.ReadAsStringAsync();
+                dynamic data = JsonConvert.DeserializeObject(result);
+                return data?.choices?[0]?.message?.content ?? "Hiện không thể đưa ra lời khuyên. Vui lòng thử lại sau.";
+            }
+        }
+        // Đặt tooltip cho các label
         private void SetLabelWithTooltip(Label label, string mainText, string tooltipText)
-         {
-             label.Text = mainText;
-             toolTip1.SetToolTip(label, tooltipText);
-             toolTip1.IsBalloon = true; 
-             toolTip1.ShowAlways = true; 
-     
-         }
-        
-
+        {
+            label.Text = mainText;
+            toolTip1.SetToolTip(label, tooltipText);
+            toolTip1.IsBalloon = true; 
+            toolTip1.ShowAlways = true;
+        }
+        // Hiển thị thông tin dự báo thời tiết hàng ngày lên một DataGridView
         private void DisplayForecastDetails(List<DailyForecast> forecasts)
         {
             // Tạo DataTable với các cột cần thiết (đã bỏ cột đầu tiên trống)
@@ -415,7 +389,6 @@ namespace Client
             dt.Columns.Add("Cao nhất");
             dt.Columns.Add("Mô tả");
             dt.Columns.Add("Thời tiết", typeof(Image));
-
             // Thêm dữ liệu vào các hàng (bỏ hàng cuối cùng trống)
             foreach (var forecast in forecasts)
             {
@@ -436,12 +409,10 @@ namespace Client
                 {
                     weatherIcon = null;
                 }
-
                 // Viết hoa chữ cái đầu mô tả
                 string description = string.IsNullOrEmpty(forecast.Description)
                     ? ""
                     : char.ToUpper(forecast.Description[0]) + forecast.Description.Substring(1);
-
                 dt.Rows.Add(
                     forecast.Date.ToString("dd/MM"),
                     forecast.DayOfWeek,
@@ -451,14 +422,11 @@ namespace Client
                     weatherIcon
                 );
             }
-
             // Gán DataTable vào DataGridView
             dataGridView1.DataSource = dt;
-
             // Cấu hình hiển thị
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.RowHeadersVisible = false; // Ẩn cột đầu tiên (cột trống)
-
             // Cấu hình cột biểu tượng
             // Cấu hình cột biểu tượng
             var imageColumn = dataGridView1.Columns["Thời tiết"] as DataGridViewImageColumn;
@@ -468,27 +436,23 @@ namespace Client
                 imageColumn.DefaultCellStyle.NullValue = null;
                 imageColumn.Width = 40;
             }
-
             // Căn chỉnh nội dung các cột
             dataGridView1.Columns["Ngày"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridView1.Columns["Thứ"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridView1.Columns["Thấp nhất"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridView1.Columns["Cao nhất"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridView1.Columns["Mô tả"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-
             // Đặt font cho cột mô tả
             dataGridView1.Columns["Mô tả"].DefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Regular);
-
             // Ẩn dòng trống cuối cùng (nếu có)
             dataGridView1.AllowUserToAddRows = false;
         }
-
-
+        // Đưa ra lời khuyên thời tiết dựa trên nhiệt độ (temperature) và mô tả thời tiết (description)
         private string GetWeatherAdvice(double temperature, string description)
         {
             description = description.ToLower();
             string advice = "";
-
+            // Đưa ra lời khuyên dựa trên nhiệt độ
             if (temperature > 35)
                 advice = "Nắng cực điểm, tránh ra ngoài giờ cao điểm 11-15h. ";
             else if (temperature > 30)
@@ -499,7 +463,7 @@ namespace Client
                 advice = "Tiết trời mát mẻ dễ chịu. ";
             else
                 advice = "Thời tiết ôn hòa lý tưởng. ";
-
+            // Đưa ra lời khuyên dựa trên mô tả thời tiết
             if (description.Contains("mưa lớn"))
                 advice += "Mưa to kèm gió mạnh, hạn chế di chuyển. Mang áo mưa loại tốt.";
             else if (description.Contains("mưa") || description.Contains("mây đen"))
@@ -512,44 +476,41 @@ namespace Client
                 advice += "Sương mù dày đặc, lái xe bật đèn, giảm tốc độ.";
             else if (description.Contains("nhiều mây"))
                 advice += "Trời nhiều mây, vẫn cần đề phòng nắng gắt buổi trưa.";
-
+            // Bổ sung lời khuyên đặc biệt
             if (temperature > 30)
                 advice += " Uống nhiều nước, ăn đồ mát.";
             else if (temperature < 15)
                 advice += " Giữ ấm cổ và tay chân.";
-
+            // Trả về lời khuyên
             return advice;
         }
-
-        // Cập nhật phương thức GetWeatherDataFromServerAsync
+        // Giao tiếp với một server thông qua giao thức TCP/IP, gửi yêu cầu và nhận dữ liệu thời tiết từ server
         private async Task<string> GetWeatherDataFromServerAsync(string requestData)
-        {
+        {   // Kết nối đến server
             using (TcpClient client = new TcpClient())
-            {
+            {   
                 await client.ConnectAsync("127.0.0.1", 8888);
-
+                // Gửi yêu cầu đến server
                 using (NetworkStream stream = client.GetStream())
                 {
                     byte[] data = Encoding.UTF8.GetBytes(requestData);
                     await stream.WriteAsync(data, 0, data.Length);
-
+                    // Nhận phản hồi từ server
                     byte[] buffer = new byte[4096];
                     int bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
                     return Encoding.UTF8.GetString(buffer, 0, bytesRead);
                 }
             }
         }
-        // Thêm phương thức mới để hiển thị các thành phố lân cận
+        // Hiển thị thông tin thời tiết của các thành phố lân cận lên một DataGridView
         private void DisplayNearbyCities(List<WeatherResponse> nearbyCities)
-        {
+        {   // Kiểm tra nếu danh sách rỗng hoặc null
             if (nearbyCities == null || nearbyCities.Count == 0)
             {
                 dataGridView2.Visible = false;
                 return;
             }
-
             dataGridView2.Visible = true;
-
             // Tạo DataTable với các cột cần thiết
             DataTable dt = new DataTable();
             dt.Columns.Add("Thành phố");
@@ -558,7 +519,6 @@ namespace Client
             dt.Columns.Add("Gió");
             dt.Columns.Add("Mô tả");
             dt.Columns.Add("Thời tiết", typeof(Image));
-
             // Thêm dữ liệu vào các hàng
             foreach (var city in nearbyCities)
             {
@@ -579,12 +539,10 @@ namespace Client
                 {
                     weatherIcon = null;
                 }
-
                 // Viết hoa chữ cái đầu mô tả
                 string description = string.IsNullOrEmpty(city.Description)
                     ? ""
                     : char.ToUpper(city.Description[0]) + city.Description.Substring(1);
-
                 dt.Rows.Add(
                     $"{city.City}, {city.Country}",
                     $"{city.Temperature}°C",
@@ -594,14 +552,11 @@ namespace Client
                     weatherIcon
                 );
             }
-
             // Gán DataTable vào DataGridView
             dataGridView2.DataSource = dt;
-
             // Cấu hình hiển thị
             dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView2.RowHeadersVisible = false;
-
             // Cấu hình cột biểu tượng
             var imageColumn = dataGridView2.Columns["Thời tiết"] as DataGridViewImageColumn;
             if (imageColumn != null)
@@ -610,74 +565,72 @@ namespace Client
                 imageColumn.DefaultCellStyle.NullValue = null;
                 imageColumn.Width = 40;
             }
-
             // Căn chỉnh nội dung các cột
             dataGridView2.Columns["Nhiệt độ"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridView2.Columns["Độ ẩm"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridView2.Columns["Gió"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridView2.AllowUserToAddRows = false;
         }
-
-         private async void btnLocation_Click(object sender, EventArgs e)
- {
-     try
-     {
-         Cursor = Cursors.WaitCursor;
-         btnLocation.Enabled = false;
-
-         // Lấy vị trí hiện tại qua IP
-         var location = await GetLocationByIPAsync();
-
-         if (location != null && location.Lat.HasValue && location.Lon.HasValue)
-         {
-             TBCity.Text = location.City;
-
-             // Gửi yêu cầu theo lat/lon
-             var request = new
-             {
-                 lat = location.Lat.Value,
-                 lon = location.Lon.Value,
-                 withNearby = true
-             };
-
-             string requestJson = JsonConvert.SerializeObject(request);
-             string response = await GetWeatherDataFromServerAsync(requestJson);
-
-             // Phân tích response
-             dynamic responseData = JsonConvert.DeserializeObject(response);
-
-             // Hiển thị thời tiết chính (sẽ tự động gửi chatbot)
-             DisplayWeatherData(JsonConvert.SerializeObject(responseData.MainWeather));
-             DisplayNearbyCities(responseData.NearbyCities.ToObject<List<WeatherResponse>>());
-         }
-         else
-         {
-             MessageBox.Show("Không thể xác định vị trí hiện tại", "Lỗi",
-                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
-         }
-     }
-     catch (Exception ex)
-     {
-         MessageBox.Show($"Lỗi khi lấy vị trí: {ex.Message}", "Lỗi",
-             MessageBoxButtons.OK, MessageBoxIcon.Error);
-     }
-     finally
-     {
-         Cursor = Cursors.Default;
-         btnLocation.Enabled = true;
-     }
- }
-
+        // Lấy vị trí hiện tại của người dùng qua IP và hiển thị thông tin thời tiết tương ứng
+        private async void btnLocation_Click(object sender, EventArgs e)
+        {
+            try
+            {   // Đặt con trỏ chuột thành đợi
+                Cursor = Cursors.WaitCursor;
+                btnLocation.Enabled = false;
+                // Lấy vị trí hiện tại qua IP
+                var location = await GetLocationByIPAsync();
+                // Kiểm tra vị trí
+                if (location != null && location.Lat.HasValue && location.Lon.HasValue)
+                {
+                    TBCity.Text = location.City;
+                    // Gửi yêu cầu theo lat/lon
+                    var request = new
+                    {
+                        lat = location.Lat.Value,
+                        lon = location.Lon.Value,
+                        withNearby = true
+                    };
+                    string requestJson = JsonConvert.SerializeObject(request);
+                    string response = await GetWeatherDataFromServerAsync(requestJson);
+                    // Phân tích response
+                    dynamic responseData = JsonConvert.DeserializeObject(response);
+                    // Hiển thị thời tiết chính (sẽ tự động gửi chatbot)
+                    DisplayWeatherData(JsonConvert.SerializeObject(responseData.MainWeather));
+                    DisplayNearbyCities(responseData.NearbyCities.ToObject<List<WeatherResponse>>());
+                }
+                // Nếu không thể lấy vị trí
+                else
+                {
+                    MessageBox.Show("Không thể xác định vị trí hiện tại", "Lỗi",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            // Xử lý ngoại lệ
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi lấy vị trí: {ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            // Khôi phục trạng thái ban đầu
+            finally
+            {
+                Cursor = Cursors.Default;
+                btnLocation.Enabled = true;
+            }
+        }
+        // Lấy thông tin vị trí địa lý (thành phố, quốc gia, kinh độ, vĩ độ) dựa trên địa chỉ IP hiện tại của người dùng
         private async Task<LocationInfo?> GetLocationByIPAsync()
         {
             try
-            {
+            {   // Khởi tạo HttpClient và gửi yêu cầu
                 using (var httpClient = new HttpClient())
                 {
                     // Sử dụng IP-API.com (miễn phí)
                     var response = await httpClient.GetStringAsync("http://ip-api.com/json/");
+                    // Phân tích dữ liệu JSON trả về
                     var locationData = JsonConvert.DeserializeObject<LocationInfo>(response);
-
+                    // Kiểm tra trạng thái
                     if (locationData?.Status == "success")
                     {
                         return locationData;
@@ -685,6 +638,7 @@ namespace Client
                     return null;
                 }
             }
+            // Xử lý ngoại lệ
             catch (Exception ex)
             {
                 MessageBox.Show($"Không thể lấy vị trí từ IP: {ex.Message}", "Lỗi",
@@ -700,8 +654,6 @@ namespace Client
         public double? Lat { get; set; }
         public double? Lon { get; set; }
     }
-
-
     public class WeatherResponse
     {
         public bool Success { get; set; }
@@ -710,7 +662,6 @@ namespace Client
         public double WindSpeed { get; set; }
         public double Pressure { get; set; }
         public double Like_feel { get; set; }
-
         public string? Description { get; set; }
         public string? City { get; set; }
         public string? Country { get; set; }
@@ -720,7 +671,6 @@ namespace Client
         public string? ErrorMessage { get; set; }
         public string? Temp_min { get; set; }
         public string? Temp_max { get; set; }
-
         public List<DailyForecast> DailyForecast { get; set; } = new List<DailyForecast>();
         public Coordinates? Coordinates { get; set; }
 

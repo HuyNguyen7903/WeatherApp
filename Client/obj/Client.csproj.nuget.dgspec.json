@@ -1,25 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Huy KM21\\Lap trinh mang\\BTL\\Client\\Client.csproj": {}
+    "E:\\Compuer\\HK8\\Lập trình mạng\\TEST\\WeatherApp\\Client\\Client.csproj": {}
   },
   "projects": {
-    "D:\\Huy KM21\\Lap trinh mang\\BTL\\Client\\Client.csproj": {
+    "E:\\Compuer\\HK8\\Lập trình mạng\\TEST\\WeatherApp\\Client\\Client.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Huy KM21\\Lap trinh mang\\BTL\\Client\\Client.csproj",
+        "projectUniqueName": "E:\\Compuer\\HK8\\Lập trình mạng\\TEST\\WeatherApp\\Client\\Client.csproj",
         "projectName": "Client",
-        "projectPath": "D:\\Huy KM21\\Lap trinh mang\\BTL\\Client\\Client.csproj",
-        "packagesPath": "C:\\Users\\Huy\\.nuget\\packages\\",
-        "outputPath": "D:\\Huy KM21\\Lap trinh mang\\BTL\\Client\\obj\\",
+        "projectPath": "E:\\Compuer\\HK8\\Lập trình mạng\\TEST\\WeatherApp\\Client\\Client.csproj",
+        "packagesPath": "C:\\Users\\PHUCVU\\.nuget\\packages\\",
+        "outputPath": "E:\\Compuer\\HK8\\Lập trình mạng\\TEST\\WeatherApp\\Client\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Huy\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\PHUCVU\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net9.0-windows"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -84,7 +91,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
