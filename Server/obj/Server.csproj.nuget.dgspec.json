@@ -1,32 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Compuer\\HK8\\Lập trình mạng\\TEST\\WeatherApp\\Server\\Server.csproj": {}
+    "D:\\Huy KM21\\Lap trinh mang\\WeatherAppN5\\Server\\Server.csproj": {}
   },
   "projects": {
-    "E:\\Compuer\\HK8\\Lập trình mạng\\TEST\\WeatherApp\\Server\\Server.csproj": {
+    "D:\\Huy KM21\\Lap trinh mang\\WeatherAppN5\\Server\\Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Compuer\\HK8\\Lập trình mạng\\TEST\\WeatherApp\\Server\\Server.csproj",
+        "projectUniqueName": "D:\\Huy KM21\\Lap trinh mang\\WeatherAppN5\\Server\\Server.csproj",
         "projectName": "Server",
-        "projectPath": "E:\\Compuer\\HK8\\Lập trình mạng\\TEST\\WeatherApp\\Server\\Server.csproj",
-        "packagesPath": "C:\\Users\\PHUCVU\\.nuget\\packages\\",
-        "outputPath": "E:\\Compuer\\HK8\\Lập trình mạng\\TEST\\WeatherApp\\Server\\obj\\",
+        "projectPath": "D:\\Huy KM21\\Lap trinh mang\\WeatherAppN5\\Server\\Server.csproj",
+        "packagesPath": "C:\\Users\\Huy\\.nuget\\packages\\",
+        "outputPath": "D:\\Huy KM21\\Lap trinh mang\\WeatherAppN5\\Server\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\PHUCVU\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Huy\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -72,7 +65,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

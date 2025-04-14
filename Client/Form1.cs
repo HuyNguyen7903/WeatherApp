@@ -351,7 +351,7 @@ namespace Client
                     content = "Bạn là một trợ lý thời tiết thông minh. " +
                             "Hãy đưa ra lời khuyên về các hoạt động phù hợp " +
                             "và địa điểm du lịch thích hợp dựa trên thông tin thời tiết được cung cấp. " +
-                            "Hãy trả lời ngắn gọn (tối đa 80 từ), rõ ràng và hữu ích. " +
+                            "Hãy trả lời ngắn gọn (tối đa 50 từ), rõ ràng và hữu ích. " +
                             "Bắt đầu bằng 'Dựa trên thời tiết hiện tại tại [địa điểm]...'"
                 },
                 new
