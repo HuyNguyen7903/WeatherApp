@@ -56,7 +56,7 @@
               "RelativeDocumentMoniker": "Client\\Form1.cs",
               "ToolTip": "E:\\Compuer\\HK8\\L\u1EADp tr\u00ECnh m\u1EA1ng\\TEST\\WeatherApp\\Client\\Form1.cs",
               "RelativeToolTip": "Client\\Form1.cs",
-              "ViewState": "AgIAAAACAAAAAAAAAAAAwJ4BAABgAAAAAAAAAA==",
+              "ViewState": "AgIAAKkBAAAAAAAAAAAowKQCAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-26T05:49:47.408Z",
               "IsPinned": true,
@@ -70,7 +70,7 @@
               "RelativeDocumentMoniker": "Server\\Program.cs",
               "ToolTip": "E:\\Compuer\\HK8\\L\u1EADp tr\u00ECnh m\u1EA1ng\\TEST\\WeatherApp\\Server\\Program.cs",
               "RelativeToolTip": "Server\\Program.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAUwB4AAABFAAAAAAAAAA==",
+              "ViewState": "AgIAAIIBAAAAAAAAAAAYwMgBAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-26T11:55:35.139Z",
               "IsPinned": true,
@@ -110,8 +110,7 @@
               "RelativeToolTip": "Client\\Form1.Designer.cs",
               "ViewState": "AgIAAA8CAAAAAAAAAAAuwD4CAABGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-30T13:19:20.267Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-30T13:19:20.267Z"
             }
           ]
         }

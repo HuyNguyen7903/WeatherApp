@@ -26,7 +26,7 @@ namespace WeatherServer
             // ✅ Kiểm tra kết nối chatbot server tại localhost:1234
             bool chatbotAvailable = await CheckChatbotConnectionAsync();
             Console.WriteLine(chatbotAvailable
-                ? "✅ Chatbot server is available at port 1234."
+                ? "✅ Chatbot server có sẵn tại cổng 1234."
                 : "❌ Không thể kết nối chatbot tại port 1234.");
             // Nếu không kết nối được đến chatbot server, dừng server
             while (true)
@@ -90,7 +90,7 @@ namespace WeatherServer
                 // Xử lý ngoại lệ
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Chatbot error: {ex.Message}");
+                    Console.WriteLine($"Chatbot lỗi: {ex.Message}");
                     return $"Lỗi khi kết nối với chatbot: {ex.Message}";
                 }
             }
@@ -168,7 +168,7 @@ namespace WeatherServer
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine($"Error processing request: {ex.Message}");
+                        Console.WriteLine($"Lôi xử lý yêu cầu: {ex.Message}");
                         var errorResponse = new { error = $"Lỗi xử lý yêu cầu: {ex.Message}" };
                         await SendJsonResponse(stream, errorResponse);
                     }
@@ -176,11 +176,11 @@ namespace WeatherServer
             }
             catch (IOException ex)
             {
-                Console.WriteLine($"Network error: {ex.Message}");
+                Console.WriteLine($"Lỗi kết nối mạng: {ex.Message}");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Unexpected error: {ex.Message}");
+                Console.WriteLine($"Lỗi không mong muốn: {ex.Message}");
             }
         }
         // Chuyển đổi timestamp(dạng số) sang giá trị ngày giờ(DateTime)
@@ -282,7 +282,7 @@ namespace WeatherServer
                 // Xử lý ngoại lệ
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Error getting weather data: {ex}");
+                    Console.WriteLine($"Lỗi khi lấy dữ liệu thời tiết: {ex}");
                     return new WeatherResponse
                     {
                         Success = false,
@@ -340,7 +340,7 @@ namespace WeatherServer
                 // Xử lý ngoại lệ
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Error getting weather by coordinates: {ex}");
+                    Console.WriteLine($"Lỗi khi lấy thời tiết theo nhiệt độ: {ex}");
                     return new WeatherResponse
                     {
                         Success = false,
@@ -395,7 +395,7 @@ namespace WeatherServer
                 // Xử lý ngoại lệ
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Error getting nearby cities data: {ex}");
+                    Console.WriteLine($"Lỗi khi lấy dữ liệu thành phố lân cận: {ex}");
                     return new List<WeatherResponse>();
                 }
             }
